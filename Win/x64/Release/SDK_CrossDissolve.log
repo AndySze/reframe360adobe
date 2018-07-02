@@ -1,0 +1,15 @@
+﻿  Converting PiPL for SDK_CrossDissolve
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  SDK_CrossDissolve.r
+  Building SDK_CrossDissolve.cu
+  SDK_CrossDissolve.cu
+  Preprocessing OpenCL to Strings for SDK_CrossDissolve.cl
+  SDK_CrossDissolve.cl
+  SDK_CrossDissolve_CPU.cpp
+  SDK_CrossDissolve_GPU.cpp
+  Generating Code...
+     Creating library x64\Release\/SDK_CrossDissolve.lib and object x64\Release\/SDK_CrossDissolve.exp
+  SDK_CrossDissolve.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\SDK_CrossDissolve.aex
+  SDK_CrossDissolve.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\SDK_CrossDissolve.pdb (Full PDB)
