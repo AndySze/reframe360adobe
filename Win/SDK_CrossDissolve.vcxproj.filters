@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="..\SDK_CrossDissolve_CPU.cpp" />
     <ClCompile Include="..\SDK_CrossDissolve_GPU.cpp" />
-    <ClCompile Include="..\CamParamManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SDK_CrossDissolve.h" />
@@ -26,7 +25,6 @@
     <ClInclude Include="..\CameraUtil.h" />
     <ClInclude Include="..\ParamUtil.h" />
     <ClInclude Include="..\MathUtil.h" />
-    <ClInclude Include="..\CamParamManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

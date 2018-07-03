@@ -23,7 +23,6 @@
 #include "SDK_CrossDissolve.h"
 #include <map>
 #include "ParamUtil.h"
-#include "CamParamManager.h"
 
 using namespace std;
 
@@ -77,6 +76,8 @@ static PF_Err ParamsSetup(
 
 	PF_ParamDef	def;
 
+	int num_params = 0;
+
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
@@ -91,6 +92,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_PITCH
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -106,7 +108,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_YAW
 	);
-
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -122,6 +124,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_ROLL
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_FLOAT_SLIDERX(
@@ -136,6 +139,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_FOV
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_FLOAT_SLIDERX(
@@ -150,6 +154,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_TINYPLANET
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_FLOAT_SLIDERX(
@@ -164,6 +169,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_RECTILINEAR
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -179,6 +185,7 @@ static PF_Err ParamsSetup(
 		PF_ParamFlag_SUPERVISE,
 		ACTIVE_AUX_CAMERA_SELECTOR
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -194,6 +201,7 @@ static PF_Err ParamsSetup(
 		0,
 		AUX_CAMERA1
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -209,6 +217,7 @@ static PF_Err ParamsSetup(
 		0,
 		AUX_CAMERA2
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -218,6 +227,7 @@ static PF_Err ParamsSetup(
 		0,
 		FORCE_AUX_DISPLAY
 	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
@@ -233,109 +243,73 @@ static PF_Err ParamsSetup(
 		0,
 		AUX_BLEND
 	);
+	num_params++;
 
 
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
 		"Transition Acceleration",
-		AUX_ACCELERATION_MIN_VALUE,
-		AUX_ACCELERATION_MAX_VALUE,
-		AUX_ACCELERATION_MIN_SLIDER,
-		AUX_ACCELERATION_MAX_SLIDER,
-		AUX_ACCELERATION_DFLT,
+		MB_SAMPLES_MIN_VALUE,
+		MB_SAMPLES_MAX_VALUE,
+		MB_SAMPLES_MIN_SLIDER,
+		MB_SAMPLES_MAX_SLIDER,
+		MB_SAMPLES_DFLT,
 		PF_Precision_TENTHS,
 		PF_ValueDisplayFlag_NONE,
 		0,
 		AUX_ACCELERATION
 	);
-	PF_ADD_FLOAT_SLIDERX(
-		"Aux Pitch",
-		MAIN_CAMERA_PITCH_MIN_VALUE,
-		MAIN_CAMERA_PITCH_MAX_VALUE,
-		MAIN_CAMERA_PITCH_MIN_SLIDER,
-		MAIN_CAMERA_PITCH_MAX_SLIDER,
-		MAIN_CAMERA_PITCH_DFLT,
-		PF_Precision_TENTHS,
-		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		AUX_CAMERA_PITCH
-	);
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Aux Yaw",
-		MAIN_CAMERA_YAW_MIN_VALUE,
-		MAIN_CAMERA_YAW_MAX_VALUE,
-		MAIN_CAMERA_YAW_MIN_SLIDER,
-		MAIN_CAMERA_YAW_MAX_SLIDER,
-		MAIN_CAMERA_YAW_DFLT,
-		PF_Precision_TENTHS,
+		"Motionblur Samples",
+		MB_SAMPLES_MIN_VALUE,
+		MB_SAMPLES_MAX_VALUE,
+		MB_SAMPLES_MIN_SLIDER,
+		MB_SAMPLES_MAX_SLIDER,
+		MB_SAMPLES_DFLT,
+		PF_Precision_INTEGER,
 		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		AUX_CAMERA_YAW
+		0,
+		MB_SAMPLES
 	);
-
+	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Aux Roll",
-		MAIN_CAMERA_ROLL_MIN_VALUE,
-		MAIN_CAMERA_ROLL_MAX_VALUE,
-		MAIN_CAMERA_ROLL_MIN_SLIDER,
-		MAIN_CAMERA_ROLL_MAX_SLIDER,
-		MAIN_CAMERA_ROLL_DFLT,
+		"Motionblur Shutter",
+		MB_SHUTTER_MIN_VALUE,
+		MB_SHUTTER_MAX_VALUE,
+		MB_SHUTTER_MIN_SLIDER,
+		MB_SHUTTER_MAX_SLIDER,
+		MB_SHUTTER_DFLT,
 		PF_Precision_TENTHS,
 		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		AUX_CAMERA_ROLL
+		0,
+		MB_SHUTTER
+	);
+	num_params++;
+
+	num_params += addAuxParams(in_data, false, 0);
+
+	PF_ADD_TOPIC(
+		"Aux Cameras",
+		AUX_CAMERA_GRP_ID
 	);
 
-	AEFX_CLR_STRUCT(def);
-	PF_ADD_FLOAT_SLIDERX(
-		"Aux Zoom",
-		MAIN_CAMERA_FOV_MIN_VALUE,
-		MAIN_CAMERA_FOV_MAX_VALUE,
-		MAIN_CAMERA_FOV_MIN_SLIDER,
-		MAIN_CAMERA_FOV_MAX_SLIDER,
-		MAIN_CAMERA_FOV_DFLT,
-		PF_Precision_TENTHS,
-		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		AUX_CAMERA_FOV
+	for (int i = 1; i <= CAMERA_MAX_VALUE; i++) {
+		num_params += addAuxParams(in_data, true, i);
+	}
+
+	PF_END_TOPIC(
+		AUX_CAMERA_GRP_ID
 	);
 
-	AEFX_CLR_STRUCT(def);
-	PF_ADD_FLOAT_SLIDERX(
-		"Aux Tiny Planet",
-		MAIN_CAMERA_TINYPLANET_MIN_VALUE,
-		MAIN_CAMERA_TINYPLANET_MAX_VALUE,
-		MAIN_CAMERA_TINYPLANET_MIN_SLIDER,
-		MAIN_CAMERA_TINYPLANET_MAX_SLIDER,
-		MAIN_CAMERA_TINYPLANET_DFLT,
-		PF_Precision_TENTHS,
-		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		AUX_CAMERA_TINYPLANET
-	);
-
-	AEFX_CLR_STRUCT(def);
-	PF_ADD_FLOAT_SLIDERX(
-		"Aux Rectify",
-		MAIN_CAMERA_RECTILINEAR_MIN_VALUE,
-		MAIN_CAMERA_RECTILINEAR_MAX_VALUE,
-		MAIN_CAMERA_RECTILINEAR_MIN_SLIDER,
-		MAIN_CAMERA_RECTILINEAR_MAX_SLIDER,
-		MAIN_CAMERA_RECTILINEAR_DFLT,
-		PF_Precision_TENTHS,
-		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		AUX_CAMERA_RECTILINEAR
-	);
-
-	out_data->num_params = NUM_PARAMETERS;
+	out_data->num_params = num_params;
 	return PF_Err_NONE;
 }
 
@@ -352,7 +326,6 @@ static PF_Err ParamChanged(
 	PF_ProgPtr effect_ref = in_data->effect_ref;
 
 	ParamSet* paramSet = (ParamSet*)in_data->sequence_data;
-	ParamSet managerParams = CamParamManager::getInstance().getParams(paramSet->id);
 
 	PF_UserChangedParamExtra* param_extra = (PF_UserChangedParamExtra*)extra;
 
@@ -409,10 +382,7 @@ static PF_Err ParamChanged(
 		}
 
 		paramSet->auxCamParams[selectedCam-1] = selectedParams;
-		managerParams = *paramSet;
 	}
-
-	CamParamManager::getInstance().setParams(managerParams);
 
 	return PF_Err_NONE;
 }
@@ -470,13 +440,7 @@ static PF_Err SequenceSetup(
 	PF_ParamDef* params[],
 	PF_LayerDef* output) {
 
-	int id = CamParamManager::getInstance().getCurrentID();
-	ParamSet paramSet = CamParamManager::getInstance().getParams(id);
-
 	ParamSet* seqParamSet = new ParamSet();
-	memcpy(seqParamSet, &paramSet, sizeof(paramSet));
-
-	CamParamManager::getInstance().setParams(*seqParamSet);
 
 	out_data->sequence_data = (PF_Handle)seqParamSet;
 	

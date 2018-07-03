@@ -149,7 +149,6 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
     <ClInclude Include="..\..\..\..\Headers\PrSDKGPUFilter.h" />
     <ClInclude Include="..\..\..\..\Headers\PrSDKPixelFormat.h" />
     <ClInclude Include="..\CameraUtil.h" />
-    <ClInclude Include="..\CamParamManager.h" />
     <ClInclude Include="..\MathUtil.h" />
     <ClInclude Include="..\ParamUtil.h" />
     <ClInclude Include="..\SDK_CrossDissolve.h" />
@@ -173,7 +172,6 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
     <ResourceCompile Include="..\SDK_CrossDissolve.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\CamParamManager.cpp" />
     <ClCompile Include="..\SDK_CrossDissolve_CPU.cpp">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Debug/</ObjectFileName>
     </ClCompile>

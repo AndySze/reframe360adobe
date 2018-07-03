@@ -32,7 +32,7 @@
 #include "PrSDKVideoSegmentProperties.h"
 
 #include "CameraUtil.h"
-#include "CamParamManager.h"
+#include "ParamUtil.h"
 
 #if _WIN32
 #include <CL/cl.h>
@@ -115,11 +115,6 @@ public:
 	{
 		PrGPUFilterBase::Initialize(ioInstanceData);
 
-		_id = mNodeID;
-		CamParamManager::getInstance().setCurrentID(_id);
-
-		CamParamManager::getInstance().initParams(_id);
-
 		if (mDeviceInfo.outDeviceFramework == PrGPUDeviceFramework_CUDA)	
 			return InitializeCUDA();			
 
@@ -157,17 +152,23 @@ public:
 		mPPixSuite->GetPixelFormat(properties, &pixelFormat);
 		int is16f = pixelFormat != PrPixelFormat_GPU_BGRA_4444_32f;
 
-		ParamSet params = CamParamManager::getInstance().getParams(_id);
-		CameraParams mainParams = params.mainCamParams;
+		int samples = (int)round(GetParam(MB_SAMPLES, inRenderParams->inClipTime).mFloat64);
+
+		float* fovs = (float*)malloc(sizeof(float)*samples);
+		float* tinyplanets = (float*)malloc(sizeof(float)*samples);
+		float* rectilinears = (float*)malloc(sizeof(float)*samples);
+		float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+
+		CameraParams mainParams = mainCameraParamsGPU(inRenderParams->inClipTime);
 
 		// read the parameters
 		double main_pitch = -mainParams.pitch / 180*M_PI;
-		double main_yaw = GetParam(MAIN_CAMERA_YAW, inRenderParams->inClipTime).mFloat64 / 180 * M_PI;
-		double main_roll = GetParam(MAIN_CAMERA_ROLL, inRenderParams->inClipTime).mFloat64 / 180 * M_PI;
+		double main_yaw = mainParams.yaw / 180 * M_PI;
+		double main_roll = mainParams.roll / 180 * M_PI;
 
-		double main_fov = GetParam(MAIN_CAMERA_FOV, inRenderParams->inClipTime).mFloat64 / 10.0f;
-		double main_tinyplanet = GetParam(MAIN_CAMERA_TINYPLANET, inRenderParams->inClipTime).mFloat64;
-		double main_recti = GetParam(MAIN_CAMERA_RECTILINEAR, inRenderParams->inClipTime).mFloat64;
+		double main_fov = mainParams.fov / 10.0f;
+		double main_tinyplanet = mainParams.tinyplanet;
+		double main_recti = mainParams.rectilinear;
 
 		// Get width & height
 		prRect bounds = {};
@@ -287,6 +288,66 @@ public:
 				return suiteError_Fail;
 		}
 		return suiteError_NoError;
+	}
+
+	CameraParams activeAuxCameraParams(PrTime time) {
+		CameraParams outParams;
+
+		int activeCam = (int)round(GetParam(ACTIVE_AUX_CAMERA_SELECTOR, time).mFloat64);
+
+		outParams.pitch = GetParam(AUX_CAMERA_PITCH, time).mFloat64;
+		outParams.yaw = GetParam(AUX_CAMERA_YAW, time).mFloat64;
+		outParams.roll = GetParam(AUX_CAMERA_ROLL, time).mFloat64;
+		outParams.fov = GetParam(AUX_CAMERA_FOV, time).mFloat64;
+		outParams.tinyplanet = GetParam(AUX_CAMERA_TINYPLANET, time).mFloat64;
+		outParams.rectilinear = GetParam(AUX_CAMERA_RECTILINEAR, time).mFloat64;
+
+		return outParams;
+	}
+
+	CameraParams auxCameraParamsForCamera(int camera, PrTime time) {
+		CameraParams outParams;
+
+		outParams.pitch = GetParam(auxParamId(AUX_CAMERA_PITCH, camera), time).mFloat64;
+		outParams.yaw = GetParam(auxParamId(AUX_CAMERA_YAW, camera), time).mFloat64;
+		outParams.roll = GetParam(auxParamId(AUX_CAMERA_ROLL, camera), time).mFloat64;
+		outParams.fov = GetParam(auxParamId(AUX_CAMERA_FOV, camera), time).mFloat64;
+		outParams.tinyplanet = GetParam(auxParamId(AUX_CAMERA_TINYPLANET, camera), time).mFloat64;
+		outParams.rectilinear = GetParam(auxParamId(AUX_CAMERA_RECTILINEAR, camera), time).mFloat64;
+
+		return outParams;
+	}
+
+	CameraParams mainCameraParamsGPU(PrTime time) {
+		CameraParams outParams;
+
+		outParams.pitch = GetParam(MAIN_CAMERA_PITCH, time).mFloat64;
+		outParams.yaw = GetParam(MAIN_CAMERA_YAW, time).mFloat64;
+		outParams.roll = GetParam(MAIN_CAMERA_ROLL, time).mFloat64;
+		outParams.fov = GetParam(MAIN_CAMERA_FOV, time).mFloat64;
+		outParams.tinyplanet = GetParam(MAIN_CAMERA_TINYPLANET, time).mFloat64;
+		outParams.rectilinear = GetParam(MAIN_CAMERA_RECTILINEAR, time).mFloat64;
+
+		return outParams;
+	}
+
+	float interpParam(int paramID, PrTime time, float offset) {
+		if (offset == 0) {
+			return GetParam(paramID, time).mFloat64;
+		}
+		else if (offset < 0) {
+			offset = -offset;
+			float floor = std::floor(offset);
+			float frac = offset - floor;
+
+			return GetParam(paramID, time - (floor + 1)).mFloat64 *frac + GetParam(paramID, time - floor).mFloat64 *(1 - frac);
+		}
+		else {
+			float floor = std::floor(offset);
+			float frac = offset - floor;
+
+			return GetParam(paramID, time + (floor + 1)).mFloat64 *frac + GetParam(paramID, time + floor).mFloat64 *(1 - frac);
+		}
 	}
 
 private:
