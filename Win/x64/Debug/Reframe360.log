@@ -1,0 +1,49 @@
+﻿  Reframe360_GPU.cpp
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(44): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(104): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(21): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(22): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(23): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(33): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(34): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(35): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(36): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(37): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(38): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(60): warning C4244: 'return': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(64): warning C4244: 'return': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(81): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(89): warning C4244: 'return': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(92): warning C4244: 'return': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(96): warning C4244: 'return': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(192): warning C4305: '=': truncation from 'double' to 'PF_FpShort'
+..\Reframe360_GPU.cpp(170): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(225): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(379): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(380): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(381): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(382): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(383): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(384): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(392): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(393): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(394): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(395): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(396): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(397): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(405): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(406): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(407): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(424): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
+..\Reframe360_GPU.cpp(430): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
+..\Reframe360_GPU.cpp(436): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(437): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(446): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(448): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     Creating library x64\Debug\/Reframe360.lib and object x64\Debug\/Reframe360.exp
+  Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
+  Reframe360.vcxproj -> x64\Debug\Reframe360.pdb (Full PDB)

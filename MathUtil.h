@@ -1,3 +1,6 @@
+#ifndef MATHUTIL
+#define MATHUTIL
+
 #include <glm/vec2.hpp> // vec2, bvec2, dvec2, ivec2 and uvec2
 #include <glm/vec3.hpp> // vec3, bvec3, dvec3, ivec3 and uvec3
 #include <glm/vec4.hpp> // vec4, bvec4, dvec4, ivec4 and uvec4
@@ -90,7 +93,33 @@ static vec3 fisheyeDir(vec3 dir, const mat3 rotMat) {
 	return fedir;
 }
 
+static vec3 tinyPlanetSphCPU(vec3 uv) {
+	vec3 sph;
+	vec2 uvxy;
+	uvxy.x = uv.x / uv.z;
+	uvxy.y = uv.y / uv.z;
+
+	float u = length(uvxy);
+	float alpha = atan2(2.0f, u);
+	float phi = M_PI - 2 * alpha;
+	float z = cos(phi);
+	float x = sin(phi);
+
+	uvxy = normalize(uvxy);
+
+	sph.z = z;
+
+	vec2 sphxy = uvxy * x;
+
+	sph.x = sphxy.x;
+	sph.y = sphxy.y;
+
+	return sph;
+}
+
 static float fitRange(float value, float in_min, float in_max, float out_min, float out_max){
 	float out = out_min + ((out_max - out_min) / (in_max - in_min)) * (value - in_min);
 	return min(out_max, max(out, out_min));
 }
+
+#endif
