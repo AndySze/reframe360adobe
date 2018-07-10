@@ -44,6 +44,5 @@ c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilte
 ..\Reframe360_GPU.cpp(437): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 ..\Reframe360_GPU.cpp(446): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 ..\Reframe360_GPU.cpp(448): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-     Creating library x64\Debug\/Reframe360.lib and object x64\Debug\/Reframe360.exp
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
   Reframe360.vcxproj -> x64\Debug\Reframe360.pdb (Full PDB)
