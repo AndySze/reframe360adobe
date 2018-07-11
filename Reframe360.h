@@ -18,6 +18,8 @@
 /* Incorporated.                                                   */
 /*                                                                 */
 /*******************************************************************/
+#pragma once
+
 #define BETA_FAIL
 #define BETA_FAIL_TIME 1536316125
 

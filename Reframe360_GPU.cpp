@@ -45,6 +45,7 @@
 
 //  CUDA KERNEL 
 //  * See Reframe360.cu
+#ifndef __APPLE__
 extern void Reframe_CUDA ( float const *outBuf, float *destBuf, unsigned int outPitch,
 	unsigned int destPitch, unsigned int width, unsigned int height,
 	float* rotMat,
@@ -53,6 +54,7 @@ extern void Reframe_CUDA ( float const *outBuf, float *destBuf, unsigned int out
 	float* rectilinear,
 	int samples,
 	int bilinear);
+#endif
 
 static cl_kernel sKernelCache[4];
 
@@ -64,6 +66,14 @@ class SDK_Reframe :
 {
 private:
 	int _id;
+    
+    void CheckError(cl_int p_Error, const char* p_Msg)
+    {
+        if (p_Error != CL_SUCCESS)
+        {
+            fprintf(stderr, "%s [%d]\n", p_Msg, p_Error);
+        }
+    }
 public:
 	prSuiteError InitializeCUDA ()
 	{
@@ -101,7 +111,7 @@ public:
 				return suiteError_Fail;
 			}
 
-			mKernel = clCreateKernel(program, "CrossDissolveKernel", &result);
+			mKernel = clCreateKernel(program, "Reframe360Kernel", &result);
 			if (result != CL_SUCCESS)
 			{
 				return suiteError_Fail;
@@ -230,27 +240,6 @@ public:
 			rectilinears[i] = (float)rectilinear;
 		}
 
-		float* rotMatDeviceBuf;
-		mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * 9 * samples, (void**)&rotMatDeviceBuf);
-		cudaMemcpy((void**)rotMatDeviceBuf, (void*)(&rotmats[0]), sizeof(float) * 9 * samples, cudaMemcpyHostToDevice);
-
-		float* fovDeviceBuf;
-		mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&fovDeviceBuf);
-		cudaMemcpy((void**)fovDeviceBuf, (void*)(fovs), sizeof(float) * samples, cudaMemcpyHostToDevice);
-
-		float* tinyplanetDeviceBuf;
-		mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&tinyplanetDeviceBuf);
-		cudaMemcpy((void**)tinyplanetDeviceBuf, (void*)(tinyplanets), sizeof(float) * samples, cudaMemcpyHostToDevice);
-
-		float* rectilinearDeviceBuf;
-		mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&rectilinearDeviceBuf);
-		cudaMemcpy((void**)rectilinearDeviceBuf, (void*)(rectilinears), sizeof(float) * samples, cudaMemcpyHostToDevice);
-
-		free(rotmats);
-		free(fovs);
-		free(tinyplanets);
-		free(rectilinears);
-
 		// Get width & height
 		prRect bounds = {};
 		mPPixSuite->GetBounds(properties, &bounds);
@@ -306,7 +295,28 @@ public:
 		// Start CUDA or OpenCL specific code
 
 		if (mDeviceInfo.outDeviceFramework == PrGPUDeviceFramework_CUDA) {
-			
+#ifndef __APPLE__
+            float* rotMatDeviceBuf;
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * 9 * samples, (void**)&rotMatDeviceBuf);
+            cudaMemcpy((void**)rotMatDeviceBuf, (void*)(&rotmats[0]), sizeof(float) * 9 * samples, cudaMemcpyHostToDevice);
+            
+            float* fovDeviceBuf;
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&fovDeviceBuf);
+            cudaMemcpy((void**)fovDeviceBuf, (void*)(fovs), sizeof(float) * samples, cudaMemcpyHostToDevice);
+            
+            float* tinyplanetDeviceBuf;
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&tinyplanetDeviceBuf);
+            cudaMemcpy((void**)tinyplanetDeviceBuf, (void*)(tinyplanets), sizeof(float) * samples, cudaMemcpyHostToDevice);
+            
+            float* rectilinearDeviceBuf;
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&rectilinearDeviceBuf);
+            cudaMemcpy((void**)rectilinearDeviceBuf, (void*)(rectilinears), sizeof(float) * samples, cudaMemcpyHostToDevice);
+            
+            free(rotmats);
+            free(fovs);
+            free(tinyplanets);
+            free(rectilinears);
+            
 			// CUDA device pointers
 			float* outgoingBuffer = (float*) outgoingFrameData;		
 			float* destBuffer = (float*) destFrameData;	
@@ -332,38 +342,52 @@ public:
 			{
 				return suiteError_Fail;
 			}
-
+#endif
 		} else {
 			// OpenCL device pointers
 			cl_mem outgoingBuffer = (cl_mem)outgoingFrameData;
 			cl_mem destBuffer = (cl_mem)destFrameData;
 
-			float progress = 0;
+			int count = 0;
+            
+            int bilinear = 0; //TODO: make parameter
+            
+            cl_int error;
+            
+            cl_context context = (cl_context)mDeviceInfo.outContextHandle;
+            cl_device_id device = (cl_device_id)mDeviceInfo.outDeviceHandle;
 
-			// Set the arguments
-			clSetKernelArg(mKernel, 0, sizeof(cl_mem), &outgoingBuffer);
-			clSetKernelArg(mKernel, 2, sizeof(cl_mem), &destBuffer);
-			clSetKernelArg(mKernel, 3, sizeof(unsigned int), &outgoingPitch);
-			clSetKernelArg(mKernel, 5, sizeof(unsigned int), &destPitch);
-			clSetKernelArg(mKernel, 6, sizeof(int), &is16f);
-			clSetKernelArg(mKernel, 7, sizeof(unsigned int), &width);
-			clSetKernelArg(mKernel, 8, sizeof(unsigned int), &height);
-			clSetKernelArg(mKernel, 9, sizeof(float), &progress);
-
-			// Launch the kernel
-			size_t threadBlock[2] = { 16, 16 };
-			size_t grid[2] = { RoundUp(width, threadBlock[0]), RoundUp(height, threadBlock[1] )};
-
-			cl_int result = clEnqueueNDRangeKernel(
-				mCommandQueue,
-				mKernel,
-				2,
-				0,
-				grid,
-				threadBlock,
-				0,
-				0,
-				0);
+            error  = clSetKernelArg(mKernel, count++, sizeof(int), &width);
+            error |= clSetKernelArg(mKernel, count++, sizeof(int), &height);
+            
+            cl_mem fov_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples, fovs, &error);
+            cl_mem tinyplanet_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples, tinyplanets, &error);
+            cl_mem rectilinear_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples, rectilinears, &error);
+            error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &fov_buf);
+            error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &tinyplanet_buf);
+            error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &rectilinear_buf);
+            
+            error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &outgoingFrameData);
+            error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &destFrameData);
+            
+            cl_mem rotmat_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*9*samples, rotmats, &error);
+            error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &rotmat_buf);
+            error |= clSetKernelArg(mKernel, count++, sizeof(int), &samples);
+            error |= clSetKernelArg(mKernel, count++, sizeof(int), &bilinear);
+            
+            CheckError(error, "Unable to set kernel arguments");
+            
+            size_t threadBlock[2] = { 16, 16 };
+            size_t grid[2] = { RoundUp(width, threadBlock[0]), RoundUp(height, threadBlock[1] )};
+            
+            cl_event clEvent;
+            cl_int result = clEnqueueNDRangeKernel(mCommandQueue, mKernel, 2, NULL, grid, threadBlock, 0, NULL, &clEvent);
+            
+            clWaitForEvents(1, &clEvent);
+            clReleaseMemObject(fov_buf);
+            clReleaseMemObject(tinyplanet_buf);
+            clReleaseMemObject(rectilinear_buf);
+            clReleaseMemObject(rotmat_buf);
 
 			if ( result != CL_SUCCESS )	
 				return suiteError_Fail;

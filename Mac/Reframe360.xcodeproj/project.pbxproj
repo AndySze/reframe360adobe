@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7E158D981A6F1D3E00BF99DB /* CUDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E158D971A6F1D3E00BF99DB /* CUDA.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E83C0FD170F4840008B8043 /* Cocoa.framework */; };
+		7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9365DF172F7344006C8436 /* OpenCL.framework */; };
+		EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */; };
+		EC04FDE820F4FF4000A2301D /* Reframe360.r in Rez */ = {isa = PBXBuildFile; fileRef = EC04FDDD20F4FF3F00A2301D /* Reframe360.r */; };
+		EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */; };
+		EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE120F4FF4000A2301D /* Reframe360.cl */; };
+		EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC04FDF120F5008500A2301D /* InfoPlist.strings */; };
+		EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */ = {isa = PBXBuildFile; fileRef = EC61E82420F5119D0062CB00 /* CreateCString.py */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		18129D2E1EE5E99100A15AE5 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.opencl;
+			isEditable = 1;
+			outputFiles = (
+				"${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/${INPUT_FILE_BASE}.cl.h",
+			);
+			script = "mkdir -p ${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/\n\nchmod 777 ${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/\n\n\npython \"Supporting Files/Utils/CreateCString.py\" -i \"${INPUT_FILE_DIR}\"/Reframe360.cl -o ${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/${INPUT_FILE_BASE}.cl.h --name k${INPUT_FILE_BASE}_OpenCLString\n\n";
+		};
+		7EC849641A6F377D00AE45FF /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.cu";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}.o",
+			);
+			script = "# Correct compilation is dependent on nvcc being installed correctly, from the CUDA SDK\necho \"Running script for *.cu files in Build Rules...\"\n/usr/local/cuda/bin/nvcc -I\"${SRCROOT}\",/usr/local/cuda/include,\"${INPUT_FILE_DIR}\"/../../../Headers,\"${INPUT_FILE_DIR}\"/../Utils,\"${AE_SDK_BASE_PATH}\"/Examples/Headers,\"${AE_SDK_BASE_PATH}\"/Examples/Util,\"${BOOST_BASE_PATH}\" -c \"${INPUT_FILE_PATH}\" -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.o";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		7E158D971A6F1D3E00BF99DB /* CUDA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CUDA.framework; path = ../../../../Library/Frameworks/CUDA.framework; sourceTree = DEVELOPER_DIR; };
+		7E83C0FA170F4840008B8043 /* Reframe360.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Reframe360.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E83C0FD170F4840008B8043 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		7E83C100170F4840008B8043 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		7E83C101170F4840008B8043 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7E83C102170F4840008B8043 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7E9365DF172F7344006C8436 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
+		EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Reframe360_GPU.cpp; path = ../Reframe360_GPU.cpp; sourceTree = "<group>"; };
+		EC04FDDC20F4FF3F00A2301D /* Reframe360.cu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Reframe360.cu; path = ../Reframe360.cu; sourceTree = "<group>"; };
+		EC04FDDD20F4FF3F00A2301D /* Reframe360.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = Reframe360.r; path = ../Reframe360.r; sourceTree = "<group>"; };
+		EC04FDDE20F4FF3F00A2301D /* CameraUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraUtil.h; path = ../CameraUtil.h; sourceTree = "<group>"; };
+		EC04FDDF20F4FF4000A2301D /* Reframe360.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reframe360.h; path = ../Reframe360.h; sourceTree = "<group>"; };
+		EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Reframe360_CPU.cpp; path = ../Reframe360_CPU.cpp; sourceTree = "<group>"; };
+		EC04FDE120F4FF4000A2301D /* Reframe360.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; name = Reframe360.cl; path = ../Reframe360.cl; sourceTree = "<group>"; };
+		EC04FDE220F4FF4000A2301D /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtil.h; path = ../MathUtil.h; sourceTree = "<group>"; };
+		EC04FDE320F4FF4000A2301D /* ParamUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParamUtil.h; path = ../ParamUtil.h; sourceTree = "<group>"; };
+		EC04FDE420F4FF4000A2301D /* Reframe360.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Reframe360.rc; path = ../Reframe360.rc; sourceTree = "<group>"; };
+		EC04FDE520F4FF4000A2301D /* Reframe360.rcp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Reframe360.rcp; path = ../Reframe360.rcp; sourceTree = "<group>"; };
+		EC04FDEE20F5006800A2301D /* Reframe360-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Reframe360-Prefix.pch"; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Prefix.pch"; sourceTree = "<group>"; };
+		EC04FDEF20F5006800A2301D /* Reframe360-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Reframe360-Info.plist"; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist"; sourceTree = "<group>"; };
+		EC04FDF220F5008500A2301D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		EC61E82320F5119D0062CB00 /* PrGPUFilterModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrGPUFilterModule.h; sourceTree = "<group>"; };
+		EC61E82420F5119D0062CB00 /* CreateCString.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = CreateCString.py; sourceTree = "<group>"; };
+		EC61E82720F5119D0062CB00 /* FloatingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingPoint.h; sourceTree = "<group>"; };
+		EC61E82820F5119D0062CB00 /* KernelCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelCore.h; sourceTree = "<group>"; };
+		EC61E82920F5119D0062CB00 /* KernelHalf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelHalf.h; sourceTree = "<group>"; };
+		EC61E82A20F5119D0062CB00 /* KernelMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelMemory.h; sourceTree = "<group>"; };
+		EC61E82B20F5119D0062CB00 /* KernelWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelWrapper.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7E83C0F7170F4840008B8043 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */,
+				7E158D981A6F1D3E00BF99DB /* CUDA.framework in Frameworks */,
+				7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7E83C0EF170F4840008B8043 = {
+			isa = PBXGroup;
+			children = (
+				EC04FDED20F5002400A2301D /* Supporting Files */,
+				EC04FDDE20F4FF3F00A2301D /* CameraUtil.h */,
+				EC04FDE220F4FF4000A2301D /* MathUtil.h */,
+				EC04FDE320F4FF4000A2301D /* ParamUtil.h */,
+				EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */,
+				EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */,
+				EC04FDE120F4FF4000A2301D /* Reframe360.cl */,
+				EC04FDDC20F4FF3F00A2301D /* Reframe360.cu */,
+				EC04FDDF20F4FF4000A2301D /* Reframe360.h */,
+				EC04FDDD20F4FF3F00A2301D /* Reframe360.r */,
+				EC04FDE420F4FF4000A2301D /* Reframe360.rc */,
+				EC04FDE520F4FF4000A2301D /* Reframe360.rcp */,
+				7E83C0FC170F4840008B8043 /* Frameworks */,
+				7E83C0FB170F4840008B8043 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7E83C0FB170F4840008B8043 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E83C0FA170F4840008B8043 /* Reframe360.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E83C0FC170F4840008B8043 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E158D971A6F1D3E00BF99DB /* CUDA.framework */,
+				7E83C0FD170F4840008B8043 /* Cocoa.framework */,
+				7E9365DF172F7344006C8436 /* OpenCL.framework */,
+				7E83C0FF170F4840008B8043 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E83C0FF170F4840008B8043 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E83C100170F4840008B8043 /* AppKit.framework */,
+				7E83C101170F4840008B8043 /* CoreData.framework */,
+				7E83C102170F4840008B8043 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		EC04FDED20F5002400A2301D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC61E82220F5119D0062CB00 /* Utils */,
+				EC04FDF120F5008500A2301D /* InfoPlist.strings */,
+				EC04FDEF20F5006800A2301D /* Reframe360-Info.plist */,
+				EC04FDEE20F5006800A2301D /* Reframe360-Prefix.pch */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC61E82220F5119D0062CB00 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EC61E82320F5119D0062CB00 /* PrGPUFilterModule.h */,
+				EC61E82420F5119D0062CB00 /* CreateCString.py */,
+				EC61E82520F5119D0062CB00 /* PrGPU */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EC61E82520F5119D0062CB00 /* PrGPU */ = {
+			isa = PBXGroup;
+			children = (
+				EC61E82620F5119D0062CB00 /* KernelSupport */,
+			);
+			path = PrGPU;
+			sourceTree = "<group>";
+		};
+		EC61E82620F5119D0062CB00 /* KernelSupport */ = {
+			isa = PBXGroup;
+			children = (
+				EC61E82720F5119D0062CB00 /* FloatingPoint.h */,
+				EC61E82820F5119D0062CB00 /* KernelCore.h */,
+				EC61E82920F5119D0062CB00 /* KernelHalf.h */,
+				EC61E82A20F5119D0062CB00 /* KernelMemory.h */,
+				EC61E82B20F5119D0062CB00 /* KernelWrapper.h */,
+			);
+			path = KernelSupport;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7E83C0F9170F4840008B8043 /* Reframe360 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E83C10C170F4840008B8043 /* Build configuration list for PBXNativeTarget "Reframe360" */;
+			buildPhases = (
+				7E83C0F6170F4840008B8043 /* Sources */,
+				7E83C0F7170F4840008B8043 /* Frameworks */,
+				7E83C0F8170F4840008B8043 /* Resources */,
+				7EC22DD31FA7C88600D810DC /* Rez */,
+				EC80A3F720F53A8600FA0E61 /* ShellScript */,
+			);
+			buildRules = (
+				18129D2E1EE5E99100A15AE5 /* PBXBuildRule */,
+				7EC849641A6F377D00AE45FF /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = Reframe360;
+			productName = SDK_CrossDissolve;
+			productReference = 7E83C0FA170F4840008B8043 /* Reframe360.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7E83C0F1170F4840008B8043 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "";
+			};
+			buildConfigurationList = 7E83C0F4170F4840008B8043 /* Build configuration list for PBXProject "Reframe360" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7E83C0EF170F4840008B8043;
+			productRefGroup = 7E83C0FB170F4840008B8043 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7E83C0F9170F4840008B8043 /* Reframe360 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7E83C0F8170F4840008B8043 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */,
+				EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		7EC22DD31FA7C88600D810DC /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC04FDE820F4FF4000A2301D /* Reframe360.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EC80A3F720F53A8600FA0E61 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin\"\ncp -R \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin\" \"/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7E83C0F6170F4840008B8043 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */,
+				EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */,
+				EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EC04FDF120F5008500A2301D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC04FDF220F5008500A2301D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7E83C10A170F4840008B8043 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../Headers/,
+					../../../../Utils/,
+					"\"${AE_SDK_BASE_PATH}/Examples/Headers\"",
+					"\"${AE_SDK_BASE_PATH}/Examples/Headers/SP\"",
+					"\"${AE_SDK_BASE_PATH}/Examples/Util\"",
+					"\"${AE_SDK_BASE_PATH}/Examples/Resources\"",
+					"\"${CUDA_SDK_BASE_PATH}/\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		7E83C10B170F4840008B8043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../Headers/,
+					../../../../Utils/,
+					"\"${AE_SDK_BASE_PATH}/Examples/Headers\"",
+					"\"${AE_SDK_BASE_PATH}/Examples/Headers/SP\"",
+					"\"${AE_SDK_BASE_PATH}/Examples/Util\"",
+					"\"${AE_SDK_BASE_PATH}/Examples/Resources\"",
+					"\"${CUDA_SDK_BASE_PATH}/\"",
+				);
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		7E83C10D170F4840008B8043 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Reframe360-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/stefansietzen/Dev/Premiere Pro CC 12.0 Mac SDK/Examples/Headers/\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Utils/\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Headers\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Util\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Resources\"",
+					/usr/local/cuda/include,
+					../../glm,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/cuda/lib;
+				OTHER_LDFLAGS = "-lcudart";
+				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7E83C10E170F4840008B8043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Reframe360-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/stefansietzen/Dev/Premiere Pro CC 12.0 Mac SDK/Examples/Headers/\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Utils/\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Headers\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Util\"",
+					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Resources\"",
+					/usr/local/cuda/include,
+					../../glm,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/cuda/lib;
+				OTHER_LDFLAGS = "-lcudart";
+				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7E83C0F4170F4840008B8043 /* Build configuration list for PBXProject "Reframe360" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E83C10A170F4840008B8043 /* Debug */,
+				7E83C10B170F4840008B8043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E83C10C170F4840008B8043 /* Build configuration list for PBXNativeTarget "Reframe360" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E83C10D170F4840008B8043 /* Debug */,
+				7E83C10E170F4840008B8043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7E83C0F1170F4840008B8043 /* Project object */;
+}
