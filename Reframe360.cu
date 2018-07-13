@@ -17,6 +17,7 @@ __device__ float3 matMul(const float3 r012, const float3 r345, const float3 r678
 __device__ float2 repairUv(float2 uv){
 	float2 outuv = {0, 0};
 
+
 	if(uv.x<0) {
 		outuv.x = 1.0 + uv.x;
 		}else if(uv.x > 1.0){
@@ -32,6 +33,9 @@ __device__ float2 repairUv(float2 uv){
 		} else {
 			outuv.y = uv.y;
 		}
+
+	outuv.x = min(max(outuv.x, 0.0), 1.0);
+	outuv.y = min(max(outuv.y, 0.0), 1.0);
 
 	return outuv;
 }
