@@ -1,6 +1,8 @@
 #ifndef MATHUTIL
 #define MATHUTIL
 
+#include <algorithm>
+
 #include <glm/vec2.hpp> // vec2, bvec2, dvec2, ivec2 and uvec2
 #include <glm/vec3.hpp> // vec3, bvec3, dvec3, ivec3 and uvec3
 #include <glm/vec4.hpp> // vec4, bvec4, dvec4, ivec4 and uvec4
@@ -120,6 +122,65 @@ static vec3 tinyPlanetSph(vec3 uv) {
 static float fitRange(float value, float in_min, float in_max, float out_min, float out_max){
     float out = out_min + ((out_max - out_min) / (in_max - in_min)) * (value - in_min);
     return std::min(out_max, std::max(out, out_min));
+}
+
+double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
+	PrTime time = in_data->current_time;
+	PrTime timeStep = in_data->time_step;
+
+	PF_ParamDef	def;
+	AEFX_CLR_STRUCT(def);
+
+	if (offset == 0) {
+		PF_CHECKOUT_PARAM(in_data, paramID, time, timeStep, in_data->time_scale, &def);
+		return def.u.fs_d.value;
+	}
+	else if (offset < 0) {
+		offset = -offset;
+		float floor = std::floor(offset);
+		float frac = offset - floor;
+
+		PF_CHECKOUT_PARAM(in_data, paramID, time - (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
+		float part1 = def.u.fs_d.value * frac;
+		AEFX_CLR_STRUCT(def);
+		PF_CHECKOUT_PARAM(in_data, paramID, time - floor * timeStep, timeStep, in_data->time_scale, &def);
+		float part2 = def.u.fs_d.value * (1 - frac);
+		
+		return part1 + part2;
+	}
+	else {
+		float floor = std::floor(offset);
+		float frac = offset - floor;
+
+		PF_CHECKOUT_PARAM(in_data, paramID, time + (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
+		float part1 = def.u.fs_d.value * frac;
+		AEFX_CLR_STRUCT(def);
+		PF_CHECKOUT_PARAM(in_data, paramID, time + floor * timeStep, timeStep, in_data->time_scale, &def);
+		float part2 = def.u.fs_d.value * (1 - frac);
+
+		return part1 + part2;
+	}
+}
+
+static float getCameraBlend_CPU(PF_InData* in_data, float offset) {
+
+	float accel = interpParam_CPU(AUX_ACCELERATION, in_data, offset);
+	float blend = interpParam_CPU(AUX_BLEND, in_data, offset);
+
+	if (blend < 0.5) {
+		blend = fitRange(blend, 0, 0.5, 0, 1);
+		blend = std::pow(blend, accel);
+		blend = fitRange(blend, 0, 1, 0, 0.5);
+	}
+	else {
+		blend = fitRange(blend, 0.5, 1.0, 0, 1);
+		blend = 1.0 - blend;
+		blend = std::pow(blend, accel);
+		blend = 1.0 - blend;
+		blend = fitRange(blend, 0, 1, 0.5, 1.0);
+	}
+
+	return blend;
 }
 
 

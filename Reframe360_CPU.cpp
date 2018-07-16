@@ -26,6 +26,7 @@
 #include "Param_Utils.h"
 #include "AE_EffectSuites.h"
 #include <ctime>
+#include <math.h>
 #include "MathUtil.h"
 
 using namespace std;
@@ -83,9 +84,55 @@ static PF_Err ParamsSetup(
 	int num_params = 1;
 
 	AEFX_CLR_STRUCT(def);
+	PF_ADD_TOPICX("Rendering Parameters", 0, MB_GRP_ID);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Main Pitch",
+		"Motionblur Samples",
+		MB_SAMPLES_MIN_VALUE,
+		MB_SAMPLES_MAX_VALUE,
+		MB_SAMPLES_MIN_SLIDER,
+		MB_SAMPLES_MAX_SLIDER,
+		MB_SAMPLES_DFLT,
+		PF_Precision_INTEGER,
+		PF_ValueDisplayFlag_NONE,
+		0,
+		MB_SAMPLES
+	);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(
+		"Motionblur Shutter",
+		MB_SHUTTER_MIN_VALUE,
+		MB_SHUTTER_MAX_VALUE,
+		MB_SHUTTER_MIN_SLIDER,
+		MB_SHUTTER_MAX_SLIDER,
+		MB_SHUTTER_DFLT,
+		PF_Precision_TENTHS,
+		PF_ValueDisplayFlag_NONE,
+		0,
+		MB_SHUTTER
+	);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+	PF_END_TOPIC(MB_GRP_ID);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_TOPICX("Overall Camera Parameters", 0, MAIN_CAMERA_GRP_ID);
+	num_params++;
+
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(
+		"Overall Pitch",
 		MAIN_CAMERA_PITCH_MIN_VALUE,
 		MAIN_CAMERA_PITCH_MAX_VALUE,
 		MAIN_CAMERA_PITCH_MIN_SLIDER,
@@ -101,7 +148,7 @@ static PF_Err ParamsSetup(
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Main Yaw",
+		"Overall Yaw",
 		MAIN_CAMERA_YAW_MIN_VALUE,
 		MAIN_CAMERA_YAW_MAX_VALUE,
 		MAIN_CAMERA_YAW_MIN_SLIDER,
@@ -117,7 +164,7 @@ static PF_Err ParamsSetup(
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Main Roll",
+		"Overall Roll",
 		MAIN_CAMERA_ROLL_MIN_VALUE,
 		MAIN_CAMERA_ROLL_MAX_VALUE,
 		MAIN_CAMERA_ROLL_MIN_SLIDER,
@@ -133,7 +180,7 @@ static PF_Err ParamsSetup(
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Main Zoom Multiplier",
+		"Overall Zoom Multiplier",
 		MAIN_CAMERA_FOV_MIN_VALUE,
 		MAIN_CAMERA_FOV_MAX_VALUE,
 		MAIN_CAMERA_FOV_MIN_SLIDER,
@@ -147,25 +194,17 @@ static PF_Err ParamsSetup(
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
+	PF_END_TOPIC(MAIN_CAMERA_GRP_ID);
+	num_params++;
 
-	PF_ADD_FLOAT_SLIDERX(
-		"Aux Camera",
-		CAMERA_MIN_VALUE,
-		CAMERA_MAX_VALUE,
-		CAMERA_MIN_SLIDER,
-		CAMERA_MAX_SLIDER,
-		CAMERA_DFLT,
-		PF_Precision_INTEGER,
-		PF_ValueDisplayFlag_NONE,
-		PF_ParamFlag_SUPERVISE,
-		ACTIVE_AUX_CAMERA_SELECTOR
-	);
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_TOPICX("Camera Animation Parameters", 0, BLEND_GRP_ID);
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Aux Camera 1",
+		"Camera 1",
 		CAMERA_MIN_VALUE,
 		CAMERA_MAX_VALUE,
 		CAMERA_MIN_SLIDER,
@@ -181,26 +220,16 @@ static PF_Err ParamsSetup(
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Aux Camera 2",
+		"Camera 2",
 		CAMERA_MIN_VALUE,
 		CAMERA_MAX_VALUE,
 		CAMERA_MIN_SLIDER,
 		CAMERA_MAX_SLIDER,
-		CAMERA_DFLT,
+		CAMERA_DFLT + 1,
 		PF_Precision_INTEGER,
 		PF_ValueDisplayFlag_NONE,
 		0,
 		AUX_CAMERA2
-	);
-	num_params++;
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_CHECKBOXX(
-		"Show Aux Camera",
-		false,
-		0,
-		FORCE_AUX_DISPLAY
 	);
 	num_params++;
 
@@ -238,38 +267,52 @@ static PF_Err ParamsSetup(
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
+	PF_END_TOPIC(BLEND_GRP_ID);
+	num_params++;
 
-	PF_ADD_FLOAT_SLIDERX(
-		"Motionblur Samples",
-		MB_SAMPLES_MIN_VALUE,
-		MB_SAMPLES_MAX_VALUE,
-		MB_SAMPLES_MIN_SLIDER,
-		MB_SAMPLES_MAX_SLIDER,
-		MB_SAMPLES_DFLT,
-		PF_Precision_INTEGER,
-		PF_ValueDisplayFlag_NONE,
-		0,
-		MB_SAMPLES
-	);
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_TOPICX("Camera Setup Parameters", 0, CAM_SELECTION_GRP_ID);
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Motionblur Shutter",
-		MB_SHUTTER_MIN_VALUE,
-		MB_SHUTTER_MAX_VALUE,
-		MB_SHUTTER_MIN_SLIDER,
-		MB_SHUTTER_MAX_SLIDER,
-		MB_SHUTTER_DFLT,
-		PF_Precision_TENTHS,
+		"Select Editable Camera",
+		CAMERA_MIN_VALUE,
+		CAMERA_MAX_VALUE,
+		CAMERA_MIN_SLIDER,
+		CAMERA_MAX_SLIDER,
+		CAMERA_DFLT,
+		PF_Precision_INTEGER,
 		PF_ValueDisplayFlag_NONE,
-		0,
-		MB_SHUTTER
+		PF_ParamFlag_SUPERVISE,
+		ACTIVE_AUX_CAMERA_SELECTOR
 	);
 	num_params++;
 
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_CHECKBOXX(
+		"Show Editable Camera",
+		false,
+		0,
+		FORCE_AUX_DISPLAY
+	);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+	PF_END_TOPIC(CAM_SELECTION_GRP_ID);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_TOPICX("Editable Camera Parameters", 0, AUX_CAMERA_GRP_ID);
+	num_params++;
+
 	num_params += addAuxParams(in_data, false, 0);
+
+	AEFX_CLR_STRUCT(def);
+	PF_END_TOPIC(AUX_CAMERA_GRP_ID);
+	num_params++;
 
 
 	for (int i = 1; i <= CAMERA_MAX_VALUE; i++) {
@@ -300,22 +343,22 @@ static PF_Err ParamChanged(
 
 		//CameraParams selectedParams = paramSet->auxCamParams[selectedCam-1];
 
-		params[AUX_CAMERA_PITCH]->u.fs_d.value = params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM]->u.fs_d.value;
+		params[AUX_CAMERA_PITCH]->u.fs_d.value = params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_PITCH]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
-		params[AUX_CAMERA_YAW]->u.fs_d.value = params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value;
+		params[AUX_CAMERA_YAW]->u.fs_d.value = params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_YAW]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
-		params[AUX_CAMERA_ROLL]->u.fs_d.value = params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value;
+		params[AUX_CAMERA_ROLL]->u.fs_d.value = params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_ROLL]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
-		params[AUX_CAMERA_FOV]->u.fs_d.value = params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value;
+		params[AUX_CAMERA_FOV]->u.fs_d.value = params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_FOV]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
-		params[AUX_CAMERA_TINYPLANET]->u.fs_d.value = params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value;
+		params[AUX_CAMERA_TINYPLANET]->u.fs_d.value = params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_TINYPLANET]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
-		params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value;
+		params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_RECTILINEAR]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 	}
 	else {
@@ -323,28 +366,28 @@ static PF_Err ParamChanged(
 
 		switch (param_extra->param_index) {
 		case AUX_CAMERA_PITCH:
-			params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value = changedParam;
-			params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM ]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = changedParam;
+			params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 			break;
 		case AUX_CAMERA_YAW:
-			params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value = changedParam;
-			params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM ]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = changedParam;
+			params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 			break;
 		case AUX_CAMERA_ROLL:
-			params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value = changedParam;
-			params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM ]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = changedParam;
+			params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 			break;
 		case AUX_CAMERA_FOV:
-			params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value = changedParam;
-			params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM ]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = changedParam;
+			params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 			break;
 		case AUX_CAMERA_TINYPLANET:
-			params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value = changedParam;
-			params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM ]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = changedParam;
+			params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 			break;
 		case AUX_CAMERA_RECTILINEAR:
-			params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM ]->u.fs_d.value = changedParam;
-			params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM ]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = changedParam;
+			params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 			break;
 		default:
 			break;
@@ -393,30 +436,175 @@ static PF_Err Render(
 	int width = output->width;
 	int height = output->height;
 
-	double tempparam = getDoubleParamValueAtOffset(AUX_CAMERA_PITCH, in_data, 0.5f);
+	int samples = (int)round(params[MB_SAMPLES]->u.fs_d.value);
+	//samples = max(1, samples);
+	int cam1 = (int)round(params[AUX_CAMERA1]->u.fs_d.value);
+	int cam2 = (int)round(params[AUX_CAMERA2]->u.fs_d.value);
+	float shutter = (int)round(params[MB_SHUTTER]->u.fs_d.value);
 
-	const char* outgoingData = (const char*)outgoing->data;
+	float* fovs = (float*)malloc(sizeof(float)*samples);
+	float* tinyplanets = (float*)malloc(sizeof(float)*samples);
+	float* rectilinears = (float*)malloc(sizeof(float)*samples);
+	float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+
+	for (int i = 0; i < samples; i++) {
+		float offset = 0;
+		if (samples > 1) {
+			offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
+		}
+
+		// read the parameters
+		double main_pitch = -interpParam_CPU(MAIN_CAMERA_PITCH, in_data, offset) / 180 * M_PI;
+		double main_yaw = -interpParam_CPU(MAIN_CAMERA_YAW, in_data, offset) / 180 * M_PI;
+		double main_roll = -interpParam_CPU(MAIN_CAMERA_ROLL, in_data, offset) / 180 * M_PI;
+		double main_fov_mult = interpParam_CPU(MAIN_CAMERA_FOV, in_data, offset);
+
+		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value){
+			cam1 = (int)round(params[ACTIVE_AUX_CAMERA_SELECTOR]->u.fs_d.value);
+		}
+
+		double cam1_pitch = -interpParam_CPU(auxParamId(AUX_CAMERA_PITCH, cam1), in_data, offset) / 180 * M_PI;
+		double cam1_yaw = -interpParam_CPU(auxParamId(AUX_CAMERA_YAW, cam1), in_data, offset) / 180 * M_PI;
+		double cam1_roll = -interpParam_CPU(auxParamId(AUX_CAMERA_ROLL, cam1), in_data, offset) / 180 * M_PI;
+
+		double cam1_fov = interpParam_CPU(auxParamId(AUX_CAMERA_FOV, cam1), in_data, offset);
+		double cam1_tinyplanet = interpParam_CPU(auxParamId(AUX_CAMERA_TINYPLANET, cam1), in_data, offset);
+		double cam1_recti = interpParam_CPU(auxParamId(AUX_CAMERA_RECTILINEAR, cam1), in_data, offset);
+
+		double cam2_pitch = -interpParam_CPU(auxParamId(AUX_CAMERA_PITCH, cam2), in_data, offset) / 180 * M_PI;
+		double cam2_yaw = -interpParam_CPU(auxParamId(AUX_CAMERA_YAW, cam2), in_data, offset) / 180 * M_PI;
+		double cam2_roll = -interpParam_CPU(auxParamId(AUX_CAMERA_ROLL, cam2), in_data, offset) / 180 * M_PI;
+
+		double cam2_fov = interpParam_CPU(auxParamId(AUX_CAMERA_FOV, cam2), in_data, offset);
+		double cam2_tinyplanet = interpParam_CPU(auxParamId(AUX_CAMERA_TINYPLANET, cam2), in_data, offset);
+		double cam2_recti = interpParam_CPU(auxParamId(AUX_CAMERA_RECTILINEAR, cam2), in_data, offset);
+
+		double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
+
+		double blend = getCameraBlend_CPU(in_data, offset);
+
+		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value) {
+			blend = 0;
+		}
+
+		pitch = cam1_pitch * (1.0 - blend) + cam2_pitch * blend + main_pitch;
+		yaw = cam1_yaw * (1.0 - blend) + cam2_yaw * blend + main_yaw;
+		roll = cam1_roll * (1.0 - blend) + cam2_roll * blend + main_roll;
+		fov = (cam1_fov * (1.0 - blend) + cam2_fov * blend) * main_fov_mult;
+		tinyplanet = cam1_tinyplanet * (1.0 - blend) + cam2_tinyplanet * blend;
+		rectilinear = cam1_recti * (1.0 - blend) + cam2_recti * blend;
+
+		//mat3 main_rotMat = rotationMatrix(main_pitch, main_yaw, main_roll);
+		mat3 rotMat = rotationMatrix(pitch, yaw, roll);
+
+		memcpy(&(rotmats[i * 9]), &rotMat[0], sizeof(float) * 9);
+		fovs[i] = (float)fov;
+		tinyplanets[i] = (float)tinyplanet;
+		rectilinears[i] = (float)rectilinear;
+	}
+		
+	for (int i = 0; i < samples; i++)
+	{
+		const char* outgoingData = (const char*)outgoing->data;
+
+		char* destData = (char*)dest->data;
+
+		mat3 rotMat;
+		memcpy(&rotMat[0], &(rotmats[i * 9]), sizeof(float) * 9);
+
+		float fov = fovs[i];
+		float aspect = (float)width / (float)height;
+
+		for (int y = 0; y < output->height;
+			++y, destData += dest->rowbytes)
+		{
+			for (int x = 0; x < output->width; ++x)
+			{
+				vec2 uv = { (float)x / width, (float)y / height };
+
+				vec3 dir = { 0, 0, 0 };
+				dir.x = (uv.x - 0.5)*2.0;
+				dir.y = (uv.y - 0.5)*2.0;
+				dir.y /= aspect;
+				dir.z = fov;
+
+				vec3 tinyplanet = tinyPlanetSph(dir);
+				tinyplanet = normalize(tinyplanet);
+
+				tinyplanet = rotMat * tinyplanet;
+				vec3 rectdir = rotMat * dir;
+
+				rectdir = normalize(rectdir);
+
+				dir = mix(fisheyeDir(dir, rotMat), tinyplanet, tinyplanets[i]);
+				dir = mix(dir, rectdir, rectilinears[i]);
+
+				vec2 iuv = polarCoord(dir);
+				iuv = repairUv(iuv);
+
+				int x_new = iuv.x * (width - 1);
+				int y_new = iuv.y * (height - 1);
+
+				iuv.x *= (width - 1);
+				iuv.y *= (height - 1);
+
+				if ((x_new < width) && (y_new < height))
+				{
+					const char* outgoingData_ = outgoingData + y_new * outgoing->rowbytes;
+
+					vec4 interpCol;
+
+					float outgoingB = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 0] : 0.0f;
+					float outgoingG = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 1] : 0.0f;
+					float outgoingR = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 2] : 0.0f;
+					float outgoingA = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 3] : 0.0f;
+
+					float recipNewAlpha = 1.0f;
+
+					interpCol.x = outgoingB;
+					interpCol.y = outgoingG;
+					interpCol.z = outgoingR;
+					interpCol.w = outgoingA;
+
+					((float*)destData)[x * 4 + 0] += interpCol.x / samples;
+					((float*)destData)[x * 4 + 1] += interpCol.y / samples;
+					((float*)destData)[x * 4 + 2] += interpCol.z / samples;
+					((float*)destData)[x * 4 + 3] += interpCol.w / samples;
+				}
+
+				continue;
+			}
+		}
+	}
+
+	free(rotmats);
+	free(fovs);
+	free(tinyplanets);
+	free(rectilinears);
+
+	/*const char* outgoingData = (const char*)outgoing->data;
 
 	char* destData = (char*)dest->data;
-
+	
 	for (int y = 0; y < output->height;
 		++y, outgoingData += outgoing->rowbytes, destData += dest->rowbytes)
 	{
 		for (int x = 0; x < output->width; ++x)
 		{
-			float outgoingB = outgoingData ? ((const char*)outgoingData)[x * 4 + 0] : 0.0f;
-			float outgoingG = outgoingData ? ((const char*)outgoingData)[x * 4 + 1] : 0.0f;
-			float outgoingR = outgoingData ? ((const char*)outgoingData)[x * 4 + 2] : 0.0f;
-			float outgoingA = outgoingData ? ((const char*)outgoingData)[x * 4 + 3] : 0.0f;
+			float outgoingB = outgoingData ? ((const float*)outgoingData)[x * 4 + 0] : 0.0f;
+			float outgoingG = outgoingData ? ((const float*)outgoingData)[x * 4 + 1] : 0.0f;
+			float outgoingR = outgoingData ? ((const float*)outgoingData)[x * 4 + 2] : 0.0f;
+			float outgoingA = outgoingData ? ((const float*)outgoingData)[x * 4 + 3] : 0.0f;
 
 			float recipNewAlpha = 1.0f;
 			
-			((char*)destData)[x * 4 + 0] = (outgoingB + 0.5f) * recipNewAlpha;
-			((char*)destData)[x * 4 + 1] = (outgoingG) * recipNewAlpha;
-			((char*)destData)[x * 4 + 2] = (outgoingR) * recipNewAlpha;
-			((char*)destData)[x * 4 + 3] = recipNewAlpha;
+			((float*)destData)[x * 4 + 0] = (outgoingB + 0.5f) * recipNewAlpha;
+			((float*)destData)[x * 4 + 1] = (outgoingG) * recipNewAlpha;
+			((float*)destData)[x * 4 + 2] = (outgoingR) * recipNewAlpha;
+			((float*)destData)[x * 4 + 3] = recipNewAlpha;
 		}
-	}
+	}*/
+	
 
 	return PF_Err_NONE;
 }

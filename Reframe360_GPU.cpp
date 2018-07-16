@@ -31,7 +31,6 @@
 #include "PrGPUFilterModule.h"
 #include "PrSDKVideoSegmentProperties.h"
 
-#include "CameraUtil.h"
 #include "ParamUtil.h"
 
 #if _WIN32

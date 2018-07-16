@@ -99,7 +99,7 @@ static float getMainRoll(PF_ParamDef* params[]) {
 static int auxParamId(int baseId, int camId) {
 	int refID = AUX_CAMERA_PITCH;
 	int diff = baseId - refID;
-	return refID + camId * AUX_PARAM_NUM + diff;
+	return refID + camId * AUX_PARAM_NUM + diff + (camId < 1 ? 0 : 1);
 }
 
 static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
@@ -115,7 +115,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		def.ui_flags = PF_PUI_INVISIBLE;
 	}
 	PF_ADD_FLOAT_SLIDER(
-		"Aux Pitch",
+		"Pitch",
 		AUX_CAMERA_PITCH_MIN_VALUE,
 		AUX_CAMERA_PITCH_MAX_VALUE,
 		AUX_CAMERA_PITCH_MIN_SLIDER,
@@ -136,7 +136,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		def.ui_flags = PF_PUI_INVISIBLE;
 	}
 	PF_ADD_FLOAT_SLIDER(
-		"Aux Yaw",
+		"Yaw",
 		AUX_CAMERA_YAW_MIN_VALUE,
 		AUX_CAMERA_YAW_MAX_VALUE,
 		AUX_CAMERA_YAW_MIN_SLIDER,
@@ -157,7 +157,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		def.ui_flags = PF_PUI_INVISIBLE;
 	}
 	PF_ADD_FLOAT_SLIDER(
-		"Aux Roll",
+		"Roll",
 		AUX_CAMERA_ROLL_MIN_VALUE,
 		AUX_CAMERA_ROLL_MAX_VALUE,
 		AUX_CAMERA_ROLL_MIN_SLIDER,
@@ -178,7 +178,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		def.ui_flags = PF_PUI_INVISIBLE;
 	}
 	PF_ADD_FLOAT_SLIDER(
-		"Aux Zoom",
+		"Zoom",
 		AUX_CAMERA_FOV_MIN_VALUE,
 		AUX_CAMERA_FOV_MAX_VALUE,
 		AUX_CAMERA_FOV_MIN_SLIDER,
@@ -200,7 +200,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		def.ui_flags = PF_PUI_INVISIBLE;
 	}
 	PF_ADD_FLOAT_SLIDER(
-		"Aux Tiny Planet",
+		"Tiny Planet",
 		AUX_CAMERA_TINYPLANET_MIN_VALUE,
 		AUX_CAMERA_TINYPLANET_MAX_VALUE,
 		AUX_CAMERA_TINYPLANET_MIN_SLIDER,
@@ -222,7 +222,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		def.ui_flags = PF_PUI_INVISIBLE;
 	}
 	PF_ADD_FLOAT_SLIDER(
-		"Aux Rectify",
+		"Rectify",
 		AUX_CAMERA_RECTILINEAR_MIN_VALUE,
 		AUX_CAMERA_RECTILINEAR_MAX_VALUE,
 		AUX_CAMERA_RECTILINEAR_MIN_SLIDER,

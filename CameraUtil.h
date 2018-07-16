@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CAMERAUTIL_H
+#define CAMERAUTIL_H
 
 #include <glm/vec2.hpp> // vec2, bvec2, dvec2, ivec2 and uvec2
 #include <glm/vec3.hpp> // vec3, bvec3, dvec3, ivec3 and uvec3
@@ -26,26 +27,28 @@
 
 using namespace glm;
 
-mat3 pitchMatrix(float pitch) {
+static mat3 pitchMatrix(float pitch) {
 	mat4 pitchMat = rotate(pitch, vec3(1.0f, 0, 0));
 	return mat3(pitchMat);
 }
 
 
-mat3 yawMatrix(float yaw) {
+static mat3 yawMatrix(float yaw) {
 	mat4 yawMat = rotate(yaw, vec3(0, 1.0f, 0));
 	return mat3(yawMat);
 }
 
-mat3 rollMatrix(float roll) {
+static mat3 rollMatrix(float roll) {
 	mat4 rollMat = rotate(roll, vec3(0, 0, 1.0f));
 	return mat3(rollMat);
 }
 
-glm::mat3 rotationMatrix(float pitch, float yaw, float roll) {
+static glm::mat3 rotationMatrix(float pitch, float yaw, float roll) {
 	mat3 pitchMat = pitchMatrix(pitch);
 	mat3 yawMat = yawMatrix(yaw);
 	mat3 rollMat = rollMatrix(roll);
 
 	return rollMat* pitchMat * yawMat;
 }
+
+#endif
