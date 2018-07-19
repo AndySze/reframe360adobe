@@ -31,6 +31,10 @@
 
 using namespace std;
 
+typedef struct SequenceData {
+public: int camToCopy = -1;
+}SequenceData;
+
 /*
 **
 */
@@ -308,6 +312,14 @@ static PF_Err ParamsSetup(
 	PF_ADD_TOPICX("Editable Camera Parameters", 0, AUX_CAMERA_GRP_ID);
 	num_params++;
 
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_BUTTON("Copy Cam Parameters", "Copy", 0, PF_ParamFlag_SUPERVISE, AUX_CAMERA_COPY_BTN_ID);
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_BUTTON("Paste Cam Parameters", "Paste", 0, PF_ParamFlag_SUPERVISE, AUX_CAMERA_PASTE_BTN_ID);
+	num_params++;
+
 	num_params += addAuxParams(in_data, false, 0);
 
 	AEFX_CLR_STRUCT(def);
@@ -333,11 +345,16 @@ static PF_Err ParamChanged(
 	PF_LayerDef* output,
 	void* extra)
 {
+	AEFX_SuiteScoper<PF_HandleSuite1> handleSuite(in_data, kPFHandleSuite, kPFHandleSuiteVersion1, out_data);
+
 	PF_ProgPtr effect_ref = in_data->effect_ref;
 
 	PF_UserChangedParamExtra* param_extra = (PF_UserChangedParamExtra*)extra;
 
 	int selectedCam = getSelectedCamera(params);
+
+	PF_Handle seqDataH = in_data->sequence_data;
+	SequenceData	*seqData = reinterpret_cast<SequenceData*>(handleSuite->host_lock_handle(seqDataH));
 
 	if (param_extra->param_index == ACTIVE_AUX_CAMERA_SELECTOR) {
 
@@ -359,6 +376,42 @@ static PF_Err ParamChanged(
 		params[AUX_CAMERA_TINYPLANET]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
 		params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_RECTILINEAR]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+	}
+	else if (param_extra->param_index == AUX_CAMERA_COPY_BTN_ID) {
+		seqData->camToCopy = selectedCam;
+	}
+	else if (param_extra->param_index == AUX_CAMERA_PASTE_BTN_ID) {
+		int copiedCam = seqData->camToCopy;
+
+		params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_PITCH + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+		params[AUX_CAMERA_PITCH]->u.fs_d.value = params[AUX_CAMERA_PITCH + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_PITCH]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+
+		params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_YAW + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+		params[AUX_CAMERA_YAW]->u.fs_d.value = params[AUX_CAMERA_YAW + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_YAW]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+
+		params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_ROLL + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_ROLL + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+		params[AUX_CAMERA_ROLL]->u.fs_d.value = params[AUX_CAMERA_ROLL + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_ROLL]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+
+		params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_FOV + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_FOV + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+		params[AUX_CAMERA_FOV]->u.fs_d.value = params[AUX_CAMERA_FOV + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_FOV]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+
+		params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_TINYPLANET + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_TINYPLANET + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+		params[AUX_CAMERA_TINYPLANET]->u.fs_d.value = params[AUX_CAMERA_TINYPLANET + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_TINYPLANET]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+
+		params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_RECTILINEAR + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+		params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_RECTILINEAR]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 	}
 	else {
@@ -395,6 +448,10 @@ static PF_Err ParamChanged(
 
 		//paramSet->auxCamParams[selectedCam-1] = selectedParams;
 	}
+
+	out_data->sequence_data = seqDataH;
+
+	handleSuite->host_unlock_handle(seqDataH);
 
 	return PF_Err_NONE;
 }
@@ -614,7 +671,16 @@ static PF_Err SequenceSetup(
 	PF_OutData* out_data,
 	PF_ParamDef* params[],
 	PF_LayerDef* output) {
-	
+
+	AEFX_SuiteScoper<PF_HandleSuite1> handleSuite(in_data, kPFHandleSuite, kPFHandleSuiteVersion1, out_data);
+
+	PF_Handle seqDataH = handleSuite->host_new_handle(sizeof(SequenceData));
+
+	SequenceData	*seqP = reinterpret_cast<SequenceData*>(handleSuite->host_lock_handle(seqDataH));
+
+	out_data->sequence_data = seqDataH;
+
+	handleSuite->host_unlock_handle(seqDataH);
 
 	return PF_Err_NONE;
 }
@@ -653,6 +719,9 @@ extern "C" DllExport PF_Err EffectMain(
 		break;
 	case PF_Cmd_SEQUENCE_SETUP:
 		err = SequenceSetup(in_data, out_data, params, inOutput);
+		break;
+	case PF_Cmd_GET_FLATTENED_SEQUENCE_DATA:
+		err = 0;
 		break;
 	case PF_Cmd_RENDER:
 		err = Render(in_data, out_data, params, inOutput);
