@@ -46,55 +46,6 @@ static int getSelectedCamera(PF_ParamDef* params[]) {
 	return activeCam;
 }
 
-static int getCamera1(PF_ParamDef* params[]) {
-	int cam = (int)round(params[AUX_CAMERA1]->u.fs_d.value);
-	return cam;
-}
-
-static int getCamera2(PF_ParamDef* params[]) {
-	int cam = (int)round(params[AUX_CAMERA2]->u.fs_d.value);
-	return cam;
-}
-
-static float getCameraBlendRaw(PF_ParamDef* params[]) {
-	return params[AUX_BLEND]->u.fs_d.value;
-}
-
-static float getCameraBlendAccel(PF_ParamDef* params[]) {
-	return params[AUX_ACCELERATION]->u.fs_d.value;
-}
-
-static float getCameraBlend(PF_ParamDef* params[]) {
-
-	float accel = getCameraBlendAccel(params);
-	float blend = getCameraBlendRaw(params);
-
-	if (blend < 0.5) {
-		blend = fitRange(blend, 0, 0.5, 0, 1);
-		blend = std::pow(blend, accel);
-		blend = fitRange(blend, 0, 1, 0, 0.5);
-	}
-	else {
-		blend = fitRange(blend, 0.5, 1.0, 0, 1);
-		blend = 1.0 - blend;
-		blend = std::pow(blend, accel);
-		blend = 1.0 - blend;
-		blend = fitRange(blend, 0, 1, 0.5, 1.0);
-	}
-
-	return blend;
-}
-
-static float getMainPitch(PF_ParamDef* params[]) {
-	return params[MAIN_CAMERA_PITCH]->u.fs_d.value;
-}
-static float getMainYaw(PF_ParamDef* params[]) {
-	return params[MAIN_CAMERA_YAW]->u.fs_d.value;
-}
-
-static float getMainRoll(PF_ParamDef* params[]) {
-	return params[MAIN_CAMERA_ROLL]->u.fs_d.value;
-}
 
 static int auxParamId(int baseId, int camId) {
 	int refID = AUX_CAMERA_PITCH;

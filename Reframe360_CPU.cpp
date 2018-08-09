@@ -208,7 +208,7 @@ static PF_Err ParamsSetup(
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_FLOAT_SLIDERX(
-		"Camera 1",
+		"Camera Sequence",
 		CAMERA_MIN_VALUE,
 		CAMERA_MAX_VALUE,
 		CAMERA_MIN_SLIDER,
@@ -217,39 +217,7 @@ static PF_Err ParamsSetup(
 		PF_Precision_INTEGER,
 		PF_ValueDisplayFlag_NONE,
 		0,
-		AUX_CAMERA1
-	);
-	num_params++;
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(
-		"Camera 2",
-		CAMERA_MIN_VALUE,
-		CAMERA_MAX_VALUE,
-		CAMERA_MIN_SLIDER,
-		CAMERA_MAX_SLIDER,
-		CAMERA_DFLT + 1,
-		PF_Precision_INTEGER,
-		PF_ValueDisplayFlag_NONE,
-		0,
-		AUX_CAMERA2
-	);
-	num_params++;
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(
-		"Blend Cameras",
-		0,
-		1.0f,
-		0,
-		1.0f,
-		0,
-		PF_Precision_TENTHS,
-		PF_ValueDisplayFlag_NONE,
-		0,
-		AUX_BLEND
+		AUX_CAM_SEQUENCE
 	);
 	num_params++;
 
@@ -495,8 +463,10 @@ static PF_Err Render(
 
 	int samples = (int)round(params[MB_SAMPLES]->u.fs_d.value);
 	//samples = max(1, samples);
-	int cam1 = (int)round(params[AUX_CAMERA1]->u.fs_d.value);
-	int cam2 = (int)round(params[AUX_CAMERA2]->u.fs_d.value);
+
+	//TODO: TEMP!!!
+	int cam1 = 1;//;(int)round(params[AUX_CAMERA1]->u.fs_d.value);
+	int cam2 = 2;// (int)round(params[AUX_CAMERA2]->u.fs_d.value);
 	float shutter = (int)round(params[MB_SHUTTER]->u.fs_d.value);
 
 	float* fovs = (float*)malloc(sizeof(float)*samples);

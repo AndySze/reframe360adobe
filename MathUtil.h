@@ -165,7 +165,7 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 static float getCameraBlend_CPU(PF_InData* in_data, float offset) {
 
 	float accel = interpParam_CPU(AUX_ACCELERATION, in_data, offset);
-	float blend = interpParam_CPU(AUX_BLEND, in_data, offset);
+	float blend = interpParam_CPU(AUX_CAM_SEQUENCE, in_data, offset);
 
 	if (blend < 0.5) {
 		blend = fitRange(blend, 0, 0.5, 0, 1);

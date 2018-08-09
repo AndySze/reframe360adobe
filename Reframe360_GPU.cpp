@@ -172,10 +172,14 @@ public:
 		mPPixSuite->GetPixelFormat(properties, &pixelFormat);
 		int is16f = pixelFormat != PrPixelFormat_GPU_BGRA_4444_32f;
 
+		int camSequenceParam = AUX_CAM_SEQUENCE;
+
 		int samples = (int)round(GetParam(MB_SAMPLES, inRenderParams->inClipTime).mFloat64);
 		samples = max(1, samples);
-		int cam1 = (int)round(GetParam(AUX_CAMERA1, inRenderParams->inClipTime).mFloat64);
-		int cam2 = (int)round(GetParam(AUX_CAMERA2, inRenderParams->inClipTime).mFloat64);
+
+		int cam1 = getPreviousCamera(camSequenceParam, inRenderParams->inClipTime);
+
+		int cam2 = getNextCamera(camSequenceParam, inRenderParams->inClipTime);
 		float shutter = GetParam(MB_SHUTTER, inRenderParams->inClipTime).mFloat64;
 
 		float* fovs = (float*)malloc(sizeof(float)*samples);
@@ -197,6 +201,7 @@ public:
 
 			if (GetParam(FORCE_AUX_DISPLAY, inRenderParams->inClipTime).mBool) {
 				cam1 = (int)round(GetParam(ACTIVE_AUX_CAMERA_SELECTOR, inRenderParams->inClipTime).mFloat64);
+				cam2 = cam1;
 			}
 
 			double cam1_pitch = -interpParam(auxParamId(AUX_CAMERA_PITCH, cam1), inRenderParams, offset) / 180 * M_PI;
@@ -217,7 +222,11 @@ public:
 
 			double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
 
-			double blend = getCameraBlend(inRenderParams, offset);
+			float camAlpha = 0;
+			if(cam1 != cam2)
+				camAlpha = getRelativeKeyFrameAlpha(camSequenceParam, inRenderParams->inClipTime);
+
+			double blend = getAcceleratedCameraBlend(inRenderParams, camAlpha, offset);
 
 			if (GetParam(FORCE_AUX_DISPLAY, inRenderParams->inClipTime).mBool) {
 				blend = 0;
@@ -454,10 +463,10 @@ public:
 		}
 	}
 
-	float getCameraBlend(const PrGPUFilterRenderParams* inParams, float offset) {
+	float getAcceleratedCameraBlend(const PrGPUFilterRenderParams* inParams, float inBlend, float offset) {
 
 		float accel = interpParam(AUX_ACCELERATION, inParams, offset);
-		float blend = interpParam(AUX_BLEND, inParams, offset);
+		float blend = inBlend;
 
 		if (blend < 0.5) {
 			blend = fitRange(blend, 0, 0.5, 0, 1);
@@ -474,6 +483,132 @@ public:
 
 		return blend;
 	}
+
+private:
+
+
+	bool needsInterPolation(csSDK_int32 paramIndex, PrTime time) {
+		if (isFirstKeyFrameTimeOrEarlier(paramIndex, time)) {
+			return false;
+		}
+		else if (isLastKeyFrameTimeOrLater(paramIndex, time)) {
+			return false;
+		}
+		else if (isExactlyOnKeyFrame(paramIndex, time)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	bool isExactlyOnKeyFrame(csSDK_int32 paramIndex, PrTime time) {
+		PrTime inTime = -100;
+		PrTime outTime = 0;
+		csSDK_int32 keyframeInterpolationMode;
+		prSuiteError result = suiteError_NoError;
+
+		while (result != suiteError_NoKeyframeAfterInTime) {
+			result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex - 1, inTime, &outTime, &keyframeInterpolationMode);
+
+			if (outTime == time) {
+				return true;
+			}
+			inTime = outTime;
+		}
+		return false;
+	}
+
+	bool isFirstKeyFrameTimeOrEarlier(csSDK_int32 paramIndex, PrTime time) {
+
+		PrTime inTime = -100;
+		PrTime outTime = 0;
+		csSDK_int32 keyframeInterpolationMode;
+		prSuiteError result = suiteError_NoError;
+
+		result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
+
+		if (result == suiteError_NoKeyframeAfterInTime)
+			return true;
+		else if (outTime >= time)
+			return true;
+		else
+			return false;
+	}
+
+	bool isLastKeyFrameTimeOrLater(csSDK_int32 paramIndex, PrTime time) {
+
+		PrTime inTime = time;
+		PrTime outTime = 0;
+		csSDK_int32 keyframeInterpolationMode;
+		prSuiteError result = suiteError_NoError;
+		
+		result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
+
+		return result == suiteError_NoKeyframeAfterInTime;
+	}
+
+	PrTime getPreviousKeyFrameTime(csSDK_int32 paramIndex, PrTime time) {
+		PrTime inTime = -100; // TODO: what is actually the lowest possible time?
+		PrTime outTime = 0;
+
+		while (inTime < time) {
+			outTime = inTime;
+			inTime = getNextKeyFrameTime(paramIndex, inTime);
+		}
+
+		return outTime;
+	}
+
+	PrTime getNextKeyFrameTime(csSDK_int32 paramIndex, PrTime time) {
+		PrTime inTime = time;
+		PrTime outTime = 0;
+		csSDK_int32 keyframeInterpolationMode;
+		prSuiteError result = suiteError_NoError;
+
+		result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
+
+		if (result == suiteError_NoKeyframeAfterInTime) {
+			//this should be impossible!
+			throw "this should be impossible! (handled by isLast... isFirst... methods";
+		}
+
+		return outTime;
+	}
+
+	float getRelativeKeyFrameAlpha(csSDK_int32 paramIndex, PrTime currentTime) {
+		PrTime prevTime = getPreviousKeyFrameTime(paramIndex, currentTime);
+		PrTime nextTime = getNextKeyFrameTime(paramIndex, currentTime);
+
+		float totalDiff = nextTime - prevTime;
+		float prevDiff = currentTime - prevTime;
+
+		float alpha = prevDiff / totalDiff;
+
+		return alpha;
+	}
+
+	int getPreviousCamera(csSDK_int32 paramIndex, PrTime time) {
+		PrTime queryTime = time;
+
+		if (needsInterPolation(paramIndex, time)) {
+			queryTime = getPreviousKeyFrameTime(paramIndex, time);
+		}
+
+		return  (int)round(GetParam(paramIndex, queryTime).mFloat64);
+
+	}
+
+	int getNextCamera(csSDK_int32 paramIndex, PrTime time) {
+		PrTime queryTime = time;
+
+		if (needsInterPolation(paramIndex, time)) {
+			queryTime = getNextKeyFrameTime(paramIndex, time);
+		}
+
+		return  (int)round(GetParam(paramIndex, queryTime).mFloat64);
+	}
+
 
 private:
 	// CUDA
