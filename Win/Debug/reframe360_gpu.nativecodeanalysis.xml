@@ -1,0 +1,2299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+      <FILENAME>reframe360_gpu.cpp</FILENAME>
+      <LINE>95</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>6385</DEFECTCODE>
+    <DESCRIPTION>Reading invalid data from 'sKernelCache':  the readable size is '32' bytes, but 'this-&gt;mDeviceIndex' bytes may be read.</DESCRIPTION>
+    <FUNCTION>SDK_Reframe::InitializeOpenCL</FUNCTION>
+    <DECORATED>?InitializeOpenCL@SDK_Reframe@@QEAAHXZ</DECORATED>
+    <FUNCLINE>86</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>88</LINE>
+        <COLUMN>19</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Skip this branch, (assume '&lt;branch condition&gt;' is false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>92</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>95</LINE>
+        <COLUMN>10</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Invalid read from 'sKernelCache[4]', (readable range is 0 to 3)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+      <FILENAME>reframe360_gpu.cpp</FILENAME>
+      <LINE>121</LINE>
+      <COLUMN>30</COLUMN>
+    </SFA>
+    <DEFECTCODE>6386</DEFECTCODE>
+    <DESCRIPTION>Buffer overrun while writing to 'sKernelCache':  the writable size is '32' bytes, but 'this-&gt;mDeviceIndex' bytes might be written.</DESCRIPTION>
+    <FUNCTION>SDK_Reframe::InitializeOpenCL</FUNCTION>
+    <DECORATED>?InitializeOpenCL@SDK_Reframe@@QEAAHXZ</DECORATED>
+    <FUNCLINE>86</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>88</LINE>
+        <COLUMN>19</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Skip this branch, (assume '&lt;branch condition&gt;' is false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>92</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>95</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>96</LINE>
+        <COLUMN>6</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume '!mKernel')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>98</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>99</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>100</LINE>
+        <COLUMN>13</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>101</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>102</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>103</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>104</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Skip this branch, (assume 'result!=0' is false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>109</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>110</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Skip this branch, (assume 'result!=0' is false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>115</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>116</LINE>
+        <COLUMN>14</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Skip this branch, (assume 'result!=0' is false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>121</LINE>
+        <COLUMN>30</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Invalid write to 'sKernelCache[4]', (writable range is 0 to 3)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+      <FILENAME>reframe360_gpu.cpp</FILENAME>
+      <LINE>250</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>6386</DEFECTCODE>
+    <DESCRIPTION>Buffer overrun while writing to 'fovs':  the writable size is 'sizeof(float)*samples' bytes, but '8' bytes might be written.</DESCRIPTION>
+    <FUNCTION>SDK_Reframe::Render</FUNCTION>
+    <DECORATED>?Render@SDK_Reframe@@UEAAHPEBUPrGPUFilterRenderParams@@PEBQEAPEAUPPix@@_KPEAPEAPEAU3@@Z</DECORATED>
+    <FUNCLINE>152</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>159</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>161</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>166</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>167</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>169</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>170</LINE>
+        <COLUMN>40</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>173</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>174</LINE>
+        <COLUMN>28</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>175</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>177</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>179</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>180</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>182</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>185</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>187</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>189</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'fovs' is a 0 byte array</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>190</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>191</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>192</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this loop, (assume 'i&lt;samples')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>195</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>196</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume 'samples&gt;1')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>197</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>201</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>202</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>203</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>204</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>211</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>212</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>213</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>215</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>216</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>217</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>219</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>220</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>221</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>223</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>224</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>225</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>34</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>46</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>57</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>75</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>229</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>230</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>233</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>235</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>239</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>240</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>242</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>243</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>244</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>247</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>249</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>250</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>251</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>252</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>32</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'i' may equal 1</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Continue this loop, (assume 'i&lt;samples')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>195</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>196</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume 'samples&gt;1')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>197</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>7</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>'i' is an In/Out argument to 'fitRange' (declared at c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h:122)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>201</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>202</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>203</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>204</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>211</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>212</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>213</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>215</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>216</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>217</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>219</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>220</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>221</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>223</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>224</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>225</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>34</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>46</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>57</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>75</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>229</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>230</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>233</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>235</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>239</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>240</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>242</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>243</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>244</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>247</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>249</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>8</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>'i' is an Output from 'memcpy' (declared at c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime_string.h:40)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>250</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>9</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Invalid write to 'fovs', (outside its writable range)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+      <FILENAME>reframe360_gpu.cpp</FILENAME>
+      <LINE>252</LINE>
+      <COLUMN>19</COLUMN>
+    </SFA>
+    <DEFECTCODE>6386</DEFECTCODE>
+    <DESCRIPTION>Buffer overrun while writing to 'rectilinears':  the writable size is 'sizeof(float)*samples' bytes, but '8' bytes might be written.</DESCRIPTION>
+    <FUNCTION>SDK_Reframe::Render</FUNCTION>
+    <DECORATED>?Render@SDK_Reframe@@UEAAHPEBUPrGPUFilterRenderParams@@PEBQEAPEAUPPix@@_KPEAPEAPEAU3@@Z</DECORATED>
+    <FUNCLINE>152</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>159</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>161</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>166</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>167</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>169</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>170</LINE>
+        <COLUMN>40</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>173</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>174</LINE>
+        <COLUMN>28</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>175</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>177</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>179</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>180</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>182</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>185</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>187</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>189</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>190</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>191</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'rectilinears' is a 0 byte array</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>192</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this loop, (assume 'i&lt;samples')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>195</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>196</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume 'samples&gt;1')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>197</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>201</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>202</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>203</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>204</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>211</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>212</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>213</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>215</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>216</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>217</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>219</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>220</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>221</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>223</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>224</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>225</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>34</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>46</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>57</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>75</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>229</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>230</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>233</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>235</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>239</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>240</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>242</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>243</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>244</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>247</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>249</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>250</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>251</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>252</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>32</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'i' may equal 1</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Continue this loop, (assume 'i&lt;samples')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>195</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>196</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume 'samples&gt;1')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>197</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>7</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>'i' is an In/Out argument to 'fitRange' (declared at c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h:122)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>201</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>202</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>203</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>204</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>211</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>212</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>213</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>215</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>216</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>217</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>219</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>220</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>221</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>223</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>224</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>225</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>34</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>46</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>57</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>75</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>229</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>230</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>233</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>235</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>239</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>240</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>242</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>243</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>244</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>247</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>249</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>8</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>'i' is an Output from 'memcpy' (declared at c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime_string.h:40)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>250</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>251</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>252</LINE>
+        <COLUMN>19</COLUMN>
+        <KEYEVENT>
+          <ID>9</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Invalid write to 'rectilinears', (outside its writable range)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+      <FILENAME>reframe360_gpu.cpp</FILENAME>
+      <LINE>251</LINE>
+      <COLUMN>18</COLUMN>
+    </SFA>
+    <DEFECTCODE>6386</DEFECTCODE>
+    <DESCRIPTION>Buffer overrun while writing to 'tinyplanets':  the writable size is 'sizeof(float)*samples' bytes, but '8' bytes might be written.</DESCRIPTION>
+    <FUNCTION>SDK_Reframe::Render</FUNCTION>
+    <DECORATED>?Render@SDK_Reframe@@UEAAHPEBUPrGPUFilterRenderParams@@PEBQEAPEAUPPix@@_KPEAPEAPEAU3@@Z</DECORATED>
+    <FUNCLINE>152</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>159</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>161</LINE>
+        <COLUMN>12</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>166</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>167</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>169</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>170</LINE>
+        <COLUMN>40</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>173</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>174</LINE>
+        <COLUMN>28</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>175</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>177</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>179</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>180</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>182</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>185</LINE>
+        <COLUMN>6</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>187</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>189</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>190</LINE>
+        <COLUMN>7</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'tinyplanets' is a 0 byte array</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>191</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>192</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this loop, (assume 'i&lt;samples')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>195</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>196</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume 'samples&gt;1')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>197</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>201</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>202</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>203</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>204</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>211</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>212</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>213</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>215</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>216</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>217</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>219</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>220</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>221</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>223</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>224</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>225</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>34</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>46</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>57</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>75</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>229</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>230</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>233</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>235</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>239</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>240</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>242</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>243</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>244</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>247</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>249</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>250</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>251</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>252</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>32</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'i' may equal 1</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>194</LINE>
+        <COLUMN>20</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Continue this loop, (assume 'i&lt;samples')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>195</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>196</LINE>
+        <COLUMN>15</COLUMN>
+        <KEYEVENT>
+          <ID>6</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Enter this branch, (assume 'samples&gt;1')</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>197</LINE>
+        <COLUMN>11</COLUMN>
+        <KEYEVENT>
+          <ID>7</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>'i' is an In/Out argument to 'fitRange' (declared at c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h:122)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>201</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>202</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>203</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>204</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>206</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>211</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>212</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>213</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>215</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>216</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>217</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>219</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>220</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>221</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>223</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>224</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>225</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>34</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>46</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>57</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>227</LINE>
+        <COLUMN>75</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>229</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>230</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>233</LINE>
+        <COLUMN>10</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>235</LINE>
+        <COLUMN>62</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>239</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>240</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>242</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>243</LINE>
+        <COLUMN>14</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>244</LINE>
+        <COLUMN>15</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>247</LINE>
+        <COLUMN>8</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>249</LINE>
+        <COLUMN>9</COLUMN>
+        <KEYEVENT>
+          <ID>8</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>'i' is an Output from 'memcpy' (declared at c:\program files (x86)\microsoft visual studio 14.0\vc\include\vcruntime_string.h:40)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>250</LINE>
+        <COLUMN>11</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\</FILEPATH>
+        <FILENAME>reframe360_gpu.cpp</FILENAME>
+        <LINE>251</LINE>
+        <COLUMN>18</COLUMN>
+        <KEYEVENT>
+          <ID>9</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Invalid write to 'tinyplanets', (outside its writable range)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+</DEFECTS>

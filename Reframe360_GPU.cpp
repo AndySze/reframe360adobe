@@ -41,6 +41,7 @@
 #include <cuda_runtime.h>
 #include <math.h>
 #include <ctime>
+#include "KeyFrameManager.h"
 
 //  CUDA KERNEL 
 //  * See Reframe360.cu
@@ -73,6 +74,7 @@ private:
             fprintf(stderr, "%s [%d]\n", p_Msg, p_Error);
         }
     }
+
 public:
 	prSuiteError InitializeCUDA ()
 	{
@@ -175,11 +177,13 @@ public:
 		int camSequenceParam = AUX_CAM_SEQUENCE;
 
 		int samples = (int)round(GetParam(MB_SAMPLES, inRenderParams->inClipTime).mFloat64);
-		samples = max(1, samples);
+		samples = glm::max(1, samples);
 
 		int cam1 = getPreviousCamera(camSequenceParam, inRenderParams->inClipTime);
+		
 
 		int cam2 = getNextCamera(camSequenceParam, inRenderParams->inClipTime);
+
 		float shutter = GetParam(MB_SHUTTER, inRenderParams->inClipTime).mFloat64;
 
 		float* fovs = (float*)malloc(sizeof(float)*samples);
@@ -485,7 +489,40 @@ public:
 	}
 
 private:
+	float MyGetParam(
+		csSDK_int32 inVideoNodeID,
+		csSDK_int32 inIndex,
+		PrTime inTime,
+		PrParam* outParam) {
+		if (!KeyFrameManager::getInstance().isAE)
+			return mVideoSegmentSuite->GetParam(mNodeID, inIndex, inTime, outParam);
+		else {
+			return KeyFrameManager::getInstance().getKeyFrameValue(inIndex + 1, inTime);
+		}
+	}
 
+	prSuiteError GetNextKeyframeTime(
+		csSDK_int32 inVideoNodeID,
+		csSDK_int32 inIndex,
+		PrTime inTime,
+		PrTime* outKeyframeTime,
+		csSDK_int32* outKeyframeInterpolationMode) {
+
+		if (!KeyFrameManager::getInstance().isAE) {
+			prSuiteError error = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, inIndex, inTime, outKeyframeTime, outKeyframeInterpolationMode);
+			return error;
+		}
+		else {
+			A_long outTime = 0;
+			prSuiteError error = KeyFrameManager::getInstance().getNextKeyFrameTime(inIndex+1, inTime, &outTime);
+			if (error == suiteError_NoError) {
+				*outKeyframeTime = outTime;
+				return error;
+			}
+			else
+				return error;
+		}
+	}
 
 	bool needsInterPolation(csSDK_int32 paramIndex, PrTime time) {
 		if (isFirstKeyFrameTimeOrEarlier(paramIndex, time)) {
@@ -503,13 +540,13 @@ private:
 	}
 
 	bool isExactlyOnKeyFrame(csSDK_int32 paramIndex, PrTime time) {
-		PrTime inTime = -100;
+		PrTime inTime = LONG_MIN;
 		PrTime outTime = 0;
 		csSDK_int32 keyframeInterpolationMode;
 		prSuiteError result = suiteError_NoError;
 
 		while (result != suiteError_NoKeyframeAfterInTime) {
-			result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex - 1, inTime, &outTime, &keyframeInterpolationMode);
+			result = GetNextKeyframeTime(mNodeID, paramIndex - 1, inTime, &outTime, &keyframeInterpolationMode);
 
 			if (outTime == time) {
 				return true;
@@ -521,12 +558,12 @@ private:
 
 	bool isFirstKeyFrameTimeOrEarlier(csSDK_int32 paramIndex, PrTime time) {
 
-		PrTime inTime = -100;
+		PrTime inTime = LONG_MIN;
 		PrTime outTime = 0;
 		csSDK_int32 keyframeInterpolationMode;
 		prSuiteError result = suiteError_NoError;
 
-		result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
+		result = GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
 
 		if (result == suiteError_NoKeyframeAfterInTime)
 			return true;
@@ -543,13 +580,13 @@ private:
 		csSDK_int32 keyframeInterpolationMode;
 		prSuiteError result = suiteError_NoError;
 		
-		result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
+		result = GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
 
 		return result == suiteError_NoKeyframeAfterInTime;
 	}
 
 	PrTime getPreviousKeyFrameTime(csSDK_int32 paramIndex, PrTime time) {
-		PrTime inTime = -100; // TODO: what is actually the lowest possible time?
+		PrTime inTime = LONG_MIN;
 		PrTime outTime = 0;
 
 		while (inTime < time) {
@@ -566,7 +603,7 @@ private:
 		csSDK_int32 keyframeInterpolationMode;
 		prSuiteError result = suiteError_NoError;
 
-		result = mVideoSegmentSuite->GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
+		result = GetNextKeyframeTime(mNodeID, paramIndex-1, inTime, &outTime, &keyframeInterpolationMode);
 
 		if (result == suiteError_NoKeyframeAfterInTime) {
 			//this should be impossible!
@@ -577,6 +614,9 @@ private:
 	}
 
 	float getRelativeKeyFrameAlpha(csSDK_int32 paramIndex, PrTime currentTime) {
+		if (KeyFrameManager::getInstance().isAE)
+			currentTime = KeyFrameManager::getInstance().getCurrentAETime();
+
 		PrTime prevTime = getPreviousKeyFrameTime(paramIndex, currentTime);
 		PrTime nextTime = getNextKeyFrameTime(paramIndex, currentTime);
 
@@ -589,24 +629,64 @@ private:
 	}
 
 	int getPreviousCamera(csSDK_int32 paramIndex, PrTime time) {
-		PrTime queryTime = time;
 
-		if (needsInterPolation(paramIndex, time)) {
-			queryTime = getPreviousKeyFrameTime(paramIndex, time);
+		int outValue = 0;
+
+		if (!KeyFrameManager::getInstance().isAE)
+		{
+			PrTime queryTime = time;
+
+			if (needsInterPolation(paramIndex, time)) {
+				queryTime = getPreviousKeyFrameTime(paramIndex, time);
+			}
+			outValue = (int)round(GetParam(paramIndex, queryTime).mFloat64);
+		}
+		else {
+			PrTime queryTime = KeyFrameManager::getInstance().getCurrentAETime();
+			PrTime aeTime = queryTime;
+
+			if (needsInterPolation(paramIndex, aeTime)) {
+				queryTime = getPreviousKeyFrameTime(paramIndex, aeTime);
+			}
+			outValue = KeyFrameManager::getInstance().getKeyFrameValue(paramIndex, queryTime);
 		}
 
-		return  (int)round(GetParam(paramIndex, queryTime).mFloat64);
+		if (outValue == 0) {
+			outValue = (int)round(GetParam(paramIndex, time).mFloat64);
+		}
+
+		return  outValue;
 
 	}
 
 	int getNextCamera(csSDK_int32 paramIndex, PrTime time) {
-		PrTime queryTime = time;
 
-		if (needsInterPolation(paramIndex, time)) {
-			queryTime = getNextKeyFrameTime(paramIndex, time);
+		int outValue = 0;
+
+		if (!KeyFrameManager::getInstance().isAE)
+		{
+			PrTime queryTime = time;
+
+			if (needsInterPolation(paramIndex, time)) {
+				queryTime = getNextKeyFrameTime(paramIndex, time);
+			}
+			outValue = (int)round(GetParam(paramIndex, queryTime).mFloat64);
+		}
+		else {
+			PrTime queryTime = KeyFrameManager::getInstance().getCurrentAETime();
+			PrTime aeTime = queryTime;
+
+			if (needsInterPolation(paramIndex, aeTime)) {
+				queryTime = getNextKeyFrameTime(paramIndex, aeTime);
+			}
+			outValue = KeyFrameManager::getInstance().getKeyFrameValue(paramIndex, queryTime);
 		}
 
-		return  (int)round(GetParam(paramIndex, queryTime).mFloat64);
+		if (outValue == 0) {
+			outValue = (int)round(GetParam(paramIndex, time).mFloat64);
+		}
+
+		return  outValue;
 	}
 
 

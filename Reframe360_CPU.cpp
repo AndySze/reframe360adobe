@@ -28,12 +28,11 @@
 #include <ctime>
 #include <math.h>
 #include "MathUtil.h"
+#include "KeyFrameManager.h"
 
 using namespace std;
 
-typedef struct SequenceData {
-public: int camToCopy = -1;
-}SequenceData;
+static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_OutData* out_data);
 
 /*
 **
@@ -216,7 +215,7 @@ static PF_Err ParamsSetup(
 		CAMERA_DFLT,
 		PF_Precision_INTEGER,
 		PF_ValueDisplayFlag_NONE,
-		0,
+		PF_ParamFlag_SUPERVISE,
 		AUX_CAM_SEQUENCE
 	);
 	num_params++;
@@ -314,6 +313,9 @@ static PF_Err ParamChanged(
 	void* extra)
 {
 	AEFX_SuiteScoper<PF_HandleSuite1> handleSuite(in_data, kPFHandleSuite, kPFHandleSuiteVersion1, out_data);
+	AEFX_SuiteScoper<PF_ParamUtilsSuite3> paramUtilsSuite(in_data, kPFParamUtilsSuite, kPFParamUtilsSuiteVersion3, out_data);
+
+
 
 	PF_ProgPtr effect_ref = in_data->effect_ref;
 
@@ -413,8 +415,6 @@ static PF_Err ParamChanged(
 		default:
 			break;
 		}
-
-		//paramSet->auxCamParams[selectedCam-1] = selectedParams;
 	}
 
 	out_data->sequence_data = seqDataH;
@@ -422,6 +422,39 @@ static PF_Err ParamChanged(
 	handleSuite->host_unlock_handle(seqDataH);
 
 	return PF_Err_NONE;
+}
+
+static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_OutData* out_data) {
+	AEFX_SuiteScoper<PF_ParamUtilsSuite3> paramUtilsSuite(in_data, kPFParamUtilsSuite, kPFParamUtilsSuiteVersion3, out_data);
+	PF_ProgPtr effect_ref = in_data->effect_ref;
+
+	if (in_data->appl_id != 'PrMr') {
+		KeyFrameManager::getInstance().isAE = true;
+		KeyFrameManager::getInstance().setCurrentAETime(in_data->current_time);
+	}
+	else {
+		return;
+	}
+
+	PF_KeyIndex keyCount;
+
+	paramUtilsSuite->PF_GetKeyframeCount(effect_ref, AUX_CAM_SEQUENCE, &keyCount);
+
+	KeyFrameManager::getInstance().beginKeyNewKeyframeData();
+
+	for (int i = 0; i < keyCount; i++) {
+		A_long keyTime;
+		A_u_long timeScale;
+		PF_ParamDef paramDef;
+
+		paramUtilsSuite->PF_CheckoutKeyframe(effect_ref, AUX_CAM_SEQUENCE, i, &keyTime, &timeScale, &paramDef);
+
+		float value = paramDef.u.fs_d.value;
+
+		KeyFrameManager::getInstance().addKeyFrame(AUX_CAM_SEQUENCE, keyTime, (int)value);
+
+		int a = 0;
+	}
 }
 
 static double getDoubleParamValueAtOffset(int paramID, PF_InData* in_data, float offset) {
@@ -655,6 +688,18 @@ static PF_Err SequenceSetup(
 	return PF_Err_NONE;
 }
 
+static PF_Err FrameSetup(PF_InData* in_data,
+	PF_OutData* out_data,
+	PF_ParamDef* params[],
+	PF_LayerDef* output) {
+
+
+	storeParamKeyframes(in_data, params, out_data);
+
+
+	return PF_Err_NONE;
+}
+
 /*
 **
 */
@@ -689,6 +734,9 @@ extern "C" DllExport PF_Err EffectMain(
 		break;
 	case PF_Cmd_SEQUENCE_SETUP:
 		err = SequenceSetup(in_data, out_data, params, inOutput);
+		break;
+	case PF_Cmd_FRAME_SETUP:
+		err = FrameSetup(in_data, out_data, params, inOutput);
 		break;
 	case PF_Cmd_GET_FLATTENED_SEQUENCE_DATA:
 		err = 0;

@@ -197,6 +197,9 @@ enum
 #define	AUX_CAMERA_RECTILINEAR_MAX_SLIDER			1.0
 #define	AUX_CAMERA_RECTILINEAR_DFLT				0.0
 
+typedef struct SequenceData {
+public: int camToCopy = -1;
+}SequenceData;
 
 typedef struct  CameraParams {
 	float pitch = MAIN_CAMERA_PITCH_DFLT;

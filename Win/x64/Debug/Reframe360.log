@@ -31,29 +31,36 @@ c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilte
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(37): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(38): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(143): warning C4305: '=': truncation from 'double' to 'PF_FpShort'
-..\Reframe360_GPU.cpp(183): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(243): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(411): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(412): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(413): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(414): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(187): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(247): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 ..\Reframe360_GPU.cpp(415): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 ..\Reframe360_GPU.cpp(416): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(424): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(425): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(426): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(427): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(417): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(418): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(419): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(420): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 ..\Reframe360_GPU.cpp(428): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 ..\Reframe360_GPU.cpp(429): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(437): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(438): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(439): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(456): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
-..\Reframe360_GPU.cpp(462): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
-..\Reframe360_GPU.cpp(468): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(478): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(480): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(583): warning C4244: 'initializing': conversion from 'PrTime' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(584): warning C4244: 'initializing': conversion from 'PrTime' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(430): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(431): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(432): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(433): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(441): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(442): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(443): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(460): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
+..\Reframe360_GPU.cpp(466): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
+..\Reframe360_GPU.cpp(472): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(482): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(484): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(498): warning C4244: 'return': conversion from 'prSuiteError' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(500): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+..\Reframe360_GPU.cpp(517): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+..\Reframe360_GPU.cpp(623): warning C4244: 'initializing': conversion from 'PrTime' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(624): warning C4244: 'initializing': conversion from 'PrTime' to 'float', possible loss of data
+..\Reframe360_GPU.cpp(651): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+..\Reframe360_GPU.cpp(651): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+..\Reframe360_GPU.cpp(682): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+..\Reframe360_GPU.cpp(682): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
   Reframe360.vcxproj -> x64\Debug\Reframe360.pdb (Full PDB)
