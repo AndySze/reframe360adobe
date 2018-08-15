@@ -228,7 +228,7 @@ public:
 
 			float camAlpha = 0;
 			if(cam1 != cam2)
-				camAlpha = getRelativeKeyFrameAlpha(camSequenceParam, inRenderParams->inClipTime);
+				camAlpha = getRelativeKeyFrameAlpha(camSequenceParam, inRenderParams->inClipTime, inRenderParams->inRenderTicksPerFrame, offset);
 
 			double blend = getAcceleratedCameraBlend(inRenderParams, camAlpha, offset);
 
@@ -613,19 +613,27 @@ private:
 		return outTime;
 	}
 
-	float getRelativeKeyFrameAlpha(csSDK_int32 paramIndex, PrTime currentTime) {
+	float getRelativeKeyFrameAlpha(csSDK_int32 paramIndex, PrTime currentTime, PrTime timestep, double offset) {
 		if (KeyFrameManager::getInstance().isAE)
 			currentTime = KeyFrameManager::getInstance().getCurrentAETime();
 
+		PrTime offsetTime = (PrTime)(currentTime + timestep * offset);
+
 		PrTime prevTime = getPreviousKeyFrameTime(paramIndex, currentTime);
 		PrTime nextTime = getNextKeyFrameTime(paramIndex, currentTime);
+		PrTime prevTimeOffset = getPreviousKeyFrameTime(paramIndex, offsetTime);
+		PrTime nextTimeOffset = getNextKeyFrameTime(paramIndex, offsetTime);
 
-		float totalDiff = nextTime - prevTime;
-		float prevDiff = currentTime - prevTime;
+		if (prevTime == prevTimeOffset && nextTime == nextTimeOffset) {
+			currentTime = offsetTime;
+		}
 
-		float alpha = prevDiff / totalDiff;
+		double totalDiff = nextTime - prevTime;
+		double prevDiff = currentTime - prevTime;
 
-		return alpha;
+		double alpha = prevDiff / totalDiff;
+
+		return (float)alpha;
 	}
 
 	int getPreviousCamera(csSDK_int32 paramIndex, PrTime time) {
