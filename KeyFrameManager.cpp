@@ -24,6 +24,14 @@ A_long KeyFrameManager::getCurrentAETime() {
 	return _currentAETime;
 }
 
+int KeyFrameManager::getCamToCopy() {
+	return _camToCopy;
+}
+
+void KeyFrameManager::setCamToCopy(int cam) {
+	_camToCopy = cam;
+}
+
 /*int KeyFrameManager::getNewUniqueEffectID() {
 	int maxEffectID = 0;
 

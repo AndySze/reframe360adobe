@@ -56,7 +56,7 @@ static PF_Err GlobalSetup(
     }
 	
 	out_data->out_flags |= PF_OutFlag_USE_OUTPUT_EXTENT | PF_OutFlag_NON_PARAM_VARY;
-	out_data->out_flags2 |= PF_OutFlag2_PRESERVES_FULLY_OPAQUE_PIXELS | PF_OutFlag2_SUPPORTS_GET_FLATTENED_SEQUENCE_DATA;
+	out_data->out_flags2 |= PF_OutFlag2_PRESERVES_FULLY_OPAQUE_PIXELS;
 
 	return PF_Err_NONE;
 }
@@ -323,8 +323,6 @@ static PF_Err ParamChanged(
 
 	int selectedCam = getSelectedCamera(params);
 
-	PF_Handle seqDataH = in_data->sequence_data;
-	SequenceData	*seqData = reinterpret_cast<SequenceData*>(handleSuite->host_lock_handle(seqDataH));
 
 	if (param_extra->param_index == ACTIVE_AUX_CAMERA_SELECTOR) {
 
@@ -349,10 +347,10 @@ static PF_Err ParamChanged(
 		params[AUX_CAMERA_RECTILINEAR]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 	}
 	else if (param_extra->param_index == AUX_CAMERA_COPY_BTN_ID) {
-		seqData->camToCopy = selectedCam;
+		KeyFrameManager::getInstance().setCamToCopy(selectedCam);
 	}
 	else if (param_extra->param_index == AUX_CAMERA_PASTE_BTN_ID) {
-		int copiedCam = seqData->camToCopy;
+		int copiedCam = KeyFrameManager::getInstance().getCamToCopy();
 
 		params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value = params[AUX_CAMERA_PITCH + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
@@ -416,10 +414,6 @@ static PF_Err ParamChanged(
 			break;
 		}
 	}
-
-	out_data->sequence_data = seqDataH;
-
-	handleSuite->host_unlock_handle(seqDataH);
 
 	return PF_Err_NONE;
 }
@@ -669,25 +663,6 @@ static PF_Err Render(
 	return PF_Err_NONE;
 }
 
-static PF_Err SequenceSetup(
-	PF_InData* in_data,
-	PF_OutData* out_data,
-	PF_ParamDef* params[],
-	PF_LayerDef* output) {
-
-	AEFX_SuiteScoper<PF_HandleSuite1> handleSuite(in_data, kPFHandleSuite, kPFHandleSuiteVersion1, out_data);
-
-	PF_Handle seqDataH = handleSuite->host_new_handle(sizeof(SequenceData));
-
-	SequenceData	*seqP = reinterpret_cast<SequenceData*>(handleSuite->host_lock_handle(seqDataH));
-
-	out_data->sequence_data = seqDataH;
-
-	handleSuite->host_unlock_handle(seqDataH);
-
-	return PF_Err_NONE;
-}
-
 static PF_Err FrameSetup(PF_InData* in_data,
 	PF_OutData* out_data,
 	PF_ParamDef* params[],
@@ -733,7 +708,7 @@ extern "C" DllExport PF_Err EffectMain(
 		err = ParamChanged(in_data, out_data, params, inOutput, extra);
 		break;
 	case PF_Cmd_SEQUENCE_SETUP:
-		err = SequenceSetup(in_data, out_data, params, inOutput);
+		err = 0;
 		break;
 	case PF_Cmd_FRAME_SETUP:
 		err = FrameSetup(in_data, out_data, params, inOutput);

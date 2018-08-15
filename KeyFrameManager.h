@@ -23,6 +23,7 @@ private:
 	std::set<int> _uniqueIDs = std::set<int>();
 
 	A_long _currentAETime;
+	int _camToCopy = 1;
 
 public:
 	KeyFrameManager(KeyFrameManager const&) = delete;
@@ -38,6 +39,9 @@ public:
 
 	void setCurrentAETime(A_long time);
 	A_long getCurrentAETime();
+
+	void setCamToCopy(int cam);
+	int getCamToCopy();
 
 	bool isAE = false;
 
