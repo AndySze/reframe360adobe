@@ -574,9 +574,9 @@ static PF_Err Render(
 		{
 			for (int x = 0; x < output->width; ++x)
 			{
-				vec2 uv = { (float)x / width, (float)y / height };
+				vec2 uv = vec2 ((float)x / width, (float)y / height );
 
-				vec3 dir = { 0, 0, 0 };
+				vec3 dir = vec3( 0, 0, 0 );
 				dir.x = (uv.x - 0.5)*2.0;
 				dir.y = (uv.y - 0.5)*2.0;
 				dir.y /= aspect;

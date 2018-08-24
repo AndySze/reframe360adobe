@@ -137,7 +137,7 @@ float4 linInterpCol(float2 uv, __global const float* input, int width, int heigh
 
 __kernel void Reframe360Kernel(
 	int p_Width, int p_Height, __global float* p_Fov, __global float* p_Tinyplanet, __global float* p_Rectilinear,
-	__global const float* p_Input, __global float* p_Output, __global float* r, int samples, int bilinear)
+	__global const float* p_Input, __global float* p_Output, __global float* r, int samples, int bilinear, int is16Bit)
 {
 	const int x = get_global_id(0);
 	const int y = get_global_id(1);
@@ -194,7 +194,16 @@ __kernel void Reframe360Kernel(
 					interpCol = linInterpCol(iuv, p_Input, p_Width, p_Height);
 				}
 				else {
-					interpCol = (float4)( p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] );
+					//interpCol = (float4)( p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] );
+                    if (is16Bit)
+                    {
+                        interpCol.x = vload_half(index_new, (const __global half*)p_Input);
+                        interpCol.y = vload_half(index_new+1, (const __global half*)p_Input);
+                        interpCol.z = vload_half(index_new+2, (const __global half*)p_Input);
+                        interpCol.w = vload_half(index_new+3, (const __global half*)p_Input);
+                    } else {
+                        interpCol = (float4)( p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] );
+                    }
 				}
 
 				accum_col.x += interpCol.x;
@@ -203,10 +212,24 @@ __kernel void Reframe360Kernel(
 				accum_col.w += interpCol.w;
 			}
 		}
-		p_Output[index + 0] = accum_col.x / samples;
-		p_Output[index + 1] = accum_col.y / samples;
-		p_Output[index + 2] = accum_col.z / samples;
-		p_Output[index + 3] = accum_col.w / samples;
+        
+        if (is16Bit)
+        {
+            vstore_half(accum_col.x/samples, index, (__global half*)p_Output);
+            vstore_half(accum_col.y/samples, index+1, (__global half*)p_Output);
+            vstore_half(accum_col.z/samples, index+2, (__global half*)p_Output);
+            vstore_half(accum_col.w/samples, index+3, (__global half*)p_Output);
+            
+        }
+        else
+        {
+            p_Output[index + 0] = accum_col.x / samples;
+            p_Output[index + 1] = accum_col.y / samples;
+            p_Output[index + 2] = accum_col.z / samples;
+            p_Output[index + 3] = accum_col.w / samples;
+        }
+        
+
         
         /*p_Output[index + 0] = p_Input[index + 0];
         p_Output[index + 1] = p_Input[index + 1];
@@ -214,3 +237,5 @@ __kernel void Reframe360Kernel(
         p_Output[index + 3] = p_Input[index + 3];*/
 	}
 }
+
+

@@ -386,6 +386,7 @@ public:
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &rotmat_buf);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &samples);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &bilinear);
+            error |= clSetKernelArg(mKernel, count++, sizeof(int), &is16f);
             
             CheckError(error, "Unable to set kernel arguments");
             
@@ -541,6 +542,9 @@ private:
 
 	bool isExactlyOnKeyFrame(csSDK_int32 paramIndex, PrTime time) {
 		PrTime inTime = LONG_MIN;
+#ifndef AE_OS_WIN // negative in time leads to incorrect results on mac API
+        inTime = 0;
+#endif
 		PrTime outTime = 0;
 		csSDK_int32 keyframeInterpolationMode;
 		prSuiteError result = suiteError_NoError;
@@ -559,6 +563,9 @@ private:
 	bool isFirstKeyFrameTimeOrEarlier(csSDK_int32 paramIndex, PrTime time) {
 
 		PrTime inTime = LONG_MIN;
+#ifndef AE_OS_WIN // negative in time leads to incorrect results on mac API
+        inTime = 0;
+#endif
 		PrTime outTime = 0;
 		csSDK_int32 keyframeInterpolationMode;
 		prSuiteError result = suiteError_NoError;
@@ -587,6 +594,9 @@ private:
 
 	PrTime getPreviousKeyFrameTime(csSDK_int32 paramIndex, PrTime time) {
 		PrTime inTime = LONG_MIN;
+#ifndef AE_OS_WIN // negative in time leads to incorrect results on mac API
+        inTime = 0;
+#endif
 		PrTime outTime = 0;
 
 		while (inTime < time) {

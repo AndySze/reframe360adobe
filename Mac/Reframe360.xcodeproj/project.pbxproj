@@ -15,6 +15,8 @@
 		EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */; };
 		EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE120F4FF4000A2301D /* Reframe360.cl */; };
 		EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC04FDF120F5008500A2301D /* InfoPlist.strings */; };
+		EC288F2B212D231200F26708 /* KeyFrameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC288F27212D231200F26708 /* KeyFrameData.cpp */; };
+		EC288F2C212D231200F26708 /* KeyFrameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC288F29212D231200F26708 /* KeyFrameManager.cpp */; };
 		EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */ = {isa = PBXBuildFile; fileRef = EC61E82420F5119D0062CB00 /* CreateCString.py */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,10 @@
 		EC04FDEE20F5006800A2301D /* Reframe360-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Reframe360-Prefix.pch"; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Prefix.pch"; sourceTree = "<group>"; };
 		EC04FDEF20F5006800A2301D /* Reframe360-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Reframe360-Info.plist"; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist"; sourceTree = "<group>"; };
 		EC04FDF220F5008500A2301D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		EC288F24212D231200F26708 /* KeyFrameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyFrameManager.h; sourceTree = "<group>"; };
+		EC288F27212D231200F26708 /* KeyFrameData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFrameData.cpp; sourceTree = "<group>"; };
+		EC288F28212D231200F26708 /* KeyFrameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyFrameData.h; sourceTree = "<group>"; };
+		EC288F29212D231200F26708 /* KeyFrameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFrameManager.cpp; sourceTree = "<group>"; };
 		EC61E82320F5119D0062CB00 /* PrGPUFilterModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrGPUFilterModule.h; sourceTree = "<group>"; };
 		EC61E82420F5119D0062CB00 /* CreateCString.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = CreateCString.py; sourceTree = "<group>"; };
 		EC61E82720F5119D0062CB00 /* FloatingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingPoint.h; sourceTree = "<group>"; };
@@ -90,6 +96,10 @@
 		7E83C0EF170F4840008B8043 = {
 			isa = PBXGroup;
 			children = (
+				EC288F27212D231200F26708 /* KeyFrameData.cpp */,
+				EC288F28212D231200F26708 /* KeyFrameData.h */,
+				EC288F29212D231200F26708 /* KeyFrameManager.cpp */,
+				EC288F24212D231200F26708 /* KeyFrameManager.h */,
 				EC04FDED20F5002400A2301D /* Supporting Files */,
 				EC04FDDE20F4FF3F00A2301D /* CameraUtil.h */,
 				EC04FDE220F4FF4000A2301D /* MathUtil.h */,
@@ -274,6 +284,8 @@
 				EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */,
 				EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */,
 				EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */,
+				EC288F2B212D231200F26708 /* KeyFrameData.cpp in Sources */,
+				EC288F2C212D231200F26708 /* KeyFrameManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
