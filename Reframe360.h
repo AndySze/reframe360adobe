@@ -46,7 +46,7 @@ struct RenderData
 {
 	PF_InData *in_data;
 	PF_EffectWorld *inputP;
-	PF_LayerDef *outputP;
+	PF_LayerDef *inOutput;
 	PF_SampPB samp_pb;
 	A_long bitDepth;
 };

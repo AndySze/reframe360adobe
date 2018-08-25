@@ -547,6 +547,95 @@ void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamD
 	}
 }
 
+static inline vec4 read32bitVec4(const char* outgoingRowData, int x_new) {
+	vec4 outgoing;
+
+	outgoing.x = outgoingRowData ? ((const float*)outgoingRowData)[x_new * 4 + 0] : 0.0f;
+	outgoing.y = outgoingRowData ? ((const float*)outgoingRowData)[x_new * 4 + 1] : 0.0f;
+	outgoing.z = outgoingRowData ? ((const float*)outgoingRowData)[x_new * 4 + 2] : 0.0f;
+	outgoing.w = outgoingRowData ? ((const float*)outgoingRowData)[x_new * 4 + 3] : 0.0f;
+
+	return outgoing;
+}
+
+static inline void write32bitVec4(char* destData, int x, int y, int rowbytes, vec4 value) {
+	((float*)destData)[y*rowbytes / sizeof(float) + x * 4 + 0] = value.x;
+	((float*)destData)[y*rowbytes / sizeof(float) + x * 4 + 1] = value.y;
+	((float*)destData)[y*rowbytes / sizeof(float) + x * 4 + 2] = value.z;
+	((float*)destData)[y*rowbytes / sizeof(float) + x * 4 + 3] = value.w;
+}
+
+static inline vec4 read16bitVec4(const char* outgoingRowData, int x_new) {
+	vec4 outgoing;
+
+	outgoing.x = outgoingRowData ? ((const A_u_short*)outgoingRowData)[x_new * 4 + 0] / (float)USHRT_MAX : 0.0f;
+	outgoing.y = outgoingRowData ? ((const A_u_short*)outgoingRowData)[x_new * 4 + 1] / (float)USHRT_MAX : 0.0f;
+	outgoing.z = outgoingRowData ? ((const A_u_short*)outgoingRowData)[x_new * 4 + 2] / (float)USHRT_MAX : 0.0f;
+	outgoing.w = outgoingRowData ? ((const A_u_short*)outgoingRowData)[x_new * 4 + 3] / (float)USHRT_MAX : 0.0f;
+
+	return outgoing;
+}
+
+static inline void write16bitVec4(char* destData, int x, int y, int rowbytes, vec4 value) {
+	((A_u_short*)destData)[y*rowbytes / sizeof(A_u_short) + x * 4 + 0] = MIN(value.x * USHRT_MAX, USHRT_MAX);
+	((A_u_short*)destData)[y*rowbytes / sizeof(A_u_short) + x * 4 + 1] = MIN(value.y * USHRT_MAX, USHRT_MAX);
+	((A_u_short*)destData)[y*rowbytes / sizeof(A_u_short) + x * 4 + 2] = MIN(value.z * USHRT_MAX, USHRT_MAX);
+	((A_u_short*)destData)[y*rowbytes / sizeof(A_u_short) + x * 4 + 3] = MIN(value.w * USHRT_MAX, USHRT_MAX);
+}
+
+static inline vec4 read8bitVec4(const char* outgoingRowData, int x_new) {
+	vec4 outgoing;
+
+	outgoing.x = outgoingRowData ? ((const A_u_char*)outgoingRowData)[x_new * 4 + 0] / (float)UCHAR_MAX : 0.0f;
+	outgoing.y = outgoingRowData ? ((const A_u_char*)outgoingRowData)[x_new * 4 + 1] / (float)UCHAR_MAX : 0.0f;
+	outgoing.z = outgoingRowData ? ((const A_u_char*)outgoingRowData)[x_new * 4 + 2] / (float)UCHAR_MAX : 0.0f;
+	outgoing.w = outgoingRowData ? ((const A_u_char*)outgoingRowData)[x_new * 4 + 3] / (float)UCHAR_MAX : 0.0f;
+
+	return outgoing;
+}
+
+static inline void write8bitVec4(char* destData, int x, int y, int rowbytes, vec4 value) {
+	((A_u_char*)destData)[y*rowbytes / sizeof(A_u_char) + x * 4 + 0] = MIN(value.x * UCHAR_MAX, UCHAR_MAX);
+	((A_u_char*)destData)[y*rowbytes / sizeof(A_u_char) + x * 4 + 1] = MIN(value.y * UCHAR_MAX, UCHAR_MAX);
+	((A_u_char*)destData)[y*rowbytes / sizeof(A_u_char) + x * 4 + 2] = MIN(value.z * UCHAR_MAX, UCHAR_MAX);
+	((A_u_char*)destData)[y*rowbytes / sizeof(A_u_char) + x * 4 + 3] = MIN(value.w * UCHAR_MAX, UCHAR_MAX);
+}
+
+static inline vec4 readVec4(const char* outgoingRowData, int x_new, int mode) {
+	switch (mode)
+	{
+	case 0:
+		return read8bitVec4(outgoingRowData, x_new);
+		break;
+	case 1:
+		return read16bitVec4(outgoingRowData, x_new);
+		break;
+	case 2:
+		return read32bitVec4(outgoingRowData, x_new);
+		break;
+	default:
+		return vec4(0, 0, 0, 0);
+		break;
+	}
+}
+
+static inline void writeVec4(char* destData, int x, int y, int rowbytes, vec4 value, int mode) {
+	switch (mode)
+	{
+	case 0:
+		write8bitVec4(destData, x, y, rowbytes, value);
+		break;
+	case 1:
+		write16bitVec4(destData, x, y, rowbytes, value);
+		break;
+	case 2:
+		write32bitVec4(destData, x, y, rowbytes, value);
+		break;
+	default:
+		break;
+	}
+}
+
 /*
 **
 */
@@ -556,7 +645,8 @@ static PF_Err Render(
 	PF_EffectWorld	*inputP,
 	PF_ParamDef* params[],
 	PF_LayerDef* output,
-	bool smartRender)
+	bool smartRender,
+	int mode)
 {
 	//TEMP
 	if (in_data->current_time == 0)
@@ -596,7 +686,7 @@ static PF_Err Render(
 	const float* outgoingData = (const float*)outgoing->data;
 	int inRowbytes = outgoing->rowbytes;
 
-	float* destData = (float*)dest->data;
+	char* destData = (char*)dest->data;
 	int rowbytes = dest->rowbytes;
 
 	float aspect = (float)width / (float)height;
@@ -646,16 +736,11 @@ static PF_Err Render(
 
 				if ((x_new < width) && (y_new < height))
 				{
-					const float* outgoingData_ = outgoingData + y_new * inRowbytes / sizeof(float);
+					const char* outgoingData_ = (const char*)outgoingData + y_new * inRowbytes;
 
 					vec4 interpCol;
 
-					vec4 outgoing;
-
-					outgoing.x = outgoingData_ ? (outgoingData_)[x_new * 4 + 0] : 0.0f;
-					outgoing.y = outgoingData_ ? (outgoingData_)[x_new * 4 + 1] : 0.0f;
-					outgoing.z = outgoingData_ ? (outgoingData_)[x_new * 4 + 2] : 0.0f;
-					outgoing.w = outgoingData_ ? (outgoingData_)[x_new * 4 + 3] : 0.0f;
+					vec4 outgoing = readVec4(outgoingData_, x_new, mode);
 
 					float recipNewAlpha = 1.0f;
 
@@ -664,10 +749,7 @@ static PF_Err Render(
 					accumValue += interpCol / (float)samples;
 				}
 
-				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 0] = accumValue.x;
-				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 1] = accumValue.y;
-				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 2] = accumValue.z;
-				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 3] = accumValue.w;
+				writeVec4(destData, x, y, rowbytes, accumValue, mode);
 			}
 			continue;
 		}
@@ -706,9 +788,17 @@ static inline PF_Err DoRender(
 		if (in_data->appl_id == 'PrMr') {
 			// get the Premiere pixel format suite
 			AEFX_SuiteScoper<PF_PixelFormatSuite1> pfS(in_data, kPFPixelFormatSuite, kPFPixelFormatSuiteVersion1, out_data);
-			//PrPixelFormat format = PrPixelFormat_BGRA_4444_8u;
+			PrPixelFormat format = PrPixelFormat_BGRA_4444_8u;
+			if (&pfS) {
+				pfS->GetPixelFormat(outputP, &format);
 
-			Render(in_data, out_data, inputP, params, outputP, false);
+				if (format == PrPixelFormat_BGRA_4444_8u) {
+					Render(in_data, out_data, inputP, params, outputP, false, 0);
+				}
+				else if (format == PrPixelFormat_BGRA_4444_32f) {
+					Render(in_data, out_data, inputP, params, outputP, false, 2);
+				}
+			}
 		}
 		else {
 			// determine pixel format
@@ -718,17 +808,19 @@ static inline PF_Err DoRender(
 			case PF_PixelFormat_ARGB128:
 			{
 				rendP->bitDepth = 32;
-				Render(in_data, out_data, inputP, params, outputP, true);
+				Render(in_data, out_data, inputP, params, outputP, true, 2);
 			}
 			break;
 			case PF_PixelFormat_ARGB64:
 			{
-
+				rendP->bitDepth = 16;
+				Render(in_data, out_data, inputP, params, outputP, true, 1);
 			}
 			break;
 			case PF_PixelFormat_ARGB32:
 			{
-
+				rendP->bitDepth = 8;
+				Render(in_data, out_data, inputP, params, outputP, true, 0);
 			}
 			break;
 			default:
@@ -774,6 +866,36 @@ static PF_Err PreRender(
 	return err;
 }
 
+static PF_Err DoNonSmartRender(PF_InData* in_data,
+	PF_OutData* out_data,
+	PF_ParamDef* params[],
+	PF_LayerDef* output)
+{
+	if (in_data->appl_id == 'PrMr') {
+	PF_EffectWorld *inputP = NULL, *outputP = NULL;
+	PF_Err err = PF_Err_NONE;
+	// checkout input & output layers
+	inputP = &params[0]->u.ld;
+	if (err) return err;
+
+	// get the Premiere pixel format suite
+	AEFX_SuiteScoper<PF_PixelFormatSuite1> pfS(in_data, kPFPixelFormatSuite, kPFPixelFormatSuiteVersion1, out_data);
+	PrPixelFormat format = PrPixelFormat_BGRA_4444_8u;
+	if (&pfS) {
+		pfS->GetPixelFormat(output, &format);
+
+		if (format == PrPixelFormat_BGRA_4444_8u) {
+			Render(in_data, out_data, inputP, params, output, false, 0);
+		}
+		else if (format == PrPixelFormat_BGRA_4444_32f) {
+			Render(in_data, out_data, inputP, params, output, false, 2);
+		}
+	}
+
+	}
+	return Render(in_data, out_data, NULL, params, output, false, 2);
+}
+
 static PF_Err SmartRender(
 	PF_InData				*in_data,
 	PF_OutData				*out_data,
@@ -802,7 +924,7 @@ static PF_Err SmartRender(
 	RenderData rd;
 	rd.in_data = in_data;
 	rd.inputP = inputP;
-	rd.outputP = outputP;
+	rd.inOutput = outputP;
 	rd.samp_pb.src = inputP;
 
 	ERR(DoRender(in_data, inputP, &rd, out_data, outputP, params));
@@ -870,7 +992,7 @@ extern "C" DllExport PF_Err EffectMain(
 		break;
 	case PF_Cmd_RENDER:
 	{
-		err = Render(in_data, out_data, NULL, params, inOutput, false);
+		err = DoNonSmartRender(in_data, out_data, params, inOutput);
 		break;
 	}
 	case PF_Cmd_SMART_PRE_RENDER:

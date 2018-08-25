@@ -1,4 +1,4 @@
-﻿  KeyFrameManager.cpp
+﻿  Reframe360_CPU.cpp
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
@@ -39,18 +39,25 @@ c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilte
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(81): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(82): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\ParamUtil.h(187): warning C4305: '=': truncation from 'double' to 'PF_FpShort'
-..\KeyFrameManager.cpp(64): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\KeyFrameManager.cpp(187): warning C4244: 'initializing': conversion from 'PrTime' to 'double', possible loss of data
-..\KeyFrameManager.cpp(188): warning C4244: 'initializing': conversion from 'PrTime' to 'double', possible loss of data
-..\KeyFrameManager.cpp(197): warning C4244: 'initializing': conversion from 'double' to 'PrTime', possible loss of data
-..\KeyFrameManager.cpp(204): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\KeyFrameManager.cpp(205): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-..\KeyFrameManager.cpp(212): warning C4244: 'initializing': conversion from 'double' to 'PrTime', possible loss of data
-..\KeyFrameManager.cpp(219): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\KeyFrameManager.cpp(220): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
-..\KeyFrameManager.cpp(245): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\KeyFrameManager.cpp(245): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-..\KeyFrameManager.cpp(282): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\KeyFrameManager.cpp(282): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+..\Reframe360_CPU.cpp(198): warning C4305: '=': truncation from 'double' to 'PF_FpShort'
+..\Reframe360_CPU.cpp(388): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(449): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(497): warning C4800: 'PF_ParamValue': forcing value to bool 'true' or 'false' (performance warning)
+..\Reframe360_CPU.cpp(529): warning C4800: 'PF_ParamValue': forcing value to bool 'true' or 'false' (performance warning)
+..\Reframe360_CPU.cpp(541): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(580): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(581): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(582): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(583): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(598): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(599): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(600): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(601): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(677): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(712): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(713): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(731): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+..\Reframe360_CPU.cpp(732): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+     Creating library x64\Debug\/Reframe360.lib and object x64\Debug\/Reframe360.exp
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
   Reframe360.vcxproj -> x64\Debug\Reframe360.pdb (Full PDB)
