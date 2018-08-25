@@ -155,6 +155,7 @@ public:
 		csSDK_size_t inFrameCount,
 		PPixHand* outFrame)
 	{
+		KeyFrameManager::getInstance().isCpuProcessing = false;
 #ifdef BETA_FAIL
 		time_t time_ = time(NULL);
 
@@ -179,10 +180,10 @@ public:
 		int samples = (int)round(GetParam(MB_SAMPLES, inRenderParams->inClipTime).mFloat64);
 		samples = glm::max(1, samples);
 
-		int cam1 = getPreviousCamera(camSequenceParam, inRenderParams->inClipTime);
+		int cam1 = KeyFrameManager::getInstance().getPreviousCamera(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime);
 		
 
-		int cam2 = getNextCamera(camSequenceParam, inRenderParams->inClipTime);
+		int cam2 = KeyFrameManager::getInstance().getNextCamera(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime);
 
 		float shutter = GetParam(MB_SHUTTER, inRenderParams->inClipTime).mFloat64;
 
@@ -228,7 +229,7 @@ public:
 
 			float camAlpha = 0;
 			if(cam1 != cam2)
-				camAlpha = getRelativeKeyFrameAlpha(camSequenceParam, inRenderParams->inClipTime, inRenderParams->inRenderTicksPerFrame, offset);
+				camAlpha = KeyFrameManager::getInstance().getRelativeKeyFrameAlpha(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime, inRenderParams->inRenderTicksPerFrame, offset);
 
 			double blend = getAcceleratedCameraBlend(inRenderParams, camAlpha, offset);
 
@@ -490,17 +491,6 @@ public:
 	}
 
 private:
-	float MyGetParam(
-		csSDK_int32 inVideoNodeID,
-		csSDK_int32 inIndex,
-		PrTime inTime,
-		PrParam* outParam) {
-		if (!KeyFrameManager::getInstance().isAE)
-			return mVideoSegmentSuite->GetParam(mNodeID, inIndex, inTime, outParam);
-		else {
-			return KeyFrameManager::getInstance().getKeyFrameValue(inIndex + 1, inTime);
-		}
-	}
 
 	prSuiteError GetNextKeyframeTime(
 		csSDK_int32 inVideoNodeID,

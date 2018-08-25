@@ -15,6 +15,50 @@
 #include <math.h>
 #include "MathUtil.h"
 
+#pragma optimize( "", off )
+double static findNeighbourKeyframeTime_CPU_Premiere(int paramID, PF_InData* in_data, bool backwards) {
+	PrTime time = in_data->current_time;
+	PrTime timeStep = in_data->time_step;
+	if (backwards)
+		timeStep = -timeStep;
+
+	PF_ParamDef	def;
+	AEFX_CLR_STRUCT(def);
+
+	PF_CHECKOUT_PARAM(in_data, paramID, time, timeStep, in_data->time_scale, &def);
+	float val = def.u.fs_d.value;
+	PF_CHECKIN_PARAM(in_data, &def);
+
+	AEFX_CLR_STRUCT(def);
+	time += timeStep;
+	PF_CHECKOUT_PARAM(in_data, paramID, time, timeStep, in_data->time_scale, &def);
+	float val_nextFrame = def.u.fs_d.value;
+	PF_CHECKIN_PARAM(in_data, &def);
+
+	float ref_delta = val_nextFrame - val;
+	if (ref_delta == 0)
+		return time - timeStep;
+
+	float new_delta = FLT_MAX;
+
+	double delta_diff = 0;
+
+	float currentVal = val_nextFrame;
+	float nextVal;
+	while (new_delta != 0 && delta_diff < 0.0001f) {
+		time += timeStep;;
+		PF_CHECKOUT_PARAM(in_data, paramID, time, timeStep, in_data->time_scale, &def);
+		nextVal = def.u.fs_d.value;
+		PF_CHECKIN_PARAM(in_data, &def);
+
+		new_delta = nextVal - currentVal;
+		delta_diff = abs(new_delta - ref_delta);
+		currentVal = nextVal;
+	}
+	return time - timeStep;;
+}
+#pragma optimize( "", on )
+
 static CameraParams mainCameraParams(PF_ParamDef* params[]) {
 	CameraParams outParams;
 

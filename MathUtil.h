@@ -133,7 +133,9 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 
 	if (offset == 0) {
 		PF_CHECKOUT_PARAM(in_data, paramID, time, timeStep, in_data->time_scale, &def);
-		return def.u.fs_d.value;
+		float outVal = def.u.fs_d.value;
+		PF_CHECKIN_PARAM(in_data, &def);
+		return outVal;
 	}
 	else if (offset < 0) {
 		offset = -offset;
@@ -142,9 +144,11 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 
 		PF_CHECKOUT_PARAM(in_data, paramID, time - (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
 		float part1 = def.u.fs_d.value * frac;
+		PF_CHECKIN_PARAM(in_data, &def);
 		AEFX_CLR_STRUCT(def);
 		PF_CHECKOUT_PARAM(in_data, paramID, time - floor * timeStep, timeStep, in_data->time_scale, &def);
 		float part2 = def.u.fs_d.value * (1 - frac);
+		PF_CHECKIN_PARAM(in_data, &def);
 		
 		return part1 + part2;
 	}
@@ -154,18 +158,20 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 
 		PF_CHECKOUT_PARAM(in_data, paramID, time + (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
 		float part1 = def.u.fs_d.value * frac;
+		PF_CHECKIN_PARAM(in_data, &def);
 		AEFX_CLR_STRUCT(def);
 		PF_CHECKOUT_PARAM(in_data, paramID, time + floor * timeStep, timeStep, in_data->time_scale, &def);
 		float part2 = def.u.fs_d.value * (1 - frac);
+		PF_CHECKIN_PARAM(in_data, &def);
 
 		return part1 + part2;
 	}
 }
 
-static float getCameraBlend_CPU(PF_InData* in_data, float offset) {
+static float getCameraBlend_CPU(PF_InData* in_data, float inBlend, float offset) {
 
 	float accel = interpParam_CPU(AUX_ACCELERATION, in_data, offset);
-	float blend = interpParam_CPU(AUX_CAM_SEQUENCE, in_data, offset);
+	float blend = inBlend;
 
 	if (blend < 0.5) {
 		blend = fitRange(blend, 0, 0.5, 0, 1);

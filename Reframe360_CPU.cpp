@@ -34,6 +34,8 @@ using namespace std;
 
 static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_OutData* out_data);
 
+static void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamDef ** params, int &cam1, int &cam2, float * rotmats, float * fovs, float * tinyplanets, float * rectilinears);
+
 /*
 **
 */
@@ -56,7 +58,7 @@ static PF_Err GlobalSetup(
     }
 	
 	out_data->out_flags |= PF_OutFlag_USE_OUTPUT_EXTENT | PF_OutFlag_NON_PARAM_VARY;
-	out_data->out_flags2 |= PF_OutFlag2_PRESERVES_FULLY_OPAQUE_PIXELS;
+	out_data->out_flags2 |= PF_OutFlag2_PRESERVES_FULLY_OPAQUE_PIXELS | PF_OutFlag2_SUPPORTS_SMART_RENDER | PF_OutFlag2_FLOAT_COLOR_AWARE;
 
 	return PF_Err_NONE;
 }
@@ -422,9 +424,10 @@ static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_Ou
 	AEFX_SuiteScoper<PF_ParamUtilsSuite3> paramUtilsSuite(in_data, kPFParamUtilsSuite, kPFParamUtilsSuiteVersion3, out_data);
 	PF_ProgPtr effect_ref = in_data->effect_ref;
 
+	KeyFrameManager::getInstance().setCurrentAETime(in_data->current_time);
+
 	if (in_data->appl_id != 'PrMr') {
 		KeyFrameManager::getInstance().isAE = true;
-		KeyFrameManager::getInstance().setCurrentAETime(in_data->current_time);
 	}
 	else {
 		return;
@@ -465,41 +468,19 @@ static double getDoubleParamValueAtOffset(int paramID, PF_InData* in_data, float
 	return (double)def.u.fs_d.value;
 }
 
-/*
-**
-*/
-static PF_Err Render(
-	PF_InData* in_data,
-	PF_OutData* out_data,
-	PF_ParamDef* params[],
-	PF_LayerDef* output)
+
+
+void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamDef ** params, int &cam1, int &cam2, float * rotmats, float * fovs, float * tinyplanets, float * rectilinears)
 {
-#ifdef BETA_FAIL
-	time_t time_ = time(NULL);
-
-	if (time_ > BETA_FAIL_TIME) {
-		return 0;
+	PrTime prevDiff, nextDiff;
+	if (KeyFrameManager::getInstance().isCpuProcessing && !KeyFrameManager::getInstance().isAE) {
+		cam1 = KeyFrameManager::getInstance().getPreviousCamera_Pr_CPU(in_data, prevDiff);
+		cam2 = KeyFrameManager::getInstance().getNextCamera_Pr_CPU(in_data, nextDiff);
 	}
-#endif
-
-	PF_LayerDef* outgoing = &params[0]->u.ld;
-	PF_LayerDef* dest = output;
-
-	int width = output->width;
-	int height = output->height;
-
-	int samples = (int)round(params[MB_SAMPLES]->u.fs_d.value);
-	//samples = max(1, samples);
-
-	//TODO: TEMP!!!
-	int cam1 = 1;//;(int)round(params[AUX_CAMERA1]->u.fs_d.value);
-	int cam2 = 2;// (int)round(params[AUX_CAMERA2]->u.fs_d.value);
-	float shutter = (int)round(params[MB_SHUTTER]->u.fs_d.value);
-
-	float* fovs = (float*)malloc(sizeof(float)*samples);
-	float* tinyplanets = (float*)malloc(sizeof(float)*samples);
-	float* rectilinears = (float*)malloc(sizeof(float)*samples);
-	float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+	else {
+		cam1 = KeyFrameManager::getInstance().getPreviousCamera(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time);
+		cam2 = KeyFrameManager::getInstance().getNextCamera(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time);
+	}
 
 	for (int i = 0; i < samples; i++) {
 		float offset = 0;
@@ -513,7 +494,7 @@ static PF_Err Render(
 		double main_roll = -interpParam_CPU(MAIN_CAMERA_ROLL, in_data, offset) / 180 * M_PI;
 		double main_fov_mult = interpParam_CPU(MAIN_CAMERA_FOV, in_data, offset);
 
-		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value){
+		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value) {
 			cam1 = (int)round(params[ACTIVE_AUX_CAMERA_SELECTOR]->u.fs_d.value);
 		}
 
@@ -535,7 +516,15 @@ static PF_Err Render(
 
 		double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
 
-		double blend = getCameraBlend_CPU(in_data, offset);
+		float camAlpha = 0;
+		if (cam1 != cam2) {
+			if (KeyFrameManager::getInstance().isAE || ! KeyFrameManager::getInstance().isCpuProcessing)
+				camAlpha = KeyFrameManager::getInstance().getRelativeKeyFrameAlpha(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time, in_data->time_step, offset);
+			else
+				camAlpha = (float)prevDiff / (prevDiff + nextDiff);
+		}
+
+		double blend = getCameraBlend_CPU(in_data, camAlpha, offset);
 
 		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value) {
 			blend = 0;
@@ -556,27 +545,80 @@ static PF_Err Render(
 		tinyplanets[i] = (float)tinyplanet;
 		rectilinears[i] = (float)rectilinear;
 	}
+}
+
+/*
+**
+*/
+static PF_Err Render(
+	PF_InData* in_data,
+	PF_OutData* out_data,
+	PF_EffectWorld	*inputP,
+	PF_ParamDef* params[],
+	PF_LayerDef* output,
+	bool smartRender)
+{
+	//TEMP
+	if (in_data->current_time == 0)
+		return PF_Err_NONE;
+
+	KeyFrameManager::getInstance().isCpuProcessing = true;
+#ifdef BETA_FAIL
+	time_t time_ = time(NULL);
+
+	if (time_ > BETA_FAIL_TIME) {
+		return 0;
+	}
+#endif
+
+	PF_LayerDef* outgoing = inputP;
+	if (!smartRender)
+		outgoing = &params[0]->u.ld;
+	PF_LayerDef* dest = output;
+
+	int width = output->width;
+	int height = output->height;
+
+	int samples = (int)round(params[MB_SAMPLES]->u.fs_d.value);
+	//samples = max(1, samples);
+
+	//TODO: TEMP!!!
+	int cam1, cam2;
+	float shutter = (int)round(params[MB_SHUTTER]->u.fs_d.value);
+
+	float* fovs = (float*)malloc(sizeof(float)*samples);
+	float* tinyplanets = (float*)malloc(sizeof(float)*samples);
+	float* rectilinears = (float*)malloc(sizeof(float)*samples);
+	float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+
+	fillParamStructs(samples, shutter, in_data, params, cam1, cam2, rotmats, fovs, tinyplanets, rectilinears);
 		
-	for (int i = 0; i < samples; i++)
+	const float* outgoingData = (const float*)outgoing->data;
+	int inRowbytes = outgoing->rowbytes;
+
+	float* destData = (float*)dest->data;
+	int rowbytes = dest->rowbytes;
+
+	float aspect = (float)width / (float)height;
+
+	#pragma loop(hint_parallel(0))
+	#pragma loop(ivdep)
+	for (int y = 0; y < height;
+		++y)
 	{
-		const char* outgoingData = (const char*)outgoing->data;
-
-		char* destData = (char*)dest->data;
-
-		mat3 rotMat;
-		memcpy(&rotMat[0], &(rotmats[i * 9]), sizeof(float) * 9);
-
-		float fov = fovs[i];
-		float aspect = (float)width / (float)height;
-
-		for (int y = 0; y < output->height;
-			++y, destData += dest->rowbytes)
+		for (int x = 0; x < width; ++x)
 		{
-			for (int x = 0; x < output->width; ++x)
+			vec4 accumValue = vec4(0, 0, 0, 0);
+			for (int i = 0; i < samples; i++)
 			{
-				vec2 uv = vec2 ((float)x / width, (float)y / height );
 
-				vec3 dir = vec3( 0, 0, 0 );
+				mat3 rotMat;
+				memcpy(&rotMat[0], &(rotmats[i * 9]), sizeof(float) * 9);
+
+				float fov = fovs[i];
+				vec2 uv = vec2((float)x / width, (float)y / height);
+
+				vec3 dir = vec3(0, 0, 0);
 				dir.x = (uv.x - 0.5)*2.0;
 				dir.y = (uv.y - 0.5)*2.0;
 				dir.y /= aspect;
@@ -604,30 +646,30 @@ static PF_Err Render(
 
 				if ((x_new < width) && (y_new < height))
 				{
-					const char* outgoingData_ = outgoingData + y_new * outgoing->rowbytes;
+					const float* outgoingData_ = outgoingData + y_new * inRowbytes / sizeof(float);
 
 					vec4 interpCol;
 
-					float outgoingB = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 0] : 0.0f;
-					float outgoingG = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 1] : 0.0f;
-					float outgoingR = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 2] : 0.0f;
-					float outgoingA = outgoingData_ ? ((const float*)outgoingData_)[x_new * 4 + 3] : 0.0f;
+					vec4 outgoing;
+
+					outgoing.x = outgoingData_ ? (outgoingData_)[x_new * 4 + 0] : 0.0f;
+					outgoing.y = outgoingData_ ? (outgoingData_)[x_new * 4 + 1] : 0.0f;
+					outgoing.z = outgoingData_ ? (outgoingData_)[x_new * 4 + 2] : 0.0f;
+					outgoing.w = outgoingData_ ? (outgoingData_)[x_new * 4 + 3] : 0.0f;
 
 					float recipNewAlpha = 1.0f;
 
-					interpCol.x = outgoingB;
-					interpCol.y = outgoingG;
-					interpCol.z = outgoingR;
-					interpCol.w = outgoingA;
+					interpCol = outgoing;
 
-					((float*)destData)[x * 4 + 0] += interpCol.x / samples;
-					((float*)destData)[x * 4 + 1] += interpCol.y / samples;
-					((float*)destData)[x * 4 + 2] += interpCol.z / samples;
-					((float*)destData)[x * 4 + 3] += interpCol.w / samples;
+					accumValue += interpCol / (float)samples;
 				}
 
-				continue;
+				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 0] = accumValue.x;
+				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 1] = accumValue.y;
+				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 2] = accumValue.z;
+				((float*)destData)[y*rowbytes/ sizeof(float) + x * 4 + 3] = accumValue.w;
 			}
+			continue;
 		}
 	}
 
@@ -635,32 +677,142 @@ static PF_Err Render(
 	free(fovs);
 	free(tinyplanets);
 	free(rectilinears);
-
-	/*const char* outgoingData = (const char*)outgoing->data;
-
-	char* destData = (char*)dest->data;
-	
-	for (int y = 0; y < output->height;
-		++y, outgoingData += outgoing->rowbytes, destData += dest->rowbytes)
-	{
-		for (int x = 0; x < output->width; ++x)
-		{
-			float outgoingB = outgoingData ? ((const float*)outgoingData)[x * 4 + 0] : 0.0f;
-			float outgoingG = outgoingData ? ((const float*)outgoingData)[x * 4 + 1] : 0.0f;
-			float outgoingR = outgoingData ? ((const float*)outgoingData)[x * 4 + 2] : 0.0f;
-			float outgoingA = outgoingData ? ((const float*)outgoingData)[x * 4 + 3] : 0.0f;
-
-			float recipNewAlpha = 1.0f;
-			
-			((float*)destData)[x * 4 + 0] = (outgoingB + 0.5f) * recipNewAlpha;
-			((float*)destData)[x * 4 + 1] = (outgoingG) * recipNewAlpha;
-			((float*)destData)[x * 4 + 2] = (outgoingR) * recipNewAlpha;
-			((float*)destData)[x * 4 + 3] = recipNewAlpha;
-		}
-	}*/
 	
 
 	return PF_Err_NONE;
+}
+
+static inline PF_Err DoRender(
+	PF_InData		*in_data,
+	PF_EffectWorld	*inputP,
+	RenderData		*rendP,
+	PF_OutData      *out_data,
+	PF_LayerDef		*outputP,
+	PF_ParamDef		*params[])
+{
+	PF_Err err = PF_Err_NONE;
+
+	AEFX_SuiteScoper<PF_WorldSuite2> wsP(in_data, kPFWorldSuite, kPFWorldSuiteVersion2, out_data);
+	if (!err) {
+		PF_Point origin;
+		PF_Rect areaR;
+		origin.h = (A_short)(in_data->output_origin_x);
+		origin.v = (A_short)(in_data->output_origin_y);
+		areaR.top = areaR.left = 0;
+		areaR.right = 1;
+		areaR.bottom = (A_short)outputP->height;
+
+		// do high bit depth rendering in Premiere Pro
+		if (in_data->appl_id == 'PrMr') {
+			// get the Premiere pixel format suite
+			AEFX_SuiteScoper<PF_PixelFormatSuite1> pfS(in_data, kPFPixelFormatSuite, kPFPixelFormatSuiteVersion1, out_data);
+			//PrPixelFormat format = PrPixelFormat_BGRA_4444_8u;
+
+			Render(in_data, out_data, inputP, params, outputP, false);
+		}
+		else {
+			// determine pixel format
+			PF_PixelFormat format;
+			wsP->PF_GetPixelFormat(outputP, &format);
+			switch (format) {
+			case PF_PixelFormat_ARGB128:
+			{
+				rendP->bitDepth = 32;
+				Render(in_data, out_data, inputP, params, outputP, true);
+			}
+			break;
+			case PF_PixelFormat_ARGB64:
+			{
+
+			}
+			break;
+			case PF_PixelFormat_ARGB32:
+			{
+
+			}
+			break;
+			default:
+				err = PF_Err_BAD_CALLBACK_PARAM;
+				break;
+			}
+		}
+	}
+
+	return err;
+}
+
+static PF_Err PreRender(
+	PF_InData			*in_data,
+	PF_OutData			*out_data,
+	PF_PreRenderExtra	*extra)
+{
+	PF_Err err = PF_Err_NONE, err2 = PF_Err_NONE;
+	PF_RenderRequest req = extra->input->output_request;
+	PF_CheckoutResult in_result;
+	ERR(extra->cb->checkout_layer(in_data->effect_ref, 0, 0,
+		&req, in_data->current_time, in_data->time_step, in_data->time_scale, &in_result));
+	//TODO: temp change
+	extra->output->result_rect = in_result.result_rect;
+	extra->output->max_result_rect = in_result.max_result_rect;
+
+	PF_ParamDef* params[TOTAL_PARAM_NUM];
+	// checkout the required params
+	for (int i = 1; i < TOTAL_PARAM_NUM; i++) {
+		params[i] = new PF_ParamDef;
+		AEFX_CLR_STRUCT(*params[i]);
+		PF_CHECKOUT_PARAM(in_data, i, in_data->current_time, in_data->time_step, in_data->time_scale, params[i]);
+	}
+
+	storeParamKeyframes(in_data, params, out_data);
+
+	// Always check in, no matter what the error condition!
+	for (int i = 1; i < NUM_PARAMS; i++) {
+		ERR2(PF_CHECKIN_PARAM(in_data, params[i]));
+		delete params[i];
+	}
+
+	return err;
+}
+
+static PF_Err SmartRender(
+	PF_InData				*in_data,
+	PF_OutData				*out_data,
+	PF_SmartRenderExtra		*extra)
+{
+	PF_Err err = PF_Err_NONE, err2 = PF_Err_NONE;
+
+	PF_EffectWorld *inputP = NULL, *outputP = NULL;
+
+	PF_ParamDef* params[TOTAL_PARAM_NUM];
+
+	// checkout input & output layers
+	ERR(extra->cb->checkout_layer_pixels(in_data->effect_ref, 0, &inputP));
+	if (err) return err;
+
+	ERR(extra->cb->checkout_output(in_data->effect_ref, &outputP));
+	if (err) return err;
+
+	// checkout the required params
+	for (int i = 1; i < TOTAL_PARAM_NUM; i++) {
+		params[i] = new PF_ParamDef;
+		AEFX_CLR_STRUCT(*params[i]);
+		PF_CHECKOUT_PARAM(in_data, i, in_data->current_time, in_data->time_step, in_data->time_scale, params[i]);
+	}
+
+	RenderData rd;
+	rd.in_data = in_data;
+	rd.inputP = inputP;
+	rd.outputP = outputP;
+	rd.samp_pb.src = inputP;
+
+	ERR(DoRender(in_data, inputP, &rd, out_data, outputP, params));
+
+	// Always check in, no matter what the error condition!
+	for (int i = 1; i < TOTAL_PARAM_NUM; i++) {
+		ERR2(PF_CHECKIN_PARAM(in_data, params[i]));
+		delete params[i];
+	}
+	return err;
 }
 
 static PF_Err FrameSetup(PF_InData* in_data,
@@ -717,8 +869,20 @@ extern "C" DllExport PF_Err EffectMain(
 		err = 0;
 		break;
 	case PF_Cmd_RENDER:
-		err = Render(in_data, out_data, params, inOutput);
+	{
+		err = Render(in_data, out_data, NULL, params, inOutput, false);
 		break;
+	}
+	case PF_Cmd_SMART_PRE_RENDER:
+	{
+		err = PreRender(in_data, out_data, reinterpret_cast<PF_PreRenderExtra*>(extra));
+		break;
+	}
+	case PF_Cmd_SMART_RENDER:
+	{
+		err = SmartRender(in_data, out_data, reinterpret_cast<PF_SmartRenderExtra*>(extra));
+		break;
+	}
 	}
 	return err;
 }

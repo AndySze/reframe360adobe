@@ -42,6 +42,15 @@
 
 #include <math.h>
 
+struct RenderData
+{
+	PF_InData *in_data;
+	PF_EffectWorld *inputP;
+	PF_LayerDef *outputP;
+	PF_SampPB samp_pb;
+	A_long bitDepth;
+};
+
 /*
 **
 */
@@ -106,6 +115,7 @@ enum
 	AUX_CAMERA_TINYPLANET,
 	AUX_CAMERA_RECTILINEAR,
 	AUX_CAMERA_GRP_END_ID,
+	NUM_PARAMS
 };
 
 #define AUX_PARAM_NUM 6
@@ -196,6 +206,8 @@ enum
 #define	AUX_CAMERA_RECTILINEAR_MIN_SLIDER			0.0
 #define	AUX_CAMERA_RECTILINEAR_MAX_SLIDER			1.0
 #define	AUX_CAMERA_RECTILINEAR_DFLT				0.0
+
+#define TOTAL_PARAM_NUM (NUM_PARAMS - AUX_PARAM_NUM + AUX_PARAM_NUM * CAMERA_MAX_VALUE)
 
 
 typedef struct  CameraParams {

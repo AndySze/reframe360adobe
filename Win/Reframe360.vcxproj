@@ -119,6 +119,8 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
       <AdditionalIncludeDirectories>..\..\..\..\Headers;..\..\..\..\Headers\SP;..\..\Utils;$(AE_SDK_BASE_PATH)\Examples\Headers\;$(AE_SDK_BASE_PATH)\Examples\Headers\SP\;$(AE_SDK_BASE_PATH)\Examples\Resources\;$(AE_SDK_BASE_PATH)\Examples\Util\;$(CUDA_PATH_V8_0)\include\;$(BOOST_BASE_PATH);$(IntDir)PreprocessedOpenCL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>MSWindows;_USE_MATH_DEFINES;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalOptions>/Qpar /Qpar-report:2 /Qvec-report:2 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
