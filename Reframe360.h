@@ -26,6 +26,12 @@
 #ifndef SDK_CROSSDISSOLVE_H
 #define SDK_CROSSDISSOLVE_H
 
+// name and description for the effect
+#define FX_NAME "Reframe360"
+#define FX_DESCRIPTION "This is a plugin that allows you to reframe your 360 degree footage."
+#define FX_CATEGORY "visuality"
+#define FX_UNIQUEID "at.visuality.Reframe360"
+
 #include "AEConfig.h"
 
 #include "PrSDKTypes.h"

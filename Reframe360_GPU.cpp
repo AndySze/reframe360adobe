@@ -53,7 +53,8 @@ extern void Reframe_CUDA ( float const *outBuf, float *destBuf, unsigned int out
 	float* tinyplanet,
 	float* rectilinear,
 	int samples,
-	int bilinear);
+	int bilinear,
+	int is16bit);
 #endif
 
 static cl_kernel sKernelCache[4];
@@ -343,7 +344,7 @@ public:
 								height,
 				rotMatDeviceBuf,
 				fovDeviceBuf, tinyplanetDeviceBuf, rectilinearDeviceBuf,
-				samples, true
+				samples, true, is16f
 			);
 
 			mGPUDeviceSuite->FreeDeviceMemory(index, rotMatDeviceBuf);

@@ -58,7 +58,7 @@ BEGIN
 	"OLGe", /* 'eGLO' */
 	0L,
 	4L,
-	68L, 
+	100L, 
 
 	"MIB8",
 	"2LGe", /* 'eGL2' */

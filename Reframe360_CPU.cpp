@@ -29,6 +29,42 @@
 #include <math.h>
 #include "MathUtil.h"
 #include "KeyFrameManager.h"
+#include "GumroadLicenseHandler.h"
+
+// ********************* aescripts licensing specific code start *********************
+
+// change the following settings for your own plugin!!!
+
+#define LIC_PRODUCT_NAME "Reframe360"
+
+#define LIC_PRIVATE_NUM 635489
+
+#define LIC_PRODUCT_ID "VSRF"
+
+#define LIC_FILENAME "Reframe360"
+
+// set this define if your plugin is compiled for beta-testers, it will then accept BTA type licenses
+#define LIC_BETA
+
+// include the aescripts licensing API (should be done *after* including the Adobe AE headers!)
+#include "aescriptsLicensing.h"
+// include the aescripts licensing Adobe helper API (should be done *after* including the Adobe AE headers and the licensing API!)
+#include "aescriptsLicensing_AdobeHelpers.h"
+
+#include "GumroadLicenseHandler.h"
+
+#include "GumroadLicense_AdobeHelpers.h"
+
+//#define GUMROAD
+
+#ifdef GUMROAD
+namespace lic = grlic;
+#else
+namespace lic = aescripts;
+#endif
+
+
+// ********************* aescripts licensing specific code end *********************
 
 using namespace std;
 
@@ -57,7 +93,7 @@ static PF_Err GlobalSetup(
         utilitySuite->EffectWantsCheckedOutFramesToMatchRenderPixelFormat(in_data->effect_ref);
     }
 	
-	out_data->out_flags |= PF_OutFlag_USE_OUTPUT_EXTENT | PF_OutFlag_NON_PARAM_VARY;
+	out_data->out_flags |= PF_OutFlag_USE_OUTPUT_EXTENT | PF_OutFlag_NON_PARAM_VARY | PF_OutFlag_I_DO_DIALOG;
 	out_data->out_flags2 |= PF_OutFlag2_PRESERVES_FULLY_OPAQUE_PIXELS | PF_OutFlag2_SUPPORTS_SMART_RENDER | PF_OutFlag2_FLOAT_COLOR_AWARE;
 
 	return PF_Err_NONE;
@@ -949,6 +985,44 @@ static PF_Err FrameSetup(PF_InData* in_data,
 	return PF_Err_NONE;
 }
 
+static string intToStr(const int i)
+{
+	stringstream ss;
+	ss << i;
+	return ss.str();
+}
+
+static PF_Err About(
+	PF_InData		*in_data,
+	PF_OutData		*out_data,
+	PF_ParamDef		*params[],
+	PF_LayerDef		*outputP)
+{
+	PF_Err err = PF_Err_NONE;
+	if (in_data->appl_id == 'PrMr') return err;
+	AEGP_SuiteHandler suites(in_data->pica_basicP);
+	string desc = FX_DESCRIPTION;
+	// ********************* aescripts licensing specific code start *********************
+	string licString = lic::getLicenseDataAsString(lic::licenseData);
+	if (!lic::licenseData.registered) licString += "\rDays since first use: " + intToStr(lic::licenseData.numberOfDaysSinceFirstStart);
+	suites.ANSICallbacksSuite1()->sprintf(out_data->return_msg, "%s, v%d.%d\r%s\rRegistered to: %s",
+		FX_NAME, PLUGIN_MAJOR_VERSION, PLUGIN_MINOR_VERSION, desc.c_str(), licString.c_str());
+	// ********************* aescripts licensing specific code end *********************
+	return err;
+}
+
+static PF_Err Register(
+	PF_InData		*in_data,
+	PF_OutData		*out_data)
+{
+	PF_Err err = PF_Err_NONE;
+	// ********************* aescripts licensing specific code start *********************
+	AEGP_SuiteHandler suites(in_data->pica_basicP);
+	int reg_result = lic::showRegistrationDialog(&suites, lic::licenseData, in_data->appl_id != 'PrMr');
+	// ********************* aescripts licensing specific code end *********************
+	return err;
+}
+
 /*
 **
 */
@@ -967,6 +1041,13 @@ extern "C" DllExport PF_Err EffectMain(
 {
 
 	PF_Err err = PF_Err_NONE;
+	// ********************* aescripts licensing specific code start *********************
+	//if (lic::checkLicenseAE(inCmd, in_data, out_data, lic::licenseData) != 0) return err;
+	// ********************* aescripts licensing specific code end *********************
+
+//	grlic::testLicenseCheck();
+//	grlic::getLicenseStoreDir();
+
 	switch (inCmd)
 	{
 	case PF_Cmd_GLOBAL_SETUP:
@@ -1005,6 +1086,16 @@ extern "C" DllExport PF_Err EffectMain(
 		err = SmartRender(in_data, out_data, reinterpret_cast<PF_SmartRenderExtra*>(extra));
 		break;
 	}
+	case PF_Cmd_ABOUT:
+	{
+		err = About(in_data, out_data, params, inOutput);
+		break;
+	}
+	case PF_Cmd_DO_DIALOG:
+	{
+		err = Register(in_data, out_data);
+		break;
 	}
 	return err;
+	}
 }

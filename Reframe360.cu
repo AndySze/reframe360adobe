@@ -1,6 +1,4 @@
-
-#ifndef SDK_CROSS_DISSOLVE
-	#define SDK_CROSS_DISSOLVE
+#pragma once
 
 	#include "helper_math.h"
 
@@ -144,7 +142,7 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			int p_Width, int p_Height,
 			const float* r,
 			float* p_Fov, float* p_Tinyplanet, float* p_Rectilinear,
-			int samples, bool bilinear
+			int samples, bool bilinear, bool is16bit
 			)
 		{
 			 const int x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -201,6 +199,16 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			   }
 			   else {
 				   interpCol = { p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] };
+
+                    if (is16bit)
+                    {
+                        interpCol.x = __half2float(((ushort const*)p_Input)[index_new]);
+                        interpCol.y = __half2float(((ushort const*)p_Input)[index_new+1]);
+                        interpCol.z = __half2float(((ushort const*)p_Input)[index_new+2]);
+                        interpCol.w = __half2float(((ushort const*)p_Input)[index_new+3]);
+                    } else {
+                        interpCol = { p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] };
+                    }
 			   }
 
 			   accum_col.x += interpCol.x;
@@ -209,10 +217,18 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			   accum_col.w += interpCol.w;
 			}
 		}
+		if(is16bit){
+		((ushort*)p_Output)[index] = __float2half_rn(accum_col.x/samples);
+		((ushort*)p_Output)[index+1] = __float2half_rn(accum_col.y/samples);
+		((ushort*)p_Output)[index+2] = __float2half_rn(accum_col.z/samples);
+		((ushort*)p_Output)[index+3] = __float2half_rn(accum_col.w/samples);
+
+		} else{
 		p_Output[index + 0] = accum_col.x / samples;
 		p_Output[index + 1] = accum_col.y / samples;
 		p_Output[index + 2] = accum_col.z / samples;
 		p_Output[index + 3] = accum_col.w / samples;
+		}
 	}
 }
 
@@ -228,15 +244,14 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			float* tinyplanet,
 			float* rectilinear,
 			int samples,
-			int bilinear
+			int bilinear,
+			int is16bit
 			)
 		{
 			dim3 blockDim (16, 16, 1);
 			dim3 gridDim ( (width + blockDim.x - 1)/ blockDim.x, (height + blockDim.y - 1) / blockDim.y, 1 );		
 
-			ReframeCUDA <<< gridDim, blockDim, 0 >>> ( (float const*) outBuf, (float*) destBuf, outPitch, destPitch, width, height, rotMat, fov, tinyplanet, rectilinear, samples, bilinear);
+			ReframeCUDA <<< gridDim, blockDim, 0 >>> ( (float const*) outBuf, (float*) destBuf, outPitch, destPitch, width, height, rotMat, fov, tinyplanet, rectilinear, samples, bilinear, is16bit); 
 
 			cudaDeviceSynchronize();
 		}
-
-#endif //SDK_CROSS_DISSOLVE

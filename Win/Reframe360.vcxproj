@@ -72,7 +72,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\Headers;..\..\..\..\Headers\SP;..\..\Utils;$(AE_SDK_BASE_PATH)\Examples\Headers\;$(AE_SDK_BASE_PATH)\Examples\Headers\SP\;$(AE_SDK_BASE_PATH)\Examples\Resources\;$(AE_SDK_BASE_PATH)\Examples\Util\;$(CUDA_PATH_V8_0)\include\;$(BOOST_BASE_PATH);$(IntDir)PreprocessedOpenCL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Stefan\Dev\aescriptsLicensing_v3.4.1\for_developers\include;C:\Users\Stefan\Dev\json-develop\include;..\..\..\..\Headers;..\..\..\..\Headers\SP;..\..\Utils;$(AE_SDK_BASE_PATH)\Examples\Headers\;$(AE_SDK_BASE_PATH)\Examples\Headers\SP\;$(AE_SDK_BASE_PATH)\Examples\Resources\;$(AE_SDK_BASE_PATH)\Examples\Util\;$(CUDA_PATH_V8_0)\include\;$(BOOST_BASE_PATH);$(IntDir)PreprocessedOpenCL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <StructMemberAlignment>Default</StructMemberAlignment>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -89,7 +89,7 @@
       <AdditionalIncludeDirectories>$(AE_SDK_BASE_PATH)\Examples\Headers\;$(AE_SDK_BASE_PATH)\Examples\Resources\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cudart.lib;OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart.lib;OpenCL.lib;Iphlpapi.lib;aescriptsLicensing_MD_Debug_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -99,7 +99,7 @@
       </DataExecutionPrevention>
       <ImportLibrary>$(IntDir)/$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalLibraryDirectories>$(CUDA_PATH_V8_0)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(CUDA_PATH_V8_0)\lib\x64;$(BOOST_BASE_PATH)\lib64-msvc-14.0;C:\Users\Stefan\Dev\aescriptsLicensing_v3.4.1\for_developers\lib\Windows\VS2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
@@ -116,7 +116,7 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\..\Headers;..\..\..\..\Headers\SP;..\..\Utils;$(AE_SDK_BASE_PATH)\Examples\Headers\;$(AE_SDK_BASE_PATH)\Examples\Headers\SP\;$(AE_SDK_BASE_PATH)\Examples\Resources\;$(AE_SDK_BASE_PATH)\Examples\Util\;$(CUDA_PATH_V8_0)\include\;$(BOOST_BASE_PATH);$(IntDir)PreprocessedOpenCL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Stefan\Dev\aescriptsLicensing_v3.4.1\for_developers\include;C:\Users\Stefan\Dev\json-develop\include;..\..\..\..\Headers;..\..\..\..\Headers\SP;..\..\Utils;$(AE_SDK_BASE_PATH)\Examples\Headers\;$(AE_SDK_BASE_PATH)\Examples\Headers\SP\;$(AE_SDK_BASE_PATH)\Examples\Resources\;$(AE_SDK_BASE_PATH)\Examples\Util\;$(CUDA_PATH_V8_0)\include\;$(BOOST_BASE_PATH);$(IntDir)PreprocessedOpenCL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>MSWindows;_USE_MATH_DEFINES;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization>MaxSpeed</Optimization>
@@ -126,8 +126,8 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <TargetMachine>MachineX64</TargetMachine>
       <ImportLibrary>$(IntDir)/$(TargetName).lib</ImportLibrary>
-      <AdditionalDependencies>cudart.lib;OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CUDA_PATH_V8_0)\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cudart.lib;OpenCL.lib;Iphlpapi.lib;aescriptsLicensing_MD_Release_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CUDA_PATH_V8_0)\lib\x64;$(BOOST_BASE_PATH)\lib64-msvc-14.0;C:\Users\Stefan\Dev\aescriptsLicensing_v3.4.1\for_developers\lib\Windows\VS2015</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
@@ -151,6 +151,9 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
     <ClInclude Include="..\..\..\..\Headers\PrSDKGPUFilter.h" />
     <ClInclude Include="..\..\..\..\Headers\PrSDKPixelFormat.h" />
     <ClInclude Include="..\CameraUtil.h" />
+    <ClInclude Include="..\GumroadLicenseHandler.h" />
+    <ClInclude Include="..\GumroadLicense_AdobeHelpers.h" />
+    <ClInclude Include="..\HardwareUUIDHandler.h" />
     <ClInclude Include="..\KeyFrameData.h" />
     <ClInclude Include="..\KeyFrameManager.h" />
     <ClInclude Include="..\MathUtil.h" />
@@ -176,8 +179,13 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
     <ResourceCompile Include="..\Reframe360.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\AEGP_SuiteHandler.cpp" />
+    <ClCompile Include="..\GumroadLicenseHandler.cpp" />
+    <ClCompile Include="..\HardwareUUIDHandler.cpp" />
+    <ClCompile Include="..\http_client_sync.cpp" />
     <ClCompile Include="..\KeyFrameData.cpp" />
     <ClCompile Include="..\KeyFrameManager.cpp" />
+    <ClCompile Include="..\MissingSuiteError.cpp" />
     <ClCompile Include="..\Reframe360_CPU.cpp">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Debug/</ObjectFileName>
     </ClCompile>

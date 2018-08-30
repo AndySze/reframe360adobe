@@ -1,24 +1,31 @@
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.bsc
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\vc140.pdb
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\gumroadlicensehandler.sbr
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\hardwareuuidhandler.sbr
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\http_client_sync.sbr
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\keyframedata.sbr
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\keyframemanager.sbr
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\keyframemanager.obj
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\keyframedata.obj
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\http_client_sync.obj
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\hardwareuuidhandler.obj
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\gumroadlicensehandler.obj
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360_cpu.sbr
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360_gpu.sbr
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\debug\reframe360_gpu.obj
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\debug\reframe360_cpu.obj
-c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.rr
-c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.obj
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\missingsuiteerror.sbr
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\missingsuiteerror.obj
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\aegp_suitehandler.sbr
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\aegp_suitehandler.obj
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\reframe360.i
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\preprocessedopencl\reframe360.cl.h
-c:\program files\adobe\common\plug-ins\7.0\mediacore\reframe360.ilk
-c:\program files\adobe\common\plug-ins\7.0\mediacore\reframe360.aex
-c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.pdb
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.rr
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.res
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.lib
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.exp
-c:\program files\adobe\common\plug-ins\7.0\mediacore\reframe360.pdb
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.obj
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360.pdb
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360 (gpu).tlog\bscmake.command.1.tlog
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360 (gpu).tlog\bscmake.read.1.tlog
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\win\x64\debug\reframe360 (gpu).tlog\bscmake.write.1.tlog
