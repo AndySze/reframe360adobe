@@ -638,38 +638,21 @@ static inline void write8bitVec4(char* destData, int x, int y, int rowbytes, vec
 }
 
 static inline vec4 readVec4(const char* outgoingRowData, int x_new, int mode) {
-	switch (mode)
-	{
-	case 0:
-		return read8bitVec4(outgoingRowData, x_new);
-		break;
-	case 1:
-		return read16bitVec4(outgoingRowData, x_new);
-		break;
-	case 2:
+	if(mode == 2)
 		return read32bitVec4(outgoingRowData, x_new);
-		break;
-	default:
-		return vec4(0, 0, 0, 0);
-		break;
-	}
+	else if(mode == 1)
+		return read16bitVec4(outgoingRowData, x_new);
+	else
+		return read8bitVec4(outgoingRowData, x_new);
 }
 
 static inline void writeVec4(char* destData, int x, int y, int rowbytes, vec4 value, int mode) {
-	switch (mode)
-	{
-	case 0:
-		write8bitVec4(destData, x, y, rowbytes, value);
-		break;
-	case 1:
-		write16bitVec4(destData, x, y, rowbytes, value);
-		break;
-	case 2:
+	if(mode==2)
 		write32bitVec4(destData, x, y, rowbytes, value);
-		break;
-	default:
-		break;
-	}
+	else if(mode==1)
+		write16bitVec4(destData, x, y, rowbytes, value);
+	else
+		write8bitVec4(destData, x, y, rowbytes, value);
 }
 
 /*
@@ -727,8 +710,8 @@ static PF_Err Render(
 
 	float aspect = (float)width / (float)height;
 
-	#pragma loop(hint_parallel(0))
-	#pragma loop(ivdep)
+	//#pragma loop(hint_parallel(0))
+	//#pragma loop(ivdep)
 	for (int y = 0; y < height;
 		++y)
 	{
@@ -921,10 +904,10 @@ static PF_Err DoNonSmartRender(PF_InData* in_data,
 		pfS->GetPixelFormat(output, &format);
 
 		if (format == PrPixelFormat_BGRA_4444_8u) {
-			Render(in_data, out_data, inputP, params, output, false, 0);
+			return Render(in_data, out_data, inputP, params, output, false, 0);
 		}
 		else if (format == PrPixelFormat_BGRA_4444_32f) {
-			Render(in_data, out_data, inputP, params, output, false, 2);
+			return Render(in_data, out_data, inputP, params, output, false, 2);
 		}
 	}
 
@@ -1073,6 +1056,10 @@ extern "C" DllExport PF_Err EffectMain(
 		break;
 	case PF_Cmd_RENDER:
 	{
+		//if (!lic::licenseData.registered) {
+		//	PF_SPRINTF(out_data->return_msg, "not registered!");
+		//	return err;
+		//}
 		err = DoNonSmartRender(in_data, out_data, params, inOutput);
 		break;
 	}
@@ -1083,6 +1070,10 @@ extern "C" DllExport PF_Err EffectMain(
 	}
 	case PF_Cmd_SMART_RENDER:
 	{
+		//if (!lic::licenseData.registered) {
+		//	PF_SPRINTF(out_data->return_msg, "not registered!");
+		//	return err;
+		//}
 		err = SmartRender(in_data, out_data, reinterpret_cast<PF_SmartRenderExtra*>(extra));
 		break;
 	}
@@ -1098,4 +1089,5 @@ extern "C" DllExport PF_Err EffectMain(
 	}
 	return err;
 	}
+	return err;
 }

@@ -184,6 +184,14 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1351) : info C5002: loop not vectorized due to reason '500'
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1351) : info C5012: loop not parallelized due to reason '500'
   
+  --- Analyzing function: class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > > __cdecl std::_Tree<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::erase(class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >,class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >) __ptr64
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5002: loop not vectorized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5012: loop not parallelized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5002: loop not vectorized due to reason '502'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5012: loop not parallelized due to reason '502'
+  
   --- Analyzing function: struct glm::mat<4,4,float,0> __cdecl glm::rotate<float,0>(struct glm::mat<4,4,float,0> const & __ptr64,float,struct glm::vec<3,float,0> const & __ptr64)
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(659) : info C5002: loop not vectorized due to reason '1200'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(695) : info C5002: loop not vectorized due to reason '1200'
@@ -216,14 +224,6 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(695) : info C5012: loop not parallelized due to reason '1000'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(659) : info C5012: loop not parallelized due to reason '1000'
   
-  --- Analyzing function: class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > > __cdecl std::_Tree<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::erase(class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >,class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >) __ptr64
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5002: loop not vectorized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5012: loop not parallelized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5002: loop not vectorized due to reason '502'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5012: loop not parallelized due to reason '502'
-  
   --- Analyzing function: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl aescripts::strReplace(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(119) : info C5002: loop not vectorized due to reason '500'
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(119) : info C5012: loop not parallelized due to reason '500'
@@ -241,12 +241,12 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(521) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: int __cdecl PreRender(struct PF_InData * __ptr64,struct PF_OutData * __ptr64,struct PF_PreRenderExtra * __ptr64)
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(890) : info C5002: loop not vectorized due to reason '1301'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(888) : info C5002: loop not vectorized due to reason '1106'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(897) : info C5002: loop not vectorized due to reason '1200'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(890) : info C5012: loop not parallelized due to reason '1010'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(888) : info C5012: loop not parallelized due to reason '1000'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(897) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(873) : info C5002: loop not vectorized due to reason '1301'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(871) : info C5002: loop not vectorized due to reason '1106'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(880) : info C5002: loop not vectorized due to reason '1200'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(873) : info C5012: loop not parallelized due to reason '1010'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(871) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(880) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: int __cdecl aescripts::checkLicense(class AEGP_SuiteHandler * __ptr64,struct aescripts::LicenseData & __ptr64,char (& __ptr64)[128])
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(223) : info C5002: loop not vectorized due to reason '500'
@@ -257,34 +257,34 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\tmsgdlg.h(284) : info C5012: loop not parallelized due to reason '500'
   
   --- Analyzing function: int __cdecl Render(struct PF_InData * __ptr64,struct PF_OutData * __ptr64,struct PF_LayerDef * __ptr64,struct PF_ParamDef * __ptr64 * __ptr64 const,struct PF_LayerDef * __ptr64,bool,int)
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(738) : info C5002: loop not vectorized due to reason '503'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(738) : info C5012: loop not parallelized due to reason '503'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(735) : info C5002: loop not vectorized due to reason '503'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(735) : info C5012: loop not parallelized due to reason '503'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(732) : info C5002: loop not vectorized due to reason '503'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(732) : info C5012: loop not parallelized due to reason '503'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(783) : info C5002: loop not vectorized due to reason '1200'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(766) : info C5002: loop not vectorized due to reason '1200'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(725) : info C5002: loop not vectorized due to reason '1200'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(384) : info C5002: loop not vectorized due to reason '1200'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(384) : info C5002: loop not vectorized due to reason '1200'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(788) : info C5002: loop not vectorized due to reason '1200'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(783) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(771) : info C5002: loop not vectorized due to reason '1200'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(721) : info C5002: loop not vectorized due to reason '1106'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(718) : info C5002: loop not vectorized due to reason '1106'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(715) : info C5002: loop not vectorized due to reason '1106'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(766) : info C5012: loop not parallelized due to reason '1000'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(725) : info C5012: loop not parallelized due to reason '1000'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(384) : info C5012: loop not parallelized due to reason '1000'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(384) : info C5012: loop not parallelized due to reason '1000'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(788) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(771) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(721) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(718) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(715) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: __cdecl CTMsgDlg::CTMsgDlg(long,long,long,long,long,long,struct HINSTANCE__ * __ptr64) __ptr64
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\tmsgdlg.h(138) : info C5002: loop not vectorized due to reason '1200'
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\tmsgdlg.h(138) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: int __cdecl SmartRender(struct PF_InData * __ptr64,struct PF_OutData * __ptr64,struct PF_SmartRenderExtra * __ptr64)
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(956) : info C5002: loop not vectorized due to reason '1301'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(954) : info C5002: loop not vectorized due to reason '1106'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(969) : info C5002: loop not vectorized due to reason '1200'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(956) : info C5012: loop not parallelized due to reason '1010'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(954) : info C5012: loop not parallelized due to reason '1000'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(969) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(939) : info C5002: loop not vectorized due to reason '1301'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(937) : info C5002: loop not vectorized due to reason '1106'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(952) : info C5002: loop not vectorized due to reason '1200'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(939) : info C5012: loop not parallelized due to reason '1010'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(937) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(952) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: int __cdecl grlic::showRegistrationDialog(class AEGP_SuiteHandler * __ptr64,struct grlic::LicenseData & __ptr64,bool)
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\gumroadlicense_adobehelpers.h(177) : info C5002: loop not vectorized due to reason '500'
@@ -303,6 +303,5 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(338) : info C5012: loop not parallelized due to reason '500'
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(373) : info C5002: loop not vectorized due to reason '500'
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(373) : info C5012: loop not parallelized due to reason '500'
-c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(1101): warning C4715: 'EffectMain': not all control paths return a value
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.pdb (Full PDB)
