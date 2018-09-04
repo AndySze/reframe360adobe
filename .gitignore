@@ -1,2 +1,8 @@
 *.obj
 *.sbr
+*.suo
+*.pdb
+*.tlog
+*.bsc
+Debug/
+Release/

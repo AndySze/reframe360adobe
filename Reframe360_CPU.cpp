@@ -55,7 +55,7 @@
 
 #include "GumroadLicense_AdobeHelpers.h"
 
-//#define GUMROAD
+#define GUMROAD
 
 #ifdef GUMROAD
 namespace lic = grlic;
@@ -812,10 +812,10 @@ static inline PF_Err DoRender(
 				pfS->GetPixelFormat(outputP, &format);
 
 				if (format == PrPixelFormat_BGRA_4444_8u) {
-					Render(in_data, out_data, inputP, params, outputP, false, 0);
+					return Render(in_data, out_data, inputP, params, outputP, false, 0);
 				}
 				else if (format == PrPixelFormat_BGRA_4444_32f) {
-					Render(in_data, out_data, inputP, params, outputP, false, 2);
+					return Render(in_data, out_data, inputP, params, outputP, false, 2);
 				}
 			}
 		}
@@ -827,19 +827,19 @@ static inline PF_Err DoRender(
 			case PF_PixelFormat_ARGB128:
 			{
 				rendP->bitDepth = 32;
-				Render(in_data, out_data, inputP, params, outputP, true, 2);
+				return Render(in_data, out_data, inputP, params, outputP, true, 2);
 			}
 			break;
 			case PF_PixelFormat_ARGB64:
 			{
 				rendP->bitDepth = 16;
-				Render(in_data, out_data, inputP, params, outputP, true, 1);
+				return Render(in_data, out_data, inputP, params, outputP, true, 1);
 			}
 			break;
 			case PF_PixelFormat_ARGB32:
 			{
 				rendP->bitDepth = 8;
-				Render(in_data, out_data, inputP, params, outputP, true, 0);
+				return Render(in_data, out_data, inputP, params, outputP, true, 0);
 			}
 			break;
 			default:
@@ -891,26 +891,25 @@ static PF_Err DoNonSmartRender(PF_InData* in_data,
 	PF_LayerDef* output)
 {
 	if (in_data->appl_id == 'PrMr') {
-	PF_EffectWorld *inputP = NULL, *outputP = NULL;
-	PF_Err err = PF_Err_NONE;
-	// checkout input & output layers
-	inputP = &params[0]->u.ld;
-	if (err) return err;
+		PF_EffectWorld *inputP = NULL, *outputP = NULL;
+		PF_Err err = PF_Err_NONE;
+		// checkout input & output layers
+		inputP = &params[0]->u.ld;
+		if (err) return err;
 
-	// get the Premiere pixel format suite
-	AEFX_SuiteScoper<PF_PixelFormatSuite1> pfS(in_data, kPFPixelFormatSuite, kPFPixelFormatSuiteVersion1, out_data);
-	PrPixelFormat format = PrPixelFormat_BGRA_4444_8u;
-	if (&pfS) {
-		pfS->GetPixelFormat(output, &format);
+		// get the Premiere pixel format suite
+		AEFX_SuiteScoper<PF_PixelFormatSuite1> pfS(in_data, kPFPixelFormatSuite, kPFPixelFormatSuiteVersion1, out_data);
+		PrPixelFormat format = PrPixelFormat_BGRA_4444_8u;
+		if (&pfS) {
+			pfS->GetPixelFormat(output, &format);
 
-		if (format == PrPixelFormat_BGRA_4444_8u) {
-			return Render(in_data, out_data, inputP, params, output, false, 0);
+			if (format == PrPixelFormat_BGRA_4444_8u) {
+				return Render(in_data, out_data, inputP, params, output, false, 0);
+			}
+			else if (format == PrPixelFormat_BGRA_4444_32f) {
+				return Render(in_data, out_data, inputP, params, output, false, 2);
+			}
 		}
-		else if (format == PrPixelFormat_BGRA_4444_32f) {
-			return Render(in_data, out_data, inputP, params, output, false, 2);
-		}
-	}
-
 	}
 	return Render(in_data, out_data, NULL, params, output, false, 2);
 }
@@ -1028,8 +1027,8 @@ extern "C" DllExport PF_Err EffectMain(
 	//if (lic::checkLicenseAE(inCmd, in_data, out_data, lic::licenseData) != 0) return err;
 	// ********************* aescripts licensing specific code end *********************
 
-//	grlic::testLicenseCheck();
-//	grlic::getLicenseStoreDir();
+	grlic::testLicenseCheck();
+	grlic::getLicenseStoreDir();
 
 	switch (inCmd)
 	{

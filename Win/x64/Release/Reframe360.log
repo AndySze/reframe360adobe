@@ -28,33 +28,33 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(191) : info C5012: loop not parallelized due to reason '1010'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(213) : info C5012: loop not parallelized due to reason '1010'
   
-  --- Analyzing function: static struct std::_Tree_node<int,void * __ptr64> * __ptr64 __cdecl std::_Tree_val<struct std::_Tree_simple_types<int> >::_Min(struct std::_Tree_node<int,void * __ptr64> * __ptr64)
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
-  
   --- Analyzing function: static struct std::_Tree_node<int,void * __ptr64> * __ptr64 __cdecl std::_Tree_val<struct std::_Tree_simple_types<int> >::_Max(struct std::_Tree_node<int,void * __ptr64> * __ptr64)
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(608) : info C5002: loop not vectorized due to reason '500'
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(608) : info C5012: loop not parallelized due to reason '500'
   
-  --- Analyzing function: static struct glm::vec<4,float,0> __cdecl glm::detail::compute_vec4_div<float,0,0>::call(struct glm::vec<4,float,0> const & __ptr64,struct glm::vec<4,float,0> const & __ptr64)
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(69) : info C5001: loop vectorized
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(69) : info C5012: loop not parallelized due to reason '1008'
-  
-  --- Analyzing function: static struct glm::vec<4,float,0> __cdecl glm::detail::compute_vec4_mul<float,0,0>::call(struct glm::vec<4,float,0> const & __ptr64,struct glm::vec<4,float,0> const & __ptr64)
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(60) : info C5001: loop vectorized
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(60) : info C5012: loop not parallelized due to reason '1008'
+  --- Analyzing function: static struct std::_Tree_node<int,void * __ptr64> * __ptr64 __cdecl std::_Tree_val<struct std::_Tree_simple_types<int> >::_Min(struct std::_Tree_node<int,void * __ptr64> * __ptr64)
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
   
   --- Analyzing function: static struct glm::vec<4,float,0> __cdecl glm::detail::compute_vec4_add<float,0,0>::call(struct glm::vec<4,float,0> const & __ptr64,struct glm::vec<4,float,0> const & __ptr64)
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(42) : info C5001: loop vectorized
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(42) : info C5012: loop not parallelized due to reason '1008'
   
-  --- Analyzing function: static struct std::_Tree_node<int,void * __ptr64> * __ptr64 __cdecl std::_Tree_comp_alloc<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::_Min(struct std::_Tree_node<int,void * __ptr64> * __ptr64)
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
+  --- Analyzing function: static struct glm::vec<4,float,0> __cdecl glm::detail::compute_vec4_mul<float,0,0>::call(struct glm::vec<4,float,0> const & __ptr64,struct glm::vec<4,float,0> const & __ptr64)
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(60) : info C5001: loop vectorized
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(60) : info C5012: loop not parallelized due to reason '1008'
+  
+  --- Analyzing function: static struct glm::vec<4,float,0> __cdecl glm::detail::compute_vec4_div<float,0,0>::call(struct glm::vec<4,float,0> const & __ptr64,struct glm::vec<4,float,0> const & __ptr64)
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(69) : info C5001: loop vectorized
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(69) : info C5012: loop not parallelized due to reason '1008'
   
   --- Analyzing function: static struct std::_Tree_node<int,void * __ptr64> * __ptr64 __cdecl std::_Tree_comp_alloc<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::_Max(struct std::_Tree_node<int,void * __ptr64> * __ptr64)
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(608) : info C5002: loop not vectorized due to reason '500'
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(608) : info C5012: loop not parallelized due to reason '500'
+  
+  --- Analyzing function: static struct std::_Tree_node<int,void * __ptr64> * __ptr64 __cdecl std::_Tree_comp_alloc<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::_Min(struct std::_Tree_node<int,void * __ptr64> * __ptr64)
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
   
   --- Analyzing function: class std::_Tree_unchecked_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> >,struct std::_Iterator_base0> & __ptr64 __cdecl std::_Tree_unchecked_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> >,struct std::_Iterator_base0>::operator++(void) __ptr64
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
@@ -184,14 +184,6 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1351) : info C5002: loop not vectorized due to reason '500'
   c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1351) : info C5012: loop not parallelized due to reason '500'
   
-  --- Analyzing function: class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > > __cdecl std::_Tree<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::erase(class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >,class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >) __ptr64
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5002: loop not vectorized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5012: loop not parallelized due to reason '500'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5002: loop not vectorized due to reason '502'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5012: loop not parallelized due to reason '502'
-  
   --- Analyzing function: struct glm::mat<4,4,float,0> __cdecl glm::rotate<float,0>(struct glm::mat<4,4,float,0> const & __ptr64,float,struct glm::vec<3,float,0> const & __ptr64)
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(659) : info C5002: loop not vectorized due to reason '1200'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(695) : info C5002: loop not vectorized due to reason '1200'
@@ -223,6 +215,14 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(659) : info C5012: loop not parallelized due to reason '1000'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(695) : info C5012: loop not parallelized due to reason '1000'
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\include\glm\glm\detail\type_vec4.inl(659) : info C5012: loop not parallelized due to reason '1000'
+  
+  --- Analyzing function: class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > > __cdecl std::_Tree<class std::_Tset_traits<int,struct std::less<int>,class std::allocator<int>,0> >::erase(class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >,class std::_Tree_const_iterator<class std::_Tree_val<struct std::_Tree_simple_types<int> > >) __ptr64
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5002: loop not vectorized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(615) : info C5012: loop not parallelized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5002: loop not vectorized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(69) : info C5012: loop not parallelized due to reason '500'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5002: loop not vectorized due to reason '502'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(1452) : info C5012: loop not parallelized due to reason '502'
   
   --- Analyzing function: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl aescripts::strReplace(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\aescriptslicensing_adobehelpers.h(119) : info C5002: loop not vectorized due to reason '500'
@@ -279,12 +279,12 @@ c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\TMsgDlg.h(9
   c:\users\stefan\dev\aescriptslicensing_v3.4.1\for_developers\include\tmsgdlg.h(138) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: int __cdecl SmartRender(struct PF_InData * __ptr64,struct PF_OutData * __ptr64,struct PF_SmartRenderExtra * __ptr64)
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(939) : info C5002: loop not vectorized due to reason '1301'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(937) : info C5002: loop not vectorized due to reason '1106'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(952) : info C5002: loop not vectorized due to reason '1200'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(939) : info C5012: loop not parallelized due to reason '1010'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(937) : info C5012: loop not parallelized due to reason '1000'
-  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(952) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(938) : info C5002: loop not vectorized due to reason '1301'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(936) : info C5002: loop not vectorized due to reason '1106'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(951) : info C5002: loop not vectorized due to reason '1200'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(938) : info C5012: loop not parallelized due to reason '1010'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(936) : info C5012: loop not parallelized due to reason '1000'
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\reframe360_cpu.cpp(951) : info C5012: loop not parallelized due to reason '1000'
   
   --- Analyzing function: int __cdecl grlic::showRegistrationDialog(class AEGP_SuiteHandler * __ptr64,struct grlic::LicenseData & __ptr64,bool)
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\gumroadlicense_adobehelpers.h(177) : info C5002: loop not vectorized due to reason '500'

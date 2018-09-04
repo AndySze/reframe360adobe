@@ -10,6 +10,6 @@ uint16_t getCpuHash();
 const char* getMachineName();
 
 static bool validate(std::string testIdString);
-const char* getSystemUniqueId();
+std::string getSystemUniqueId();
 static uint16_t* computeSystemUniqueId();
 

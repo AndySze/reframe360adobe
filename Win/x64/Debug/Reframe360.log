@@ -1,5 +1,18 @@
-﻿     Creating library x64\Debug\/Reframe360.lib and object x64\Debug\/Reframe360.exp
-aescriptsLicensing_MD_Debug_64.lib(aescriptsLicensing.obj) : warning LNK4099: PDB 'aescriptsLicensing.pdb' was not found with 'aescriptsLicensing_MD_Debug_64.lib(aescriptsLicensing.obj)' or at 'C:\Users\Stefan\Dev\Premiere Pro CC 12.0 Win SDK\Examples\Projects\GPUVideoFilter\Reframe360\Win\x64\Debug\aescriptsLicensing.pdb'; linking object as if no debug info
-aescriptsLicensing_MD_Debug_64.lib(Licensing_v2_for_SDK_plugins.obj) : warning LNK4099: PDB 'aescriptsLicensing.pdb' was not found with 'aescriptsLicensing_MD_Debug_64.lib(Licensing_v2_for_SDK_plugins.obj)' or at 'C:\Users\Stefan\Dev\Premiere Pro CC 12.0 Win SDK\Examples\Projects\GPUVideoFilter\Reframe360\Win\x64\Debug\aescriptsLicensing.pdb'; linking object as if no debug info
+﻿  GumroadLicenseHandler.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0501 to the compiler command line; or
+  - add _WIN32_WINNT=0x0501 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0501 (i.e. Windows XP target).
+..\GumroadLicenseHandler.cpp(166): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+..\GumroadLicenseHandler.cpp(198): warning C4101: 'e': unreferenced local variable
+..\GumroadLicenseHandler.cpp(262): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+..\GumroadLicenseHandler.cpp(342): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+..\GumroadLicenseHandler.cpp(342): warning C4996: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::copy': Call to 'std::basic_string::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xstring(1808): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::copy'
+..\GumroadLicenseHandler.cpp(414): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\ucrt\stdio.h(2263): note: see declaration of 'sscanf'
+LINK : warning LNK4044: unrecognized option '/lboost_filesystem'; ignored
+LINK : warning LNK4044: unrecognized option '/lboost_system'; ignored
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
   Reframe360.vcxproj -> x64\Debug\Reframe360.pdb (Full PDB)
+BSCMAKE : warning BK4503: minor error in .SBR file 'x64\Debug\GumroadLicenseHandler.sbr' ignored

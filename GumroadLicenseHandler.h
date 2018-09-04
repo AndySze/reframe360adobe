@@ -81,7 +81,6 @@ namespace grlic
 	// get floating license from (optional) remote licensing server
 	int getLicenseFromLicenseServer(const char* _productID, int _privNum, bool _drop, licString& _license);
 
-
 	string getLicenseStoreDir();
 	void testLicenseCheck();
 

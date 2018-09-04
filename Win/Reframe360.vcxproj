@@ -100,6 +100,7 @@
       <ImportLibrary>$(IntDir)/$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalLibraryDirectories>$(CUDA_PATH_V8_0)\lib\x64;$(BOOST_BASE_PATH)\lib64-msvc-14.0;C:\Users\Stefan\Dev\aescriptsLicensing_v3.4.1\for_developers\lib\Windows\VS2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>-lboost_filesystem -lboost_system %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Bscmake>
       <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>

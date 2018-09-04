@@ -322,7 +322,7 @@ static uint16_t* computeSystemUniqueId()
 	return id;
 }
 
-const char* getSystemUniqueId()
+std::string getSystemUniqueId()
 {
 	// get the name of the computer
 	std::string buf;
@@ -346,10 +346,10 @@ const char* getSystemUniqueId()
 	char p[512];
 	int len = buf.copy(p, 512, 0);
 	p[len] = 0;
-	char* p_ptr = &p[0];
+	char* p_ptr = p;
 	while (*p_ptr) { *p_ptr = toupper(*p_ptr); p_ptr++; }
 
-	return &p[0];
+	return std::string(p);
 }
 
 static bool validate(std::string testIdString)
