@@ -157,6 +157,7 @@ if not defined CUDA_PATH echo "CUDA_PATH is not defined! Please make sure the CU
     <ClInclude Include="..\HardwareUUIDHandler.h" />
     <ClInclude Include="..\KeyFrameData.h" />
     <ClInclude Include="..\KeyFrameManager.h" />
+    <ClInclude Include="..\Licensing.h" />
     <ClInclude Include="..\MathUtil.h" />
     <ClInclude Include="..\ParamUtil.h" />
     <ClInclude Include="..\Reframe360.h" />

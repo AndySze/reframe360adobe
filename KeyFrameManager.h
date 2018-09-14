@@ -46,6 +46,7 @@ public:
 
 	bool isAE = false;
 	bool isCpuProcessing = false;
+	bool isRegistered = false;
 
 	PrParam GetParam(
 		csSDK_int32 nodeID,

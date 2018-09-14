@@ -3,6 +3,9 @@
 *.suo
 *.pdb
 *.tlog
+*.log
+*.bsc
+*.exp
 *.bsc
 Debug/
 Release/

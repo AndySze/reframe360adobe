@@ -55,7 +55,7 @@
 
 #include "GumroadLicense_AdobeHelpers.h"
 
-#define GUMROAD
+//#define GUMROAD
 
 #ifdef GUMROAD
 namespace lic = grlic;
@@ -1024,11 +1024,18 @@ extern "C" DllExport PF_Err EffectMain(
 
 	PF_Err err = PF_Err_NONE;
 	// ********************* aescripts licensing specific code start *********************
-	//if (lic::checkLicenseAE(inCmd, in_data, out_data, lic::licenseData) != 0) return err;
+	if (lic::checkLicenseAE(inCmd, in_data, out_data, lic::licenseData) != 0) return err;
 	// ********************* aescripts licensing specific code end *********************
 
-	grlic::testLicenseCheck();
-	grlic::getLicenseStoreDir();
+	if (lic::licenseData.registered) {
+		KeyFrameManager::getInstance().isRegistered = true;
+	}
+	else {
+		KeyFrameManager::getInstance().isRegistered = false;
+	}
+
+	//grlic::testLicenseCheck();
+	//grlic::getLicenseStoreDir();
 
 	switch (inCmd)
 	{

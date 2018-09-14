@@ -20,7 +20,7 @@
 /*******************************************************************/
 #pragma once
 
-#define BETA_FAIL
+//#define BETA_FAIL
 #define BETA_FAIL_TIME 1536316125
 
 #ifndef SDK_CROSSDISSOLVE_H
@@ -47,6 +47,8 @@
 #include "PrSDKAESupport.h"
 
 #include <math.h>
+
+#include "Licensing.h"
 
 struct RenderData
 {

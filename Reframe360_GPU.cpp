@@ -28,6 +28,9 @@
 
 #include "Reframe360.cl.h"
 #include "Reframe360.h"
+#include "AEGP_SuiteHandler.h"
+#include "Param_Utils.h"
+#include "AE_EffectSuites.h"
 #include "PrGPUFilterModule.h"
 #include "PrSDKVideoSegmentProperties.h"
 
@@ -42,6 +45,20 @@
 #include <math.h>
 #include <ctime>
 #include "KeyFrameManager.h"
+#include "Licensing.h"
+
+// include the aescripts licensing API (should be done *after* including the Adobe AE headers!)
+#include "aescriptsLicensing.h"
+
+#include "GumroadLicenseHandler.h"
+
+//#define GUMROAD
+
+#ifdef GUMROAD
+namespace lic = grlic;
+#else
+namespace lic = aescripts;
+#endif
 
 //  CUDA KERNEL 
 //  * See Reframe360.cu
@@ -164,6 +181,8 @@ public:
 			return 0;
 		}
 #endif
+		if (!KeyFrameManager::getInstance().isRegistered)
+			return 0;
 
 		int m = mNodeID;
 		PPixHand properties = inFrames[0];
@@ -344,7 +363,7 @@ public:
 								height,
 				rotMatDeviceBuf,
 				fovDeviceBuf, tinyplanetDeviceBuf, rectilinearDeviceBuf,
-				samples, true, is16f
+				samples, true, is16f ? 1 : 0
 			);
 
 			mGPUDeviceSuite->FreeDeviceMemory(index, rotMatDeviceBuf);

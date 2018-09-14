@@ -4,6 +4,8 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reframe360 (GPU)", "Reframe360.vcxproj", "{35A2FA5C-49F2-4558-B100-16F7B858872E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Reframe360Setup", "..\Reframe360Setup\Reframe360Setup.vdproj", "{3C189B34-9106-46D6-A212-5077C47338EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -14,6 +16,8 @@ Global
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Debug|x64.Build.0 = Debug|x64
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Release|x64.ActiveCfg = Release|x64
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Release|x64.Build.0 = Release|x64
+		{3C189B34-9106-46D6-A212-5077C47338EF}.Debug|x64.ActiveCfg = Debug
+		{3C189B34-9106-46D6-A212-5077C47338EF}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 #pragma once
 
 	#include "helper_math.h"
+#include "cuda_fp16.h"
 
 #define PI 3.1415926535897932384626433832795
 
@@ -106,7 +107,7 @@ __device__ float3 tinyPlanetSph(float3 uv) {
 	return sph;
 }
 
-__device__ float4 linInterpCol(float2 uv, const float* input, int width, int height){
+__device__ float4 linInterpCol(float2 uv, const float* input, int width, int height, int is16bit){
 	float4 outCol = {0,0,0,0};
 	float i = floor(uv.x);
 	float j = floor(uv.y);
@@ -121,15 +122,50 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 	const int maxIndex = (width * height -1) * 4;
 	
 	if(indexX2Y2 < maxIndex-height - 100){
-		outCol.x = (1.0 - a)*(1.0 - b)*input[indexX1Y1] + a*(1.0 - b)*input[indexX2Y1] + (1.0 - a)*b*input[indexX1Y2] + a*b*input[indexX2Y2];
-		outCol.y = (1.0 - a)*(1.0 - b)*input[indexX1Y1 + 1] + a*(1.0 - b)*input[indexX2Y1 + 1] + (1.0 - a)*b*input[indexX1Y2 + 1] + a*b*input[indexX2Y2 + 1];
-		outCol.z = (1.0 - a)*(1.0 - b)*input[indexX1Y1 + 2] + a*(1.0 - b)*input[indexX2Y1 + 2] + (1.0 - a)*b*input[indexX1Y2 + 2] + a*b*input[indexX2Y2 + 2];
-		outCol.w = (1.0 - a)*(1.0 - b)*input[indexX1Y1 + 3] + a*(1.0 - b)*input[indexX2Y1 + 3] + (1.0 - a)*b*input[indexX1Y2 + 3] + a*b*input[indexX2Y2 + 3];
+
+		if (!!is16bit) {
+			outCol.x = (1.0 - a)*(1.0 - b)*__half2float(((__half const*)input)[indexX1Y1]) +
+				a * (1.0 - b)*__half2float(((__half const*)input)[indexX2Y1]) +
+				(1.0 - a)*b*__half2float(((__half const*)input)[indexX1Y2]) +
+				a * b*__half2float(((__half const*)input)[indexX2Y2]);
+
+			outCol.y = (1.0 - a)*(1.0 - b)*__half2float(((__half const*)input)[indexX1Y1 + 1]) +
+				a * (1.0 - b)*__half2float(((__half const*)input)[indexX2Y1 + 1]) +
+				(1.0 - a)*b*__half2float(((__half const*)input)[indexX1Y2 + 1]) +
+				a * b*__half2float(((__half const*)input)[indexX2Y2 + 1]);
+
+			outCol.z = (1.0 - a)*(1.0 - b)*__half2float(((__half const*)input)[indexX1Y1 + 2]) +
+				a * (1.0 - b)*__half2float(((__half const*)input)[indexX2Y1 + 2]) +
+				(1.0 - a)*b*__half2float(((__half const*)input)[indexX1Y2 + 2]) +
+				a * b*__half2float(((__half const*)input)[indexX2Y2 + 2]);
+
+			outCol.w = (1.0 - a)*(1.0 - b)*__half2float(((__half const*)input)[indexX1Y1 + 3]) +
+				a * (1.0 - b)*__half2float(((__half const*)input)[indexX2Y1 + 3]) +
+				(1.0 - a)*b*__half2float(((__half const*)input)[indexX1Y2 + 3]) +
+				a * b*__half2float(((__half const*)input)[indexX2Y2 + 3]);
+		}
+		else {
+			outCol.x = (1.0 - a)*(1.0 - b)*input[indexX1Y1] + a * (1.0 - b)*input[indexX2Y1] + (1.0 - a)*b*input[indexX1Y2] + a * b*input[indexX2Y2];
+			outCol.y = (1.0 - a)*(1.0 - b)*input[indexX1Y1 + 1] + a * (1.0 - b)*input[indexX2Y1 + 1] + (1.0 - a)*b*input[indexX1Y2 + 1] + a * b*input[indexX2Y2 + 1];
+			outCol.z = (1.0 - a)*(1.0 - b)*input[indexX1Y1 + 2] + a * (1.0 - b)*input[indexX2Y1 + 2] + (1.0 - a)*b*input[indexX1Y2 + 2] + a * b*input[indexX2Y2 + 2];
+			outCol.w = (1.0 - a)*(1.0 - b)*input[indexX1Y1 + 3] + a * (1.0 - b)*input[indexX2Y1 + 3] + (1.0 - a)*b*input[indexX1Y2 + 3] + a * b*input[indexX2Y2 + 3];
+		}
 	} else {
-		outCol.x = input[indexX1Y1];
-		outCol.y = input[indexX1Y1+ 1];
-		outCol.z = input[indexX1Y1+ 2];
-		outCol.w = input[indexX1Y1+ 3];
+
+		if (!!is16bit)
+		{
+			outCol.x = __half2float(((__half const*)input)[indexX1Y1]);
+			outCol.y = __half2float(((__half const*)input)[indexX1Y1 + 1]);
+			outCol.z = __half2float(((__half const*)input)[indexX1Y1 + 2]);
+			outCol.w = __half2float(((__half const*)input)[indexX1Y1 + 3]);
+		}
+		else {
+
+			outCol.x = input[indexX1Y1];
+			outCol.y = input[indexX1Y1 + 1];
+			outCol.z = input[indexX1Y1 + 2];
+			outCol.w = input[indexX1Y1 + 3];
+		}
 	}
 	return outCol;
 }
@@ -195,17 +231,17 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 
 			   float4 interpCol;
 			   if (bilinear){
-				   interpCol = linInterpCol(iuv, p_Input, p_Width, p_Height);
+				   interpCol = linInterpCol(iuv, p_Input, p_Width, p_Height, is16bit);
 			   }
 			   else {
 				   interpCol = { p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] };
 
-                    if (is16bit)
+                    if (!!is16bit)
                     {
-                        interpCol.x = __half2float(((ushort const*)p_Input)[index_new]);
-                        interpCol.y = __half2float(((ushort const*)p_Input)[index_new+1]);
-                        interpCol.z = __half2float(((ushort const*)p_Input)[index_new+2]);
-                        interpCol.w = __half2float(((ushort const*)p_Input)[index_new+3]);
+                        interpCol.x = __half2float(((__half const*)p_Input)[index_new]);
+                        interpCol.y = __half2float(((__half const*)p_Input)[index_new+1]);
+                        interpCol.z = __half2float(((__half const*)p_Input)[index_new+2]);
+                        interpCol.w = __half2float(((__half const*)p_Input)[index_new+3]);
                     } else {
                         interpCol = { p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] };
                     }
@@ -217,11 +253,11 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			   accum_col.w += interpCol.w;
 			}
 		}
-		if(is16bit){
-		((ushort*)p_Output)[index] = __float2half_rn(accum_col.x/samples);
-		((ushort*)p_Output)[index+1] = __float2half_rn(accum_col.y/samples);
-		((ushort*)p_Output)[index+2] = __float2half_rn(accum_col.z/samples);
-		((ushort*)p_Output)[index+3] = __float2half_rn(accum_col.w/samples);
+		if(!!is16bit){
+		((__half*)p_Output)[index] = __float2half(accum_col.x/samples);
+		((__half*)p_Output)[index+1] = __float2half(accum_col.y/samples);
+		((__half*)p_Output)[index+2] = __float2half(accum_col.z/samples);
+		((__half*)p_Output)[index+3] = __float2half(accum_col.w/samples);
 
 		} else{
 		p_Output[index + 0] = accum_col.x / samples;
