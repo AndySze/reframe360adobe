@@ -48,7 +48,7 @@
 
 #include <math.h>
 
-#include "Licensing.h"
+ #include "Licensing.h"
 
 struct RenderData
 {
