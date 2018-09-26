@@ -248,7 +248,7 @@ int KeyFrameManager::getPreviousCamera(PF_ParamDef* params[], csSDK_int32 nodeID
 	if (outValue == 0) {
 		if(!KeyFrameManager::getInstance().isAE)
 			outValue = (int)round(GetParam(nodeID, videoSegmentSuite, paramIndex, time).mFloat64);
-		else
+		else if(params)
 			outValue = (int)round(params[paramIndex]->u.fs_d.value);
 		//TEMP
 		if (outValue == 0)
@@ -285,7 +285,7 @@ int KeyFrameManager::getNextCamera(PF_ParamDef* params[], csSDK_int32 nodeID, Pr
 	if (outValue == 0) {
 		if (!KeyFrameManager::getInstance().isAE)
 			outValue = (int)round(GetParam(nodeID, videoSegmentSuite, paramIndex, time).mFloat64);
-		else
+		else if(params)
 			outValue = (int)round(params[paramIndex]->u.fs_d.value);
 		//TEMP
 		if (outValue == 0)

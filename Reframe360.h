@@ -20,8 +20,8 @@
 /*******************************************************************/
 #pragma once
 
-//#define BETA_FAIL
-#define BETA_FAIL_TIME 1536316125
+#define BETA_FAIL
+#define BETA_FAIL_TIME 1546301340
 
 #ifndef SDK_CROSSDISSOLVE_H
 #define SDK_CROSSDISSOLVE_H

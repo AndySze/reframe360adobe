@@ -575,6 +575,7 @@ void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamD
 
 		//mat3 main_rotMat = rotationMatrix(main_pitch, main_yaw, main_roll);
 		mat3 rotMat = rotationMatrix(pitch, yaw, roll);
+		rotMat = transpose(rotMat);
 
 		memcpy(&(rotmats[i * 9]), &rotMat[0], sizeof(float) * 9);
 		fovs[i] = (float)fov;
@@ -1021,6 +1022,7 @@ extern "C" DllExport PF_Err EffectMain(
 	PF_LayerDef* inOutput,
 	void* extra)
 {
+	AEGP_SuiteHandler suites(in_data->pica_basicP);
 
 	PF_Err err = PF_Err_NONE;
 	// ********************* aescripts licensing specific code start *********************
@@ -1033,6 +1035,11 @@ extern "C" DllExport PF_Err EffectMain(
 	else {
 		KeyFrameManager::getInstance().isRegistered = false;
 	}
+
+	if (in_data->appl_id != 'PrMr') {
+		KeyFrameManager::getInstance().isAE = true;
+	}
+
 
 	//grlic::testLicenseCheck();
 	//grlic::getLicenseStoreDir();
@@ -1052,8 +1059,29 @@ extern "C" DllExport PF_Err EffectMain(
 		err = ParamChanged(in_data, out_data, params, inOutput, extra);
 		break;
 	case PF_Cmd_SEQUENCE_SETUP:
-		err = 0;
+	{
+#ifdef BETA_FAIL
+		time_t time_ = time(NULL);
+
+		if (time_ > BETA_FAIL_TIME) {
+			sprintf(out_data->return_msg, "BETA VERSION EXPIRED!");
+			err = 1;
+		}
+#endif
 		break;
+	}
+	case PF_Cmd_SEQUENCE_RESETUP:
+	{
+#ifdef BETA_FAIL
+		time_t time_ = time(NULL);
+
+		if (time_ > BETA_FAIL_TIME) {
+			sprintf(out_data->return_msg, "BETA VERSION EXPIRED!");
+			err = 1;
+		}
+#endif
+		break;
+	}
 	case PF_Cmd_FRAME_SETUP:
 		err = FrameSetup(in_data, out_data, params, inOutput);
 		break;

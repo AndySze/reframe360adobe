@@ -178,7 +178,7 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			int p_Width, int p_Height,
 			const float* r,
 			float* p_Fov, float* p_Tinyplanet, float* p_Rectilinear,
-			int samples, bool bilinear, bool is16bit
+			int samples, bool bilinear, bool is16bit, bool noLicense
 			)
 		{
 			 const int x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -251,6 +251,10 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			   accum_col.y += interpCol.y;
 			   accum_col.z += interpCol.z;
 			   accum_col.w += interpCol.w;
+
+			   if (!!noLicense) {
+				   accum_col.x = 0;
+			   }
 			}
 		}
 		if(!!is16bit){
@@ -281,13 +285,14 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			float* rectilinear,
 			int samples,
 			int bilinear,
-			int is16bit
+			int is16bit,
+			int noLicense
 			)
 		{
 			dim3 blockDim (16, 16, 1);
 			dim3 gridDim ( (width + blockDim.x - 1)/ blockDim.x, (height + blockDim.y - 1) / blockDim.y, 1 );		
 
-			ReframeCUDA <<< gridDim, blockDim, 0 >>> ( (float const*) outBuf, (float*) destBuf, outPitch, destPitch, width, height, rotMat, fov, tinyplanet, rectilinear, samples, bilinear, is16bit); 
+			ReframeCUDA <<< gridDim, blockDim, 0 >>> ( (float const*) outBuf, (float*) destBuf, outPitch, destPitch, width, height, rotMat, fov, tinyplanet, rectilinear, samples, bilinear, is16bit, noLicense); 
 
 			cudaDeviceSynchronize();
 		}

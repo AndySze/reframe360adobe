@@ -1,9 +1,4 @@
-﻿  Building Reframe360.cu
-  Reframe360.cu
-C:/Users/Stefan/Dev/Premiere Pro CC 12.0 Win SDK/Examples/Projects/GPUVideoFilter/Reframe360/Win/../Reframe360.cu(290): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-  Preprocessing OpenCL to Strings for Reframe360.cl
-  Reframe360.cl
-  Reframe360_GPU.cpp
+﻿  Reframe360_CPU.cpp
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\MathUtil.h(43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
@@ -48,35 +43,32 @@ c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilte
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\Licensing.h(6): note: see previous definition of 'LIC_PRIVATE_NUM'
 c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\GumroadLicenseHandler.h(10): warning C4005: 'LIC_PRODUCT_ID': macro redefinition
   c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\Licensing.h(8): note: see previous definition of 'LIC_PRODUCT_ID'
-..\Reframe360_GPU.cpp(208): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(268): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(437): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(438): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(439): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(440): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(441): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(442): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(450): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(451): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(452): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(453): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(454): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(455): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(463): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(464): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(465): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(482): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
-..\Reframe360_GPU.cpp(488): warning C4244: 'argument': conversion from 'float' to 'PrTime', possible loss of data
-..\Reframe360_GPU.cpp(494): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(504): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(506): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-..\Reframe360_GPU.cpp(528): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\Reframe360_GPU.cpp(651): warning C4244: 'initializing': conversion from 'PrTime' to 'double', possible loss of data
-..\Reframe360_GPU.cpp(652): warning C4244: 'initializing': conversion from 'PrTime' to 'double', possible loss of data
-..\Reframe360_GPU.cpp(679): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\Reframe360_GPU.cpp(679): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-..\Reframe360_GPU.cpp(710): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
-..\Reframe360_GPU.cpp(710): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+..\Reframe360_CPU.cpp(40): warning C4005: 'LIC_PRIVATE_NUM': macro redefinition
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\GumroadLicenseHandler.h(8): note: see previous definition of 'LIC_PRIVATE_NUM'
+..\Reframe360_CPU.cpp(42): warning C4005: 'LIC_PRODUCT_ID': macro redefinition
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\GumroadLicenseHandler.h(10): note: see previous definition of 'LIC_PRODUCT_ID'
+c:\users\stefan\dev\aescripts-plugins-licensing-framework-master\include\TMsgDlg.h(90): warning C4312: 'type cast': conversion from 'LONG' to 'CTMsgDlg *' of greater size
+c:\users\stefan\dev\aescripts-plugins-licensing-framework-master\include\TMsgDlg.h(94): warning C4311: 'type cast': pointer truncation from 'CTMsgDlg *' to 'long'
+c:\users\stefan\dev\aescripts-plugins-licensing-framework-master\include\TMsgDlg.h(94): warning C4302: 'type cast': truncation from 'CTMsgDlg *' to 'long'
+..\Reframe360_CPU.cpp(234): warning C4305: '=': truncation from 'double' to 'PF_FpShort'
+..\Reframe360_CPU.cpp(424): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(485): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(533): warning C4800: 'PF_ParamValue': forcing value to bool 'true' or 'false' (performance warning)
+..\Reframe360_CPU.cpp(565): warning C4800: 'PF_ParamValue': forcing value to bool 'true' or 'false' (performance warning)
+..\Reframe360_CPU.cpp(577): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(617): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(618): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(619): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(620): warning C4244: '=': conversion from 'float' to 'A_u_short', possible loss of data
+..\Reframe360_CPU.cpp(635): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(636): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(637): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(638): warning C4244: '=': conversion from 'float' to 'A_u_char', possible loss of data
+..\Reframe360_CPU.cpp(697): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(732): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(733): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+..\Reframe360_CPU.cpp(751): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+..\Reframe360_CPU.cpp(752): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 LINK : warning LNK4044: unrecognized option '/lboost_filesystem'; ignored
 LINK : warning LNK4044: unrecognized option '/lboost_system'; ignored
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex

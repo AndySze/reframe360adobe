@@ -52,8 +52,15 @@ void KeyFrameData::addKeyFrame(int param, A_long time, float value) {
 }
 
 float KeyFrameData::getKeyFrameValue(int param, A_long time) {
-	if (_paramKeyFrames.count(param) != 0)
+	if (_paramKeyFrames.count(param) != 0) {
+		if (time < _paramKeyFrames[param].begin()->first) {
+			return _paramKeyFrames[param].begin()->second;
+		}
+		else if (time > _paramKeyFrames[param].rbegin()->first) {
+			return _paramKeyFrames[param].rbegin()->second;
+		}
 		return _paramKeyFrames[param][time];
+	}
 	else
 		return 0;
 }

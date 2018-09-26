@@ -71,7 +71,8 @@ extern void Reframe_CUDA ( float const *outBuf, float *destBuf, unsigned int out
 	float* rectilinear,
 	int samples,
 	int bilinear,
-	int is16bit);
+	int is16bit,
+	int noLicense);
 #endif
 
 static cl_kernel sKernelCache[4];
@@ -181,8 +182,8 @@ public:
 			return 0;
 		}
 #endif
-		if (!KeyFrameManager::getInstance().isRegistered)
-			return 0;
+		//if (!KeyFrameManager::getInstance().isRegistered)
+		//	return 0;
 
 		int m = mNodeID;
 		PPixHand properties = inFrames[0];
@@ -363,7 +364,7 @@ public:
 								height,
 				rotMatDeviceBuf,
 				fovDeviceBuf, tinyplanetDeviceBuf, rectilinearDeviceBuf,
-				samples, true, is16f ? 1 : 0
+				samples, true, is16f ? 1 : 0, !KeyFrameManager::getInstance().isRegistered
 			);
 
 			mGPUDeviceSuite->FreeDeviceMemory(index, rotMatDeviceBuf);
