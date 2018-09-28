@@ -137,7 +137,7 @@ float4 linInterpCol(float2 uv, __global const float* input, int width, int heigh
 
 __kernel void Reframe360Kernel(
 	int p_Width, int p_Height, __global float* p_Fov, __global float* p_Tinyplanet, __global float* p_Rectilinear,
-	__global const float* p_Input, __global float* p_Output, __global float* r, int samples, int bilinear, int is16Bit)
+	__global const float* p_Input, __global float* p_Output, __global float* r, int samples, int bilinear, int is16Bit, int noLicense)
 {
 	const int x = get_global_id(0);
 	const int y = get_global_id(1);
@@ -201,6 +201,7 @@ __kernel void Reframe360Kernel(
                         interpCol.y = vload_half(index_new+1, (const __global half*)p_Input);
                         interpCol.z = vload_half(index_new+2, (const __global half*)p_Input);
                         interpCol.w = vload_half(index_new+3, (const __global half*)p_Input);
+
                     } else {
                         interpCol = (float4)( p_Input[index_new + 0], p_Input[index_new + 1], p_Input[index_new + 2], p_Input[index_new + 3] );
                     }
@@ -210,6 +211,10 @@ __kernel void Reframe360Kernel(
 				accum_col.y += interpCol.y;
 				accum_col.z += interpCol.z;
 				accum_col.w += interpCol.w;
+                
+                if(noLicense){
+                    accum_col.x = 0;
+                }
 			}
 		}
         

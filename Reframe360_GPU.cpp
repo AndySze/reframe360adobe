@@ -409,6 +409,8 @@ public:
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &samples);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &bilinear);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &is16f);
+            int noLicense = KeyFrameManager::getInstance().isRegistered ? 0 : 1;
+            error |= clSetKernelArg(mKernel, count++, sizeof(int), &noLicense);
             
             CheckError(error, "Unable to set kernel arguments");
             

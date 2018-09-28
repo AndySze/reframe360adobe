@@ -16,6 +16,13 @@
 		EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE120F4FF4000A2301D /* Reframe360.cl */; };
 		EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC04FDF120F5008500A2301D /* InfoPlist.strings */; };
 		EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */ = {isa = PBXBuildFile; fileRef = EC61E82420F5119D0062CB00 /* CreateCString.py */; };
+		ECC92FF0215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */; };
+		ECC92FF5215BCB890054C2D7 /* KeyFrameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */; };
+		ECC92FF6215BCB890054C2D7 /* KeyFrameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF3215BCB890054C2D7 /* KeyFrameManager.cpp */; };
+		ECC92FFE215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF7215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp */; };
+		ECC92FFF215BCBA30054C2D7 /* HardwareUUIDHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */; };
+		ECC93006215DF3240054C2D7 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC93005215DF3240054C2D7 /* libboost_system.dylib */; };
+		ECC93008215DF9CC0054C2D7 /* MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -71,6 +78,18 @@
 		EC61E82920F5119D0062CB00 /* KernelHalf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelHalf.h; sourceTree = "<group>"; };
 		EC61E82A20F5119D0062CB00 /* KernelMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelMemory.h; sourceTree = "<group>"; };
 		EC61E82B20F5119D0062CB00 /* KernelWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelWrapper.h; sourceTree = "<group>"; };
+		ECC92FEE215BC8DD0054C2D7 /* Licensing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Licensing.h; path = ../Licensing.h; sourceTree = "<group>"; };
+		ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "aescriptsLicensing_libc++_Debug_64.a"; path = "../../aescripts-PLUGINS-licensing-framework-master/lib/MacOS/aescriptsLicensing_libc++_Debug_64.a"; sourceTree = "<group>"; };
+		ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeyFrameData.cpp; path = ../KeyFrameData.cpp; sourceTree = "<group>"; };
+		ECC92FF2215BCB890054C2D7 /* KeyFrameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyFrameData.h; path = ../KeyFrameData.h; sourceTree = "<group>"; };
+		ECC92FF3215BCB890054C2D7 /* KeyFrameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeyFrameManager.cpp; path = ../KeyFrameManager.cpp; sourceTree = "<group>"; };
+		ECC92FF4215BCB890054C2D7 /* KeyFrameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyFrameManager.h; path = ../KeyFrameManager.h; sourceTree = "<group>"; };
+		ECC92FF7215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AEGP_SuiteHandler.cpp; path = ../AEGP_SuiteHandler.cpp; sourceTree = "<group>"; };
+		ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HardwareUUIDHandler.cpp; path = ../HardwareUUIDHandler.cpp; sourceTree = "<group>"; };
+		ECC92FFB215BCBA30054C2D7 /* HardwareUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HardwareUUIDHandler.h; path = ../HardwareUUIDHandler.h; sourceTree = "<group>"; };
+		ECC93002215DF2BA0054C2D7 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_system.a; sourceTree = "<group>"; };
+		ECC93005215DF3240054C2D7 /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = ../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_system.dylib; sourceTree = "<group>"; };
+		ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MissingSuiteError.cpp; path = ../MissingSuiteError.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC93006215DF3240054C2D7 /* libboost_system.dylib in Frameworks */,
+				ECC92FF0215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */,
 				7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */,
 				7E158D981A6F1D3E00BF99DB /* CUDA.framework in Frameworks */,
 				7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */,
@@ -90,6 +111,15 @@
 		7E83C0EF170F4840008B8043 = {
 			isa = PBXGroup;
 			children = (
+				ECC92FF7215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp */,
+				ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */,
+				ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */,
+				ECC92FFB215BCBA30054C2D7 /* HardwareUUIDHandler.h */,
+				ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */,
+				ECC92FF2215BCB890054C2D7 /* KeyFrameData.h */,
+				ECC92FF3215BCB890054C2D7 /* KeyFrameManager.cpp */,
+				ECC92FF4215BCB890054C2D7 /* KeyFrameManager.h */,
+				ECC92FEE215BC8DD0054C2D7 /* Licensing.h */,
 				EC04FDED20F5002400A2301D /* Supporting Files */,
 				EC04FDDE20F4FF3F00A2301D /* CameraUtil.h */,
 				EC04FDE220F4FF4000A2301D /* MathUtil.h */,
@@ -118,6 +148,10 @@
 		7E83C0FC170F4840008B8043 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ECC93005215DF3240054C2D7 /* libboost_system.dylib */,
+				ECC93004215DF3030054C2D7 /* Caskroom */,
+				ECC93002215DF2BA0054C2D7 /* libboost_system.a */,
+				ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */,
 				7E158D971A6F1D3E00BF99DB /* CUDA.framework */,
 				7E83C0FD170F4840008B8043 /* Cocoa.framework */,
 				7E9365DF172F7344006C8436 /* OpenCL.framework */,
@@ -175,6 +209,14 @@
 				EC61E82B20F5119D0062CB00 /* KernelWrapper.h */,
 			);
 			path = KernelSupport;
+			sourceTree = "<group>";
+		};
+		ECC93004215DF3030054C2D7 /* Caskroom */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Caskroom;
+			path = ../../../../../usr/local/Caskroom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,9 +313,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC92FFE215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp in Sources */,
 				EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */,
 				EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */,
 				EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */,
+				ECC93008215DF9CC0054C2D7 /* MissingSuiteError.cpp in Sources */,
+				ECC92FFF215BCBA30054C2D7 /* HardwareUUIDHandler.cpp in Sources */,
+				ECC92FF5215BCB890054C2D7 /* KeyFrameData.cpp in Sources */,
+				ECC92FF6215BCB890054C2D7 /* KeyFrameManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +405,8 @@
 		7E83C10D170F4840008B8043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -374,11 +423,16 @@
 					/usr/local/cuda/include,
 					../../glm,
 					"\"../../aescripts-PLUGINS-licensing-framework-master/include/\"",
+					"\"/Users/stefansietzen/Dev/json/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
-				LIBRARY_SEARCH_PATHS = /usr/local/cuda/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/cuda/lib,
+					"/Users/stefansietzen/Dev/aescripts-PLUGINS-licensing-framework-master/lib/MacOS",
+					/usr/local/Cellar/boost/1.67.0_1/lib,
+				);
 				OTHER_LDFLAGS = "-lcudart";
 				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,6 +443,8 @@
 		7E83C10E170F4840008B8043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -405,12 +461,20 @@
 					/usr/local/cuda/include,
 					../../glm,
 					"\"../../aescripts-PLUGINS-licensing-framework-master/include/\"",
+					"\"/Users/stefansietzen/Dev/json/include",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
-				LIBRARY_SEARCH_PATHS = /usr/local/cuda/lib;
-				OTHER_LDFLAGS = "-lcudart";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/cuda/lib,
+					"/Users/stefansietzen/Dev/aescripts-PLUGINS-licensing-framework-master/lib/MacOS",
+					/usr/local/Cellar/boost/1.67.0_1/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-lcudart",
+					"-laescriptsLicensing_libc++_Release_64",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

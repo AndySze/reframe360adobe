@@ -51,13 +51,13 @@
 // include the aescripts licensing Adobe helper API (should be done *after* including the Adobe AE headers and the licensing API!)
 #include "aescriptsLicensing_AdobeHelpers.h"
 
+//#define GUMROAD
+
+#ifdef GUMROAD
 #include "GumroadLicenseHandler.h"
 
 #include "GumroadLicense_AdobeHelpers.h"
 
-//#define GUMROAD
-
-#ifdef GUMROAD
 namespace lic = grlic;
 #else
 namespace lic = aescripts;
