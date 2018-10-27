@@ -20,11 +20,15 @@ private:
 	KeyFrameManager() {}
 
 	KeyFrameData _sequenceKeyFrames = KeyFrameData();
+    
+    KeyFrameData _currentRecordingKeyFrames = KeyFrameData();
 
 	std::set<int> _uniqueIDs = std::set<int>();
 
 	A_long _currentAETime;
 	int _camToCopy = 1;
+    
+    bool _isRecording = false;
 
 public:
 	KeyFrameManager(KeyFrameManager const&) = delete;
@@ -33,10 +37,14 @@ public:
 	prSuiteError getNextKeyFrameTime(int param, A_long inTime, A_long *outTime);
 
 	void addKeyFrame(int param, A_long time, int value);
-
-	float getKeyFrameValue(int param, A_long time);
-
-	void beginKeyNewKeyframeData();
+    float getKeyFrameValue(int param, A_long time);
+    void beginKeyNewKeyframeData();
+    
+    void setRecordingKeyframe(int param, A_long time, float value);
+    KeyFrameData getCurrentRecordingKeyframeData();
+    void beginKeyNewRemoteRecording();
+    void stopRemoteRecording();
+    bool isRecording();
 
 	void setCurrentAETime(A_long time);
 	A_long getCurrentAETime();

@@ -38,10 +38,10 @@
 
 #if _WIN32
 #include <CL/cl.h>
+#include <cuda_runtime.h>
 #else
 #include <OpenCL/cl.h>
 #endif
-#include <cuda_runtime.h>
 #include <math.h>
 #include <ctime>
 #include "KeyFrameManager.h"
@@ -51,6 +51,8 @@
 #include "aescriptsLicensing.h"
 
 #include "GumroadLicenseHandler.h"
+
+#include "TCPServer.hpp"
 
 //#define GUMROAD
 
@@ -85,6 +87,8 @@ class SDK_Reframe :
 {
 private:
 	int _id;
+    
+    PrSDKTimeSuite* mTimeSuite;
     
     void CheckError(cl_int p_Error, const char* p_Msg)
     {
@@ -147,7 +151,10 @@ public:
 	virtual prSuiteError Initialize( PrGPUFilterInstance* ioInstanceData )
 	{
 		PrGPUFilterBase::Initialize(ioInstanceData);
-
+        
+        mSuites->utilFuncs->getSPBasicSuite()->AcquireSuite(kPrSDKTimeSuite, kPrSDKTimeSuiteVersion, (const void**)&mTimeSuite);
+        
+        
 		if (mDeviceInfo.outDeviceFramework == PrGPUDeviceFramework_CUDA)	
 			return InitializeCUDA();			
 
@@ -218,12 +225,34 @@ public:
 			if (samples > 1) {
 				offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
 			}
+            
+            bool isRecording = KeyFrameManager::getInstance().isRecording();
 
 			// read the parameters
 			double main_pitch = -interpParam(MAIN_CAMERA_PITCH, inRenderParams, offset) / 180 * M_PI;
 			double main_yaw = -interpParam(MAIN_CAMERA_YAW, inRenderParams, offset) / 180 * M_PI;
 			double main_roll = -interpParam(MAIN_CAMERA_ROLL, inRenderParams, offset) / 180 * M_PI;
 			double main_fov_mult = interpParam(MAIN_CAMERA_FOV, inRenderParams, offset);
+            
+            if(isRecording){
+                PrTime ticksPerFrame = inRenderParams->inRenderTicksPerFrame;
+                PrTime currentTime = inRenderParams->inClipTime;
+                int frame = currentTime / ticksPerFrame;
+                
+                double receivedYaw = ReframeTCPServer::getInstance().getYaw();
+                double receivedPitch = ReframeTCPServer::getInstance().getPitch();
+                double receivedRoll = ReframeTCPServer::getInstance().getRoll();
+                
+                main_pitch = -receivedPitch;
+                main_yaw = -receivedYaw;
+                main_roll = -receivedRoll;
+                
+                KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_PITCH, frame, receivedPitch * 180 / M_PI);
+                KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_YAW, frame, receivedYaw * 180 / M_PI);
+                KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_ROLL, frame, receivedRoll * 180 / M_PI);
+
+            }
+
 
 			if (GetParam(FORCE_AUX_DISPLAY, inRenderParams->inClipTime).mBool) {
 				cam1 = (int)round(GetParam(ACTIVE_AUX_CAMERA_SELECTOR, inRenderParams->inClipTime).mFloat64);

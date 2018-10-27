@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E158D981A6F1D3E00BF99DB /* CUDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E158D971A6F1D3E00BF99DB /* CUDA.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E83C0FD170F4840008B8043 /* Cocoa.framework */; };
 		7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9365DF172F7344006C8436 /* OpenCL.framework */; };
 		EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */; };
@@ -16,6 +15,7 @@
 		EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE120F4FF4000A2301D /* Reframe360.cl */; };
 		EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC04FDF120F5008500A2301D /* InfoPlist.strings */; };
 		EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */ = {isa = PBXBuildFile; fileRef = EC61E82420F5119D0062CB00 /* CreateCString.py */; };
+		EC99A90E217B05FA00DA2AA1 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99A90D217B05FA00DA2AA1 /* libboost_thread-mt.dylib */; };
 		ECC92FF0215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */; };
 		ECC92FF5215BCB890054C2D7 /* KeyFrameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */; };
 		ECC92FF6215BCB890054C2D7 /* KeyFrameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF3215BCB890054C2D7 /* KeyFrameManager.cpp */; };
@@ -23,6 +23,9 @@
 		ECC92FFF215BCBA30054C2D7 /* HardwareUUIDHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */; };
 		ECC93006215DF3240054C2D7 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC93005215DF3240054C2D7 /* libboost_system.dylib */; };
 		ECC93008215DF9CC0054C2D7 /* MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */; };
+		ECE99A97217994460044FA75 /* GumroadLicenseHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE99A96217994460044FA75 /* GumroadLicenseHandler.cpp */; };
+		ECE99A9A2179CE670044FA75 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE99A982179CE670044FA75 /* TCPServer.cpp */; };
+		ECFF62C62182101200EAE509 /* aescriptsLicensing_libc++_Release_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECFF62C421820F9800EAE509 /* aescriptsLicensing_libc++_Release_64.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -45,7 +48,7 @@
 			outputFiles = (
 				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}.o",
 			);
-			script = "# Correct compilation is dependent on nvcc being installed correctly, from the CUDA SDK\necho \"Running script for *.cu files in Build Rules...\"\n/usr/local/cuda/bin/nvcc -I\"${SRCROOT}\",/usr/local/cuda/include,\"${INPUT_FILE_DIR}\"/../../../Headers,\"${INPUT_FILE_DIR}\"/../Utils,\"${AE_SDK_BASE_PATH}\"/Examples/Headers,\"${AE_SDK_BASE_PATH}\"/Examples/Util,\"${BOOST_BASE_PATH}\" -c \"${INPUT_FILE_PATH}\" -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.o";
+			script = "# Correct compilation is dependent on nvcc being installed correctly, from the CUDA SDK\necho \"Running script for *.cu files in Build Rules...\"\n/usr/local/cuda/bin/nvcc -I\"${SRCROOT}\",/usr/local/cuda/include,\"${INPUT_FILE_DIR}\"/../../../Headers,\"${INPUT_FILE_DIR}\"/../Utils,\"${AE_SDK_BASE_PATH}\"/Examples/Headers,\"${AE_SDK_BASE_PATH}\"/Examples/Util,\"${BOOST_BASE_PATH}\" -c \"${INPUT_FILE_PATH}\" -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.o\n";
 		};
 /* End PBXBuildRule section */
 
@@ -78,6 +81,7 @@
 		EC61E82920F5119D0062CB00 /* KernelHalf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelHalf.h; sourceTree = "<group>"; };
 		EC61E82A20F5119D0062CB00 /* KernelMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelMemory.h; sourceTree = "<group>"; };
 		EC61E82B20F5119D0062CB00 /* KernelWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelWrapper.h; sourceTree = "<group>"; };
+		EC99A90D217B05FA00DA2AA1 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
 		ECC92FEE215BC8DD0054C2D7 /* Licensing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Licensing.h; path = ../Licensing.h; sourceTree = "<group>"; };
 		ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "aescriptsLicensing_libc++_Debug_64.a"; path = "../../aescripts-PLUGINS-licensing-framework-master/lib/MacOS/aescriptsLicensing_libc++_Debug_64.a"; sourceTree = "<group>"; };
 		ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeyFrameData.cpp; path = ../KeyFrameData.cpp; sourceTree = "<group>"; };
@@ -90,6 +94,12 @@
 		ECC93002215DF2BA0054C2D7 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_system.a; sourceTree = "<group>"; };
 		ECC93005215DF3240054C2D7 /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = ../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_system.dylib; sourceTree = "<group>"; };
 		ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MissingSuiteError.cpp; path = ../MissingSuiteError.cpp; sourceTree = "<group>"; };
+		ECE99A95217994460044FA75 /* GumroadLicenseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GumroadLicenseHandler.h; path = ../GumroadLicenseHandler.h; sourceTree = "<group>"; };
+		ECE99A96217994460044FA75 /* GumroadLicenseHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GumroadLicenseHandler.cpp; path = ../GumroadLicenseHandler.cpp; sourceTree = "<group>"; };
+		ECE99A982179CE670044FA75 /* TCPServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TCPServer.cpp; path = ../TCPServer.cpp; sourceTree = "<group>"; };
+		ECE99A992179CE670044FA75 /* TCPServer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TCPServer.hpp; path = ../TCPServer.hpp; sourceTree = "<group>"; };
+		ECFF62C221820F7E00EAE509 /* aescriptsLicensing_libstdc++_Release_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "aescriptsLicensing_libstdc++_Release_64.a"; path = "../../aescripts-PLUGINS-licensing-framework-master/lib/MacOS/aescriptsLicensing_libstdc++_Release_64.a"; sourceTree = "<group>"; };
+		ECFF62C421820F9800EAE509 /* aescriptsLicensing_libc++_Release_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "aescriptsLicensing_libc++_Release_64.a"; path = "../../aescripts-PLUGINS-licensing-framework-master/lib/MacOS/aescriptsLicensing_libc++_Release_64.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +107,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECFF62C62182101200EAE509 /* aescriptsLicensing_libc++_Release_64.a in Frameworks */,
+				EC99A90E217B05FA00DA2AA1 /* libboost_thread-mt.dylib in Frameworks */,
 				ECC93006215DF3240054C2D7 /* libboost_system.dylib in Frameworks */,
 				ECC92FF0215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */,
 				7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */,
-				7E158D981A6F1D3E00BF99DB /* CUDA.framework in Frameworks */,
 				7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +122,10 @@
 		7E83C0EF170F4840008B8043 = {
 			isa = PBXGroup;
 			children = (
+				ECE99A982179CE670044FA75 /* TCPServer.cpp */,
+				ECE99A992179CE670044FA75 /* TCPServer.hpp */,
+				ECE99A96217994460044FA75 /* GumroadLicenseHandler.cpp */,
+				ECE99A95217994460044FA75 /* GumroadLicenseHandler.h */,
 				ECC92FF7215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp */,
 				ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */,
 				ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */,
@@ -122,8 +137,8 @@
 				ECC92FEE215BC8DD0054C2D7 /* Licensing.h */,
 				EC04FDED20F5002400A2301D /* Supporting Files */,
 				EC04FDDE20F4FF3F00A2301D /* CameraUtil.h */,
-				EC04FDE220F4FF4000A2301D /* MathUtil.h */,
 				EC04FDE320F4FF4000A2301D /* ParamUtil.h */,
+				EC04FDE220F4FF4000A2301D /* MathUtil.h */,
 				EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */,
 				EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */,
 				EC04FDE120F4FF4000A2301D /* Reframe360.cl */,
@@ -148,6 +163,9 @@
 		7E83C0FC170F4840008B8043 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ECFF62C421820F9800EAE509 /* aescriptsLicensing_libc++_Release_64.a */,
+				ECFF62C221820F7E00EAE509 /* aescriptsLicensing_libstdc++_Release_64.a */,
+				EC99A90D217B05FA00DA2AA1 /* libboost_thread-mt.dylib */,
 				ECC93005215DF3240054C2D7 /* libboost_system.dylib */,
 				ECC93004215DF3030054C2D7 /* Caskroom */,
 				ECC93002215DF2BA0054C2D7 /* libboost_system.a */,
@@ -315,6 +333,8 @@
 			files = (
 				ECC92FFE215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp in Sources */,
 				EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */,
+				ECE99A9A2179CE670044FA75 /* TCPServer.cpp in Sources */,
+				ECE99A97217994460044FA75 /* GumroadLicenseHandler.cpp in Sources */,
 				EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */,
 				EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */,
 				ECC93008215DF9CC0054C2D7 /* MissingSuiteError.cpp in Sources */,
@@ -341,6 +361,7 @@
 		7E83C10A170F4840008B8043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -377,6 +398,7 @@
 		7E83C10B170F4840008B8043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -405,7 +427,7 @@
 		7E83C10D170F4840008B8043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -423,17 +445,17 @@
 					/usr/local/cuda/include,
 					../../glm,
 					"\"../../aescripts-PLUGINS-licensing-framework-master/include/\"",
-					"\"/Users/stefansietzen/Dev/json/include",
+					"\"/Users/stefansietzen/Dev/json/include\"",
+					/Users/stefansietzen/Dev/boost_1_67_0/,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/usr/local/cuda/lib,
 					"/Users/stefansietzen/Dev/aescripts-PLUGINS-licensing-framework-master/lib/MacOS",
 					/usr/local/Cellar/boost/1.67.0_1/lib,
 				);
-				OTHER_LDFLAGS = "-lcudart";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -443,7 +465,7 @@
 		7E83C10E170F4840008B8043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -461,20 +483,17 @@
 					/usr/local/cuda/include,
 					../../glm,
 					"\"../../aescripts-PLUGINS-licensing-framework-master/include/\"",
-					"\"/Users/stefansietzen/Dev/json/include",
+					"\"/Users/stefansietzen/Dev/json/include\"",
+					/Users/stefansietzen/Dev/boost_1_67_0/,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/usr/local/cuda/lib,
 					"/Users/stefansietzen/Dev/aescripts-PLUGINS-licensing-framework-master/lib/MacOS",
 					/usr/local/Cellar/boost/1.67.0_1/lib,
 				);
-				OTHER_LDFLAGS = (
-					"-lcudart",
-					"-laescriptsLicensing_libc++_Release_64",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

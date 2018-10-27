@@ -97,6 +97,15 @@ static int auxParamId(int baseId, int camId) {
 	return refID + camId * AUX_PARAM_NUM + diff + (camId < 1 ? 0 : 1);
 }
 
+static int recordStartButtonParamID(){
+    int maxAuxParamID = auxParamId(AUX_CAMERA_RECTILINEAR, 20);
+    return maxAuxParamID + 1;
+}
+
+static int recordStopButtonParamID(){
+    return recordStartButtonParamID() + 1;
+}
+
 static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 	PF_ParamDef	def;
 	int num_params = 0;

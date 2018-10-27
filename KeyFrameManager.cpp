@@ -13,8 +13,31 @@ float KeyFrameManager::getKeyFrameValue(int param, A_long time) {
 	return _sequenceKeyFrames.getKeyFrameValue(param, time);
 }
 
+
+
 void KeyFrameManager::beginKeyNewKeyframeData() {
-	_sequenceKeyFrames.reset();
+    _sequenceKeyFrames.reset();
+}
+void KeyFrameManager::setRecordingKeyframe(int param, A_long time, float value) {
+    _currentRecordingKeyFrames.addKeyFrame(param, time, (float)value);
+}
+
+void KeyFrameManager::stopRemoteRecording(){
+    _isRecording = false;
+}
+
+bool KeyFrameManager::isRecording(){
+    return _isRecording;
+}
+
+KeyFrameData KeyFrameManager::getCurrentRecordingKeyframeData() {
+    return _currentRecordingKeyFrames;
+}
+
+void KeyFrameManager::beginKeyNewRemoteRecording() {
+    _currentRecordingKeyFrames.reset();
+    _isRecording = true;
+
 }
 
 void KeyFrameManager::setCurrentAETime(A_long time) {

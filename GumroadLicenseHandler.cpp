@@ -73,7 +73,7 @@ string grlic::getLicenseStoreDir() {
 
 // load license file from disk
 int grlic::loadLicenseFromFile(const char* _licenseFileName, const char* _productID, int _privNum, LicenseData& _lData, bool _createTrialLicense, bool _renderOnlyMode) {
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 
 typedef enum {
@@ -326,12 +326,12 @@ int grlic::saveLicenseToFile(const char* _licenseFileName, const char* _productI
 
 	//2.: 
 
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 
 // validate license string (usually not needed, as called implicitly by loadLicenseFromFile)
 int grlic::validateLicense(licString _license, const char* _productID, int _privNum, LicenseData& _lData, bool _renderOnlyMode) {
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 
 // get machine ID (usually not needed)
@@ -346,17 +346,17 @@ bool grlic::getMachineId(machineString& _result) {
 
 // dynamically add data for a blacklisted serial
 void grlic::addBlacklistedSerial(int _privNum, int _d1, int _d2, int _d3, int _d4) {
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 
 // get overuse state (usually not needed to be called directly, called implicitly by validateLicense)
 int grlic::checkOveruse(LicenseData& _lData) {
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 
 // get server and port for (optional) licensing server
 int grlic::getLicenseServerPort(licString& _cServer, licString& _cPort, licString& _cBackupServer, licString& _cBackupPort) {
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 
 class WordDelimitedByComma : public std::string
@@ -372,7 +372,7 @@ std::istream& operator>>(std::istream& is, WordDelimitedByComma& output)
 
 // get floating license from (optional) remote licensing server
 int grlic::getLicenseFromLicenseServer(const char* _productID, int _privNum, bool _drop, licString& _license) {
-	throw exception("not implemented");
+	throw runtime_error("not implemented");
 }
 #define PARSEFAIL ld->success=false; return;
 void parseJson(GumroadLicData* ld, string s) {

@@ -30,6 +30,9 @@
 #include "MathUtil.h"
 #include "KeyFrameManager.h"
 #include "GumroadLicenseHandler.h"
+#include "TCPServer.hpp"
+#include <boost/asio.hpp>
+#include <boost/bind.hpp>
 
 // ********************* aescripts licensing specific code start *********************
 
@@ -335,6 +338,14 @@ static PF_Err ParamsSetup(
 	for (int i = 1; i <= CAMERA_MAX_VALUE; i++) {
 		num_params += addAuxParams(in_data, true, i);
 	}
+    
+    AEFX_CLR_STRUCT(def);
+    PF_ADD_BUTTON("Start Recording", "Start Rec.", 0, PF_ParamFlag_SUPERVISE, recordStartButtonParamID());
+    num_params++;
+    
+    AEFX_CLR_STRUCT(def);
+    PF_ADD_BUTTON("Stop Recording", "Stop Rec.", 0, PF_ParamFlag_SUPERVISE, recordStopButtonParamID());
+    num_params++;
 
 	out_data->num_params = num_params;
 	return PF_Err_NONE;
@@ -350,6 +361,12 @@ static PF_Err ParamChanged(
 	PF_LayerDef* output,
 	void* extra)
 {
+    AEGP_EffectRefH        effect_refH        =    NULL;
+    
+    AEGP_SuiteHandler    suites(in_data->pica_basicP);
+    
+    suites.PFInterfaceSuite1()->AEGP_GetNewEffectForEffect(NULL, in_data->effect_ref, &effect_refH);
+    
 	AEFX_SuiteScoper<PF_HandleSuite1> handleSuite(in_data, kPFHandleSuite, kPFHandleSuiteVersion1, out_data);
 	AEFX_SuiteScoper<PF_ParamUtilsSuite3> paramUtilsSuite(in_data, kPFParamUtilsSuite, kPFParamUtilsSuiteVersion3, out_data);
 
@@ -360,6 +377,9 @@ static PF_Err ParamChanged(
 	PF_UserChangedParamExtra* param_extra = (PF_UserChangedParamExtra*)extra;
 
 	int selectedCam = getSelectedCamera(params);
+
+    int recordStartBtnId = recordStartButtonParamID();
+    int recordStopBtnId = recordStopButtonParamID();
 
 
 	if (param_extra->param_index == ACTIVE_AUX_CAMERA_SELECTOR) {
@@ -420,6 +440,71 @@ static PF_Err ParamChanged(
 		params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_RECTILINEAR]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 	}
+    else if (param_extra->param_index == recordStartButtonParamID()) {
+        KeyFrameManager::getInstance().beginKeyNewRemoteRecording();
+        try {
+            std::string message = ReframeTCPServer::getInstance().startServer();
+            CTMsgDlg cDlg(400,500); // create dialog with size 300x400
+            int result = cDlg.ShowDialog(
+                                         "OK?", //title of dialog
+                                         message, //message to be displayed
+                                         "OK", //caption of first button
+                                         "OK", //optional: caption of second button
+                                         "OK",  //optional: caption of third button
+                                         false, //true if input textbox should also be displayed
+                                         "" // default text for input text box
+                                         );
+        } catch(std::exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
+    }
+    else if (param_extra->param_index == recordStopButtonParamID()) {
+        AEFX_SuiteScoper<AEGP_KeyframeSuite3> keyframeSuite(in_data, kAEGPKeyframeSuite, kAEGPKeyframeSuiteVersion3, out_data);
+        
+        ReframeTCPServer::getInstance().stopServer();
+        
+        AEGP_StreamRefH yawStreamRef, pitchStreamRef, rollStreamRef;
+        suites.StreamSuite5()->AEGP_GetNewEffectStreamByIndex(NULL, effect_refH, MAIN_CAMERA_YAW, &yawStreamRef);
+        suites.StreamSuite5()->AEGP_GetNewEffectStreamByIndex(NULL, effect_refH, MAIN_CAMERA_PITCH, &pitchStreamRef);
+        suites.StreamSuite5()->AEGP_GetNewEffectStreamByIndex(NULL, effect_refH, MAIN_CAMERA_ROLL, &rollStreamRef);
+
+        
+        KeyFrameData recordedData = KeyFrameManager::getInstance().getCurrentRecordingKeyframeData();
+        KeyFrameManager::getInstance().stopRemoteRecording();
+
+        
+        A_long time = -1;
+        A_long foundTime;
+        AEGP_KeyframeIndex kfIndex;
+        
+        while(recordedData.getNextKeyFrameTime(MAIN_CAMERA_YAW, time, &foundTime) != suiteError_NoKeyframeAfterInTime){
+            A_Time keyFrameTime;
+            keyFrameTime.scale = in_data->time_scale;
+            keyFrameTime.value = foundTime * in_data->time_step; // to convert from frames to seconds regarding time_scale;
+            
+            time = foundTime;
+            
+            AEGP_StreamValue kfYawVal, kfPitchVal, kfRollVal;
+            kfYawVal.streamH = yawStreamRef;
+            kfYawVal.val.one_d = recordedData.getKeyFrameValue(MAIN_CAMERA_YAW, time);
+            
+            kfPitchVal.streamH = pitchStreamRef;
+            kfPitchVal.val.one_d = recordedData.getKeyFrameValue(MAIN_CAMERA_PITCH, time);
+            
+            kfRollVal.streamH = rollStreamRef;
+            kfRollVal.val.one_d = recordedData.getKeyFrameValue(MAIN_CAMERA_ROLL, time);
+            
+            keyframeSuite->AEGP_InsertKeyframe(yawStreamRef, AEGP_LTimeMode_LayerTime, &keyFrameTime, &kfIndex);
+            keyframeSuite->AEGP_SetKeyframeValue(yawStreamRef, kfIndex, &kfYawVal);
+            
+            keyframeSuite->AEGP_InsertKeyframe(pitchStreamRef, AEGP_LTimeMode_LayerTime, &keyFrameTime, &kfIndex);
+            keyframeSuite->AEGP_SetKeyframeValue(pitchStreamRef, kfIndex, &kfPitchVal);
+            
+            keyframeSuite->AEGP_InsertKeyframe(rollStreamRef, AEGP_LTimeMode_LayerTime, &keyFrameTime, &kfIndex);
+            keyframeSuite->AEGP_SetKeyframeValue(rollStreamRef, kfIndex, &kfRollVal);
+        }
+        
+    }
 	else {
 		float changedParam = params[param_extra->param_index]->u.fs_d.value;
 
