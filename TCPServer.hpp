@@ -1,10 +1,11 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
+
+#include <iostream>
+#include <memory>
 
 #include <mutex>
 
@@ -28,10 +29,10 @@ public:
     
 private:
     tcp::socket socket;
-    enum { max_length = 128 };
+    enum { max_length = 1024 };
     char data[max_length];
     
-    std::string getLastOrientationMessage();
+    std::string getLastOrientationMessage(int bytesTransferred);
     std::mutex mtx;
 
 };

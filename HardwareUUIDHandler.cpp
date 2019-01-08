@@ -3,8 +3,6 @@
 
 #ifdef _WIN32
 
-#include "machine_id.h"
-
 #include <windows.h>
 #include <intrin.h>
 #include <iphlpapi.h>

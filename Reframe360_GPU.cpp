@@ -53,6 +53,7 @@
 #include "GumroadLicenseHandler.h"
 
 #include "TCPServer.hpp"
+#include <chrono>
 
 //#define GUMROAD
 
@@ -181,6 +182,8 @@ public:
 		csSDK_size_t inFrameCount,
 		PPixHand* outFrame)
 	{
+		std::clock_t start = std::clock();
+
 		KeyFrameManager::getInstance().isCpuProcessing = false;
 #ifdef BETA_FAIL
 		time_t time_ = time(NULL);
@@ -219,14 +222,14 @@ public:
 		float* tinyplanets = (float*)malloc(sizeof(float)*samples);
 		float* rectilinears = (float*)malloc(sizeof(float)*samples);
 		float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+
+		bool isRecording = KeyFrameManager::getInstance().isRecording();
 #
 		for (int i = 0; i < samples; i++) {
 			float offset = 0;
 			if (samples > 1) {
 				offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
 			}
-            
-            bool isRecording = KeyFrameManager::getInstance().isRecording();
 
 			// read the parameters
 			double main_pitch = -interpParam(MAIN_CAMERA_PITCH, inRenderParams, offset) / 180 * M_PI;
@@ -458,6 +461,17 @@ public:
 			if ( result != CL_SUCCESS )	
 				return suiteError_Fail;
 		}
+		/*if (isRecording) {
+			float fps = KeyFrameManager::getInstance().getCurrentFps();
+			float durationInSeconds = 1.0 / fps;
+			inRenderParams->inRenderTicksPerFrame;
+			double time_interval = inRenderParams->inClipTime;
+			double duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+			while (duration < durationInSeconds) {
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+			}
+		}*/
 		return suiteError_NoError;
 	}
 

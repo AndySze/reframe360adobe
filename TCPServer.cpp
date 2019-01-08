@@ -1,11 +1,13 @@
-#include "TCPServer.hpp"
 
-#include <iostream>
-#include <memory>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 #include <boost/asio/ip/basic_resolver.hpp>
+
+#include "TCPServer.hpp"
+
+#include <iostream>
+#include <memory>
 //thanks kalven for tips/debugging
 
 using boost::asio::ip::tcp;
@@ -34,16 +36,29 @@ Session::Session(boost::asio::io_service& ios) : socket(ios) {}
     {
         if (!err) {
             //std::cout << "recv: " << std::endl;
-            std::string latestMsg = getLastOrientationMessage();
-            std::istringstream iss(latestMsg);
-            std::vector<std::string> split_tokens(std::istream_iterator<std::string>{iss},
-                                                  std::istream_iterator<std::string>());
-            std::string yaw = split_tokens[1];
-            
-            //std::cout << yaw << std::endl;
-            ReframeTCPServer::getInstance().setYaw(stof(yaw));
-            ReframeTCPServer::getInstance().setPitch(stof(split_tokens[3]));
-             ReframeTCPServer::getInstance().setRoll(stof(split_tokens[5]));
+			try {
+				std::string latestMsg = getLastOrientationMessage(bytes_transferred);
+				std::istringstream iss(latestMsg);
+				std::vector<std::string> split_tokens(std::istream_iterator<std::string>{iss},
+					std::istream_iterator<std::string>());
+
+				if (split_tokens.size() == 6) {
+					std::string yaw = split_tokens[1];
+					//std::cout << yaw << std::endl;
+					ReframeTCPServer::getInstance().setYaw(stof(yaw));
+					ReframeTCPServer::getInstance().setPitch(stof(split_tokens[3]));
+					ReframeTCPServer::getInstance().setRoll(stof(split_tokens[5]));
+				}
+				else {
+					int error = 0; // just for breakpoint
+				}
+			}
+			catch (const std::exception&)
+			{
+
+				// just leave angles like they are
+				std::cerr << "err (recv), message corrupt: " << err.message() << std::endl;
+			}
             
             boost::this_thread::interruption_point();
             
@@ -59,18 +74,35 @@ Session::Session(boost::asio::io_service& ios) : socket(ios) {}
         }
     }
     
-std::string Session::getLastOrientationMessage(){
-    mtx.lock();
-    std::string dataString(data);
-    std::string endString("msgEnd");
-    std::string yawString("yaw");
-    size_t msgEndPos = dataString.rfind(endString);
-    size_t yawPos = dataString.rfind(yawString, msgEndPos);
-    
-    std::string msgStr = dataString.substr(yawPos, msgEndPos - yawPos);
+std::string Session::getLastOrientationMessage(int bytesTransferred) {
+	mtx.lock();
+	try {
+		std::string dataString(data);
+		std::string endString("msgEnd");
+		std::string yawString("yaw");
+		size_t msgEndPos = dataString.size();
+		std::string msgStr = "";
 
-    mtx.unlock();
-    return msgStr;
+		int continue_search = 1;
+		do {
+			msgEndPos = dataString.rfind(endString, msgEndPos-1);
+			size_t yawPos = dataString.rfind(yawString, msgEndPos);
+
+			msgStr = dataString.substr(yawPos, msgEndPos - yawPos);
+			std::istringstream iss(msgStr);
+			std::vector<std::string> split_tokens(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+			if (split_tokens.size() == 6 || msgEndPos == std::string::npos || yawPos == std::string::npos)
+				continue_search = 0;
+			else
+				continue_search = 1;
+		} while (continue_search);
+		mtx.unlock();
+		return msgStr;
+	}
+	catch (const std::exception&){
+		mtx.unlock();
+	}
+	return "";
 }
 
 ReframeTCPServer::ReframeTCPServer() :  ios(),
@@ -90,7 +122,7 @@ acceptor(ios, tcp::endpoint(tcp::v4(), 8080))
         
         for(auto it = re.begin(); it != re.end(); ++it){
             std::string addr = it->endpoint().address().to_string();
-            if(addr.find("192.168") != std::string::npos){
+            if(addr.find(".0.") != std::string::npos){
                 sstream << it->endpoint().address() << '\n';
             }
         }

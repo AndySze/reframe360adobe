@@ -30,6 +30,8 @@ private:
     
     bool _isRecording = false;
 
+	float _currentFps = 25.0f;
+
 public:
 	KeyFrameManager(KeyFrameManager const&) = delete;
 	void operator=(KeyFrameManager const&) = delete;
@@ -91,5 +93,8 @@ public:
 	int getPreviousCamera_Pr_CPU(PF_InData* in_data, PrTime &prevDiff);
 
 	int getNextCamera_Pr_CPU(PF_InData* in_data, PrTime &nextDiff);
+
+	float getCurrentFps();
+	void setCurrentFps(float fps);
 };
 

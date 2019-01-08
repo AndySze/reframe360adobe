@@ -19,6 +19,8 @@
 /*                                                                 */
 /*******************************************************************/
 
+#include <boost/asio.hpp>
+#include <boost/bind.hpp>
 #include "Reframe360.h"
 #include <map>
 #include "ParamUtil.h"
@@ -31,8 +33,6 @@
 #include "KeyFrameManager.h"
 #include "GumroadLicenseHandler.h"
 #include "TCPServer.hpp"
-#include <boost/asio.hpp>
-#include <boost/bind.hpp>
 
 // ********************* aescripts licensing specific code start *********************
 
@@ -454,6 +454,10 @@ static PF_Err ParamChanged(
                                          false, //true if input textbox should also be displayed
                                          "" // default text for input text box
                                          );
+
+			params[MAIN_CAMERA_YAW]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[MAIN_CAMERA_PITCH]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[MAIN_CAMERA_ROLL]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
         } catch(std::exception& e) {
             std::cerr << e.what() << std::endl;
         }
@@ -1048,6 +1052,11 @@ static PF_Err FrameSetup(PF_InData* in_data,
 
 
 	storeParamKeyframes(in_data, params, out_data);
+
+	float time_step = (float)in_data->time_step;
+	float time_scale = (float)in_data->time_scale;
+	float fps = 1.0 / (time_step / time_scale);
+	KeyFrameManager::getInstance().setCurrentFps(fps);
 
 
 	return PF_Err_NONE;

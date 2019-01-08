@@ -317,3 +317,11 @@ int KeyFrameManager::getNextCamera(PF_ParamDef* params[], csSDK_int32 nodeID, Pr
 
 	return  outValue;
 }
+
+float KeyFrameManager::getCurrentFps() {
+	return _currentFps;
+}
+
+void KeyFrameManager::setCurrentFps(float fps) {
+	_currentFps = fps;
+}

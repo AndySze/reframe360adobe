@@ -5,6 +5,7 @@
 #endif
 #endif
 
+
 #include "AEConfig.h"
 
 #include "PrSDKTypes.h"
@@ -15,6 +16,8 @@
 
 #include "GumroadLicenseHandler.h"
 #include "AEGP_SuiteHandler.h"
+
+
 
 // This is a helper class for the aescripts licensing framework,
 // providing some more high-level functionality specific to After Effects and Premiere Pro as host application
@@ -64,7 +67,7 @@ namespace grlic
 	inline void openOS(const char* cmd)
 	{
 #ifdef AE_OS_WIN
-		ShellExecute(NULL, "open", cmd, NULL, NULL, SW_SHOWNORMAL);
+		//ShellExecute(NULL, "open", cmd, NULL, NULL, SW_SHOWNORMAL);
 #else
 		string s = "open " + string(cmd);
 		system(s.c_str());
