@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.598672"
+            timestampString = "571267509.632278"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -27,11 +27,11 @@
             condition = "is16f == 1"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.5990109"
+            timestampString = "571267509.632862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -43,13 +43,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.599249"
+            timestampString = "571267509.633181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "685"
-            endingLineNumber = "685"
-            landmarkName = "getRelativeKeyFrameAlpha(csSDK_int32 paramIndex, PrTime currentTime, PrTime timestep, double offset)"
-            landmarkType = "7">
+            startingLineNumber = "701"
+            endingLineNumber = "701"
+            landmarkName = "SDK_Reframe"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -59,12 +59,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.5994771"
+            timestampString = "571267509.633454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "593"
-            endingLineNumber = "593"
-            landmarkName = "isExactlyOnKeyFrame(csSDK_int32 paramIndex, PrTime time)"
+            startingLineNumber = "609"
+            endingLineNumber = "609"
+            landmarkName = "GetNextKeyframeTime( csSDK_int32 inVideoNodeID, csSDK_int32 inIndex, PrTime inTime, PrTime* outKeyframeTime, csSDK_int32* outKeyframeInterpolationMode)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -76,11 +76,11 @@
             condition = "width != 1920"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.599699"
+            timestampString = "571267509.633718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -92,11 +92,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.599921"
+            timestampString = "571267509.633976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -108,12 +108,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.600139"
+            timestampString = "571267509.634238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "idToInd(int id)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -124,11 +124,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.6003571"
+            timestampString = "571267509.63459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -140,12 +140,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.6005729"
+            timestampString = "571267509.6349109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1110"
-            endingLineNumber = "1110"
-            landmarkName = "EffectMain( PF_Cmd inCmd, PF_InData* in_data, PF_OutData* out_data, PF_ParamDef* params[], PF_LayerDef* inOutput, void* extra)"
+            startingLineNumber = "1141"
+            endingLineNumber = "1141"
+            landmarkName = "FrameSetup(PF_InData* in_data, PF_OutData* out_data, PF_ParamDef* params[], PF_LayerDef* output)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -157,11 +157,11 @@
             condition = "is16f==true"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.600615"
+            timestampString = "571267509.635149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -173,7 +173,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../TCPServer.cpp"
-            timestampString = "562008243.955093"
+            timestampString = "571266230.241713"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -189,13 +189,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../TCPServer.cpp"
-            timestampString = "562008243.955143"
+            timestampString = "571266230.241859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
-            landmarkName = "Session::start()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -205,12 +205,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../TCPServer.cpp"
-            timestampString = "562008243.955204"
+            timestampString = "571266230.241896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "ReframeTCPServer::ReframeTCPServer()"
+            landmarkName = "Session::getLastOrientationMessage(int bytesTransferred)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -221,12 +221,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../TCPServer.cpp"
-            timestampString = "562008243.955253"
+            timestampString = "571266230.2419291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
             endingLineNumber = "66"
-            landmarkName = "Session::getLastOrientationMessage()"
+            landmarkName = "Session::handle_read(std::shared_ptr&lt;Session&gt;&amp; s, const boost::system::error_code&amp; err, size_t bytes_transferred)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -237,7 +237,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.600891"
+            timestampString = "571267509.6354851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "472"
@@ -253,12 +253,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.600931"
+            timestampString = "571267509.6355571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "375"
             endingLineNumber = "375"
-            landmarkName = "ParamChanged( PF_InData* in_data, PF_OutData* out_data, PF_ParamDef* params[], PF_LayerDef* output, void* extra)"
+            landmarkName = "ParamsSetup( PF_InData* in_data, PF_OutData* out_data, PF_ParamDef* params[], PF_LayerDef* output)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -269,12 +269,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.600967"
+            timestampString = "571267509.635651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "385"
             endingLineNumber = "385"
-            landmarkName = "ParamChanged( PF_InData* in_data, PF_OutData* out_data, PF_ParamDef* params[], PF_LayerDef* output, void* extra)"
+            landmarkName = "ParamsSetup( PF_InData* in_data, PF_OutData* out_data, PF_ParamDef* params[], PF_LayerDef* output)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -301,7 +301,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.601014"
+            timestampString = "571267509.635725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "462"
@@ -317,11 +317,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.6010621"
+            timestampString = "571267509.6357861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -333,7 +333,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.601325"
+            timestampString = "571267509.636062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "464"
@@ -349,7 +349,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.601362"
+            timestampString = "571267509.636125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "482"
@@ -365,7 +365,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.601395"
+            timestampString = "571267509.636184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "475"
@@ -381,7 +381,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_CPU.cpp"
-            timestampString = "562171398.601428"
+            timestampString = "571267509.636276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "497"
@@ -397,11 +397,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.6014611"
+            timestampString = "571267509.636377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -429,11 +429,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.601703"
+            timestampString = "571267509.636662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -445,11 +445,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.6019239"
+            timestampString = "571267509.6369261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
             landmarkType = "7">
          </BreakpointContent>
@@ -461,12 +461,348 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Reframe360_GPU.cpp"
-            timestampString = "562171398.602141"
+            timestampString = "571267509.637234"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "496"
-            endingLineNumber = "496"
-            landmarkName = "mainCameraParamsGPU(PrTime time)"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
+            landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_GPU.cpp"
+            timestampString = "571267509.637489"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "Render( const PrGPUFilterRenderParams* inRenderParams, const PPixHand* inFrames, csSDK_size_t inFrameCount, PPixHand* outFrame)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            condition = "mode==0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.6377439"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "936"
+            endingLineNumber = "936"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.637808"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "945"
+            endingLineNumber = "945"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "malloc_error_break"
+            moduleName = "">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "malloc_error_break"
+                  moduleName = "libsystem_malloc.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_GPU.cpp"
+            timestampString = "571267509.637866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "InitializeOpenCL ()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_GPU.cpp"
+            timestampString = "571267509.6381"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "InitializeOpenCL ()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638365"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "858"
+            endingLineNumber = "858"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638419"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "667"
+            endingLineNumber = "667"
+            landmarkName = "fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamDef ** params, int &amp;cam1, int &amp;cam2, float * rotmats, float * fovs, float * tinyplanets, float * rectilinears)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638467"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "873"
+            endingLineNumber = "873"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638514"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "853"
+            endingLineNumber = "853"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.6385601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "854"
+            endingLineNumber = "854"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638607"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "863"
+            endingLineNumber = "863"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638651"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "801"
+            endingLineNumber = "801"
+            landmarkName = "readVec4(const char* outgoingRowData, int x_new, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638693"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "796"
+            endingLineNumber = "796"
+            landmarkName = "readVec4(const char* outgoingRowData, int x_new, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.6387351"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "927"
+            endingLineNumber = "927"
+            landmarkName = "Render( PF_InData* in_data, PF_OutData* out_data, PF_EffectWorld *inputP, PF_ParamDef* params[], PF_LayerDef* output, bool smartRender, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638775"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "805"
+            endingLineNumber = "805"
+            landmarkName = "writeVec4(char* destData, int x, int y, int rowbytes, vec4 value, int mode)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.6388119"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "789"
+            endingLineNumber = "789"
+            landmarkName = "write8bitVec4(char* destData, int x, int y, int rowbytes, vec4 value)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.638847"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "788"
+            endingLineNumber = "788"
+            landmarkName = "write8bitVec4(char* destData, int x, int y, int rowbytes, vec4 value)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_CPU.cpp"
+            timestampString = "571267509.6388839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1015"
+            endingLineNumber = "1015"
+            landmarkName = "DoRender( PF_InData *in_data, PF_EffectWorld *inputP, RenderData *rendP, PF_OutData *out_data, PF_LayerDef *outputP, PF_ParamDef *params[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Reframe360_GPU.cpp"
+            timestampString = "571267509.638921"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "InitializeOpenCL ()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

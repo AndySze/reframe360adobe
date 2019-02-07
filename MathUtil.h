@@ -37,6 +37,9 @@ namespace mu{
 static vec2 repairUv(vec2 uv){
     vec2 outuv = vec2( 0, 0 );
     
+    if(uv.x != uv.x || uv.y != uv.y) //is nan check
+        return outuv;
+    
     if (uv.x<0) {
         outuv.x = 1.0 + uv.x;
     }

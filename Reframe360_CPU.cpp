@@ -650,6 +650,11 @@ static double getDoubleParamValueAtOffset(int paramID, PF_InData* in_data, float
 
 void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamDef ** params, int &cam1, int &cam2, float * rotmats, float * fovs, float * tinyplanets, float * rectilinears)
 {
+    int multiCamNum = (int)params[idToInd(MULTICAM_GRIDSIZE_PRAM_ID)]->u.fs_d.value;
+    int showMulticam = params[idToInd(SHOW_MULTICAM_PARAM_ID)]->u.bd.value;
+    if (showMulticam != 1)
+        multiCamNum = 1;
+    
 	PrTime prevDiff, nextDiff;
 	if (KeyFrameManager::getInstance().isCpuProcessing && !KeyFrameManager::getInstance().isAE) {
 		cam1 = KeyFrameManager::getInstance().getPreviousCamera_Pr_CPU(in_data, prevDiff);
@@ -659,71 +664,78 @@ void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamD
 		cam1 = KeyFrameManager::getInstance().getPreviousCamera(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time);
 		cam2 = KeyFrameManager::getInstance().getNextCamera(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time);
 	}
+    for (int cam = 1; cam <= multiCamNum; cam++) {
+        for (int i = 0; i < samples; i++) {
+            float offset = 0;
+            if (samples > 1) {
+                offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
+            }
 
-	for (int i = 0; i < samples; i++) {
-		float offset = 0;
-		if (samples > 1) {
-			offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
-		}
+            // read the parameters
+            double main_pitch = -interpParam_CPU(MAIN_CAMERA_PITCH, in_data, offset) / 180 * M_PI;
+            double main_yaw = -interpParam_CPU(MAIN_CAMERA_YAW, in_data, offset) / 180 * M_PI;
+            double main_roll = -interpParam_CPU(MAIN_CAMERA_ROLL, in_data, offset) / 180 * M_PI;
+            double main_fov_mult = interpParam_CPU(MAIN_CAMERA_FOV, in_data, offset);
 
-		// read the parameters
-		double main_pitch = -interpParam_CPU(MAIN_CAMERA_PITCH, in_data, offset) / 180 * M_PI;
-		double main_yaw = -interpParam_CPU(MAIN_CAMERA_YAW, in_data, offset) / 180 * M_PI;
-		double main_roll = -interpParam_CPU(MAIN_CAMERA_ROLL, in_data, offset) / 180 * M_PI;
-		double main_fov_mult = interpParam_CPU(MAIN_CAMERA_FOV, in_data, offset);
+            if ((bool)params[idToInd(FORCE_AUX_DISPLAY)]->u.bd.value) {
+                cam1 = (int)round(params[idToInd(ACTIVE_AUX_CAMERA_SELECTOR)]->u.fs_d.value);
+            }
+            if (showMulticam) {
+                cam1 = cam;
+                cam2 = cam;
+            }
 
-		if ((bool)params[idToInd(FORCE_AUX_DISPLAY)]->u.bd.value) {
-			cam1 = (int)round(params[idToInd(ACTIVE_AUX_CAMERA_SELECTOR)]->u.fs_d.value);
-		}
+            double cam1_pitch = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_PITCH, cam1)), in_data, offset) / 180 * M_PI;
+            double cam1_yaw = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_YAW, cam1)), in_data, offset) / 180 * M_PI;
+            double cam1_roll = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_ROLL, cam1)), in_data, offset) / 180 * M_PI;
 
-		double cam1_pitch = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_PITCH, cam1)), in_data, offset) / 180 * M_PI;
-		double cam1_yaw = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_YAW, cam1)), in_data, offset) / 180 * M_PI;
-		double cam1_roll = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_ROLL, cam1)), in_data, offset) / 180 * M_PI;
+            double cam1_fov = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_FOV, cam1)), in_data, offset);
+            double cam1_tinyplanet = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, cam1)), in_data, offset);
+            double cam1_recti = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, cam1)), in_data, offset);
 
-		double cam1_fov = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_FOV, cam1)), in_data, offset);
-		double cam1_tinyplanet = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, cam1)), in_data, offset);
-		double cam1_recti = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, cam1)), in_data, offset);
+            double cam2_pitch = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_PITCH, cam2)), in_data, offset) / 180 * M_PI;
+            double cam2_yaw = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_YAW, cam2)), in_data, offset) / 180 * M_PI;
+            double cam2_roll = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_ROLL, cam2)), in_data, offset) / 180 * M_PI;
 
-		double cam2_pitch = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_PITCH, cam2)), in_data, offset) / 180 * M_PI;
-		double cam2_yaw = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_YAW, cam2)), in_data, offset) / 180 * M_PI;
-		double cam2_roll = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_ROLL, cam2)), in_data, offset) / 180 * M_PI;
+            double cam2_fov = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_FOV, cam2)), in_data, offset);
+            double cam2_tinyplanet = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, cam2)), in_data, offset);
+            double cam2_recti = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, cam2)), in_data, offset);
 
-		double cam2_fov = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_FOV, cam2)), in_data, offset);
-		double cam2_tinyplanet = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, cam2)), in_data, offset);
-		double cam2_recti = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, cam2)), in_data, offset);
+            double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
 
-		double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
+            float camAlpha = 0;
+            if (cam1 != cam2) {
+                if (KeyFrameManager::getInstance().isAE || ! KeyFrameManager::getInstance().isCpuProcessing)
+                    camAlpha = KeyFrameManager::getInstance().getRelativeKeyFrameAlpha(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time, in_data->time_step, offset);
+                else
+                    camAlpha = (float)prevDiff / (prevDiff + nextDiff);
+            }
 
-		float camAlpha = 0;
-		if (cam1 != cam2) {
-			if (KeyFrameManager::getInstance().isAE || ! KeyFrameManager::getInstance().isCpuProcessing)
-				camAlpha = KeyFrameManager::getInstance().getRelativeKeyFrameAlpha(params, NULL, NULL, AUX_CAM_SEQUENCE, in_data->current_time, in_data->time_step, offset);
-			else
-				camAlpha = (float)prevDiff / (prevDiff + nextDiff);
-		}
+            double blend = getCameraBlend_CPU(in_data, camAlpha, offset);
 
-		double blend = getCameraBlend_CPU(in_data, camAlpha, offset);
+            if ((bool)params[idToInd(FORCE_AUX_DISPLAY)]->u.bd.value) {
+                blend = 0;
+            }
 
-		if ((bool)params[idToInd(FORCE_AUX_DISPLAY)]->u.bd.value) {
-			blend = 0;
-		}
+            pitch = cam1_pitch * (1.0 - blend) + cam2_pitch * blend + main_pitch;
+            yaw = cam1_yaw * (1.0 - blend) + cam2_yaw * blend + main_yaw;
+            roll = cam1_roll * (1.0 - blend) + cam2_roll * blend + main_roll;
+            fov = (cam1_fov * (1.0 - blend) + cam2_fov * blend) * main_fov_mult;
+            tinyplanet = cam1_tinyplanet * (1.0 - blend) + cam2_tinyplanet * blend;
+            rectilinear = cam1_recti * (1.0 - blend) + cam2_recti * blend;
 
-		pitch = cam1_pitch * (1.0 - blend) + cam2_pitch * blend + main_pitch;
-		yaw = cam1_yaw * (1.0 - blend) + cam2_yaw * blend + main_yaw;
-		roll = cam1_roll * (1.0 - blend) + cam2_roll * blend + main_roll;
-		fov = (cam1_fov * (1.0 - blend) + cam2_fov * blend) * main_fov_mult;
-		tinyplanet = cam1_tinyplanet * (1.0 - blend) + cam2_tinyplanet * blend;
-		rectilinear = cam1_recti * (1.0 - blend) + cam2_recti * blend;
+            //mat3 main_rotMat = rotationMatrix(main_pitch, main_yaw, main_roll);
+            mat3 rotMat = rotationMatrix(pitch, yaw, roll);
+            rotMat = transpose(rotMat);
 
-		//mat3 main_rotMat = rotationMatrix(main_pitch, main_yaw, main_roll);
-		mat3 rotMat = rotationMatrix(pitch, yaw, roll);
-		rotMat = transpose(rotMat);
-
-		memcpy(&(rotmats[i * 9]), &rotMat[0], sizeof(float) * 9);
-		fovs[i] = (float)fov;
-		tinyplanets[i] = (float)tinyplanet;
-		rectilinears[i] = (float)rectilinear;
-	}
+            int matCamStartIndex = (cam-1) * (samples * 9);
+            int camStartIndex = (cam-1) * samples;
+            memcpy(&(rotmats[matCamStartIndex + i * 9]), &rotMat[0], sizeof(float) * 9);
+            fovs[camStartIndex + i] = (float)fov;
+            tinyplanets[camStartIndex + i] = (float)tinyplanet;
+            rectilinears[camStartIndex + i] = (float)rectilinear;
+        }
+    }
 }
 
 static inline vec4 read32bitVec4(const char* outgoingRowData, int x_new) {
@@ -837,11 +849,16 @@ static PF_Err Render(
 	//TODO: TEMP!!!
 	int cam1, cam2;
 	float shutter = (int)round(params[idToInd(MB_SHUTTER)]->u.fs_d.value);
+    
+    int multiCamNum = (int)params[idToInd(MULTICAM_GRIDSIZE_PRAM_ID)]->u.fs_d.value;
+    int showMulticam = (int)params[idToInd(SHOW_MULTICAM_PARAM_ID)]->u.bd.value;
+    if (showMulticam != 1)
+        multiCamNum = 1;
 
-	float* fovs = (float*)malloc(sizeof(float)*samples);
-	float* tinyplanets = (float*)malloc(sizeof(float)*samples);
-	float* rectilinears = (float*)malloc(sizeof(float)*samples);
-	float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+	float* fovs = (float*)malloc(sizeof(float)*samples*multiCamNum);
+	float* tinyplanets = (float*)malloc(sizeof(float)*samples*multiCamNum);
+	float* rectilinears = (float*)malloc(sizeof(float)*samples*multiCamNum);
+	float* rotmats = (float*)malloc(sizeof(float)*samples * 9*multiCamNum);
 
 	fillParamStructs(samples, shutter, in_data, params, cam1, cam2, rotmats, fovs, tinyplanets, rectilinears);
 		
@@ -852,70 +869,84 @@ static PF_Err Render(
 	int rowbytes = dest->rowbytes;
 
 	float aspect = (float)width / (float)height;
+    
+    const int gridWidth = (int)ceilf(sqrtf(multiCamNum));
+    int cellWidth = width / gridWidth;
+    int cellHeight = height / gridWidth;
 
-	//#pragma loop(hint_parallel(0))
-	//#pragma loop(ivdep)
-	for (int y = 0; y < height;
-		++y)
-	{
-		for (int x = 0; x < width; ++x)
-		{
-			vec4 accumValue = vec4(0, 0, 0, 0);
-			for (int i = 0; i < samples; i++)
-			{
+	#pragma loop(hint_parallel(0))
+	#pragma loop(ivdep)
+    for (int y = 0; y < height;
+        ++y)
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            int cellIndX = x / cellWidth;
+            int cellIndY = y / cellHeight;
+            int cam = cellIndY * gridWidth + cellIndX;
+            int inCellX = x % cellWidth;
+            int inCellY = y % cellHeight;
+            
+            int camOffset = cam * samples;
+            int rotmatCamOffset = cam * samples * 9;
+            
+            vec4 accumValue = vec4(0, 0, 0, 0);
+            for (int i = 0; i < samples; i++)
+            {
+                mat3 rotMat;
+                memcpy(&rotMat[0], &(rotmats[rotmatCamOffset+i * 9]), sizeof(float) * 9);
 
-				mat3 rotMat;
-				memcpy(&rotMat[0], &(rotmats[i * 9]), sizeof(float) * 9);
+                float fov = fovs[camOffset + i];
+                vec2 cell_uv = vec2((float)inCellX / cellWidth, (float)inCellY / cellHeight);
+                float aspect = (float)cellWidth / (float)cellHeight;
+                vec2 uv = vec2((float)x / width, (float)y / height);
 
-				float fov = fovs[i];
-				vec2 uv = vec2((float)x / width, (float)y / height);
+                vec3 dir = vec3(0, 0, 0);
+                dir.x = (cell_uv.x - 0.5)*2.0;
+                dir.y = (cell_uv.y - 0.5)*2.0;
+                dir.y /= aspect;
+                dir.z = fov;
 
-				vec3 dir = vec3(0, 0, 0);
-				dir.x = (uv.x - 0.5)*2.0;
-				dir.y = (uv.y - 0.5)*2.0;
-				dir.y /= aspect;
-				dir.z = fov;
+                vec3 tinyplanet = tinyPlanetSph(dir);
+                tinyplanet = normalize(tinyplanet);
 
-				vec3 tinyplanet = tinyPlanetSph(dir);
-				tinyplanet = normalize(tinyplanet);
+                tinyplanet = rotMat * tinyplanet;
+                vec3 rectdir = rotMat * dir;
 
-				tinyplanet = rotMat * tinyplanet;
-				vec3 rectdir = rotMat * dir;
+                rectdir = normalize(rectdir);
 
-				rectdir = normalize(rectdir);
+                dir = mix(fisheyeDir(dir, rotMat), tinyplanet, tinyplanets[camOffset + i]);
+                dir = mix(dir, rectdir, rectilinears[camOffset + i]);
 
-				dir = mix(fisheyeDir(dir, rotMat), tinyplanet, tinyplanets[i]);
-				dir = mix(dir, rectdir, rectilinears[i]);
+                vec2 iuv = polarCoord(dir);
+                iuv = repairUv(iuv);
 
-				vec2 iuv = polarCoord(dir);
-				iuv = repairUv(iuv);
+                int x_new = iuv.x * (width - 1);
+                int y_new = iuv.y * (height - 1);
 
-				int x_new = iuv.x * (width - 1);
-				int y_new = iuv.y * (height - 1);
+                iuv.x *= (width - 1);
+                iuv.y *= (height - 1);
 
-				iuv.x *= (width - 1);
-				iuv.y *= (height - 1);
+                if ((x_new < width) && (y_new < height))
+                {
+                    const char* outgoingData_ = (const char*)outgoingData + y_new * inRowbytes;
 
-				if ((x_new < width) && (y_new < height))
-				{
-					const char* outgoingData_ = (const char*)outgoingData + y_new * inRowbytes;
+                    vec4 interpCol;
 
-					vec4 interpCol;
+                    vec4 outgoing = readVec4(outgoingData_, x_new, mode);
 
-					vec4 outgoing = readVec4(outgoingData_, x_new, mode);
+                    float recipNewAlpha = 1.0f;
 
-					float recipNewAlpha = 1.0f;
+                    interpCol = outgoing;
 
-					interpCol = outgoing;
+                    accumValue += interpCol / (float)samples;
+                }
 
-					accumValue += interpCol / (float)samples;
-				}
-
-				writeVec4(destData, x, y, rowbytes, accumValue, mode);
-			}
-			continue;
-		}
-	}
+                writeVec4(destData, x, y, rowbytes, accumValue, mode);
+            }
+            continue;
+        }
+    }
 
 	free(rotmats);
 	free(fovs);
@@ -1020,7 +1051,7 @@ static PF_Err PreRender(
 	storeParamKeyframes(in_data, params, out_data);
 
 	// Always check in, no matter what the error condition!
-	for (int i = 1; i < NUM_PARAMS; i++) {
+	for (int i = 1; i < TOTAL_PARAM_NUM; i++) {
 		ERR2(PF_CHECKIN_PARAM(in_data, params[i]));
 		delete params[i];
 	}

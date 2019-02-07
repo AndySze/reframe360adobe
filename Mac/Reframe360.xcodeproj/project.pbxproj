@@ -248,7 +248,7 @@
 				7E83C0F7170F4840008B8043 /* Frameworks */,
 				7E83C0F8170F4840008B8043 /* Resources */,
 				7EC22DD31FA7C88600D810DC /* Rez */,
-				EC80A3F720F53A8600FA0E61 /* ShellScript */,
+				EC80A3F720F53A8600FA0E61 /* Run Script */,
 			);
 			buildRules = (
 				18129D2E1EE5E99100A15AE5 /* PBXBuildRule */,
@@ -311,18 +311,19 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		EC80A3F720F53A8600FA0E61 /* ShellScript */ = {
+		EC80A3F720F53A8600FA0E61 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin\"\ncp -R \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin\" \"/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore\"";
+			shellScript = "echo \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin\"\ncp -R \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin\" \"/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -405,6 +406,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -472,6 +474,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Reframe360-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

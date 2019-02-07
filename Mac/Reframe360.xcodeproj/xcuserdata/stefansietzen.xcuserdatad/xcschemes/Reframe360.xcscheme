@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "exec &gt; /tmp/my_log_file.txt 2&gt;&amp;1&#13;&#10;pwd&#10;&#10;echo &quot;${TARGET_BUILD_DIR}/${PRODUCT_NAME}&quot;.plugin&#10;cp -R &quot;${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin&quot; &quot;/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore&quot;&#13;&#10;&#13;&#10;"
+               scriptText = "exec &gt; /tmp/my_log_file.txt 2&gt;&amp;1&#10;pwd&#10;&#10;echo &quot;${TARGET_BUILD_DIR}/${PRODUCT_NAME}&quot;.plugin&#10;cp -R &quot;${TARGET_BUILD_DIR}/${PRODUCT_NAME}.plugin&quot; &quot;/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore&quot;&#10;&#10;"
                shellToInvoke = "/bin/sh">
                <EnvironmentBuildable>
                   <BuildableReference
@@ -52,7 +52,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"

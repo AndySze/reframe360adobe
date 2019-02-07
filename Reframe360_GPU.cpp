@@ -25,6 +25,7 @@
 				Rama Hoetzlein from nVidia
     2.0.1       Fixed custom build steps for CUDA on Windows            zlam        5/6/2017
 */
+#define CL_SILENCE_DEPRECATION
 
 #include "Reframe360.cl.h"
 #include "Reframe360.h"
@@ -134,6 +135,20 @@ public:
 			result = clBuildProgram(program, 1, &device, "-cl-single-precision-constant -cl-fast-relaxed-math", 0, 0);
 			if (result != CL_SUCCESS)
 			{
+                if (result == CL_BUILD_PROGRAM_FAILURE) {
+                    // Determine the size of the log
+                    size_t log_size;
+                    clGetProgramBuildInfo(program, device, CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
+                    
+                    // Allocate memory for the log
+                    char *log = (char *) malloc(log_size);
+                    
+                    // Get the log
+                    clGetProgramBuildInfo(program, device, CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
+                    
+                    // Print the log
+                    printf("%s\n", log);
+                }
 				return suiteError_Fail;
 			}
 
@@ -236,7 +251,7 @@ public:
 		float* rotmats = (float*)malloc(sizeof(float)*samples * 9 * multiCamNum);
 
 		bool isRecording = KeyFrameManager::getInstance().isRecording();
-#
+
 		for (int cam = 1; cam <= multiCamNum; cam++) {
 			for (int i = 0; i < samples; i++) {
 				float offset = 0;
@@ -446,9 +461,9 @@ public:
             error  = clSetKernelArg(mKernel, count++, sizeof(int), &width);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &height);
             
-            cl_mem fov_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples, fovs, &error);
-            cl_mem tinyplanet_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples, tinyplanets, &error);
-            cl_mem rectilinear_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples, rectilinears, &error);
+            cl_mem fov_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples*multiCamNum, fovs, &error);
+            cl_mem tinyplanet_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples*multiCamNum, tinyplanets, &error);
+            cl_mem rectilinear_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*samples*multiCamNum, rectilinears, &error);
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &fov_buf);
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &tinyplanet_buf);
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &rectilinear_buf);
@@ -456,10 +471,11 @@ public:
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &outgoingFrameData);
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &destFrameData);
             
-            cl_mem rotmat_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*9*samples, rotmats, &error);
+            cl_mem rotmat_buf = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float)*9*samples*multiCamNum, rotmats, &error);
             error |= clSetKernelArg(mKernel, count++, sizeof(cl_mem), &rotmat_buf);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &samples);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &bilinear);
+            error |= clSetKernelArg(mKernel, count++, sizeof(int), &multiCamNum);
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &is16f);
             int noLicense = KeyFrameManager::getInstance().isRegistered ? 0 : 1;
             error |= clSetKernelArg(mKernel, count++, sizeof(int), &noLicense);
