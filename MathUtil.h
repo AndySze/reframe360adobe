@@ -24,7 +24,15 @@
 #include <glm/trigonometric.hpp> // all the GLSL trigonometric functions
 #include <glm/vector_relational.hpp> // all the GLSL vector relational functions
 
+#include "KeyFrameManager.h"
+
 using namespace glm;
+
+namespace mu{
+	static int idToInd(int id) {
+		return KeyFrameManager::getInstance().idToIndex[id];
+	}
+}
 
 static vec2 repairUv(vec2 uv){
     vec2 outuv = vec2( 0, 0 );
@@ -132,7 +140,7 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 	AEFX_CLR_STRUCT(def);
 
 	if (offset == 0) {
-		PF_CHECKOUT_PARAM(in_data, paramID, time, timeStep, in_data->time_scale, &def);
+		PF_CHECKOUT_PARAM(in_data, mu::idToInd(paramID), time, timeStep, in_data->time_scale, &def);
 		float outVal = def.u.fs_d.value;
 		PF_CHECKIN_PARAM(in_data, &def);
 		return outVal;
@@ -142,11 +150,11 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 		float floor = std::floor(offset);
 		float frac = offset - floor;
 
-		PF_CHECKOUT_PARAM(in_data, paramID, time - (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
+		PF_CHECKOUT_PARAM(in_data, mu::idToInd(paramID), time - (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
 		float part1 = def.u.fs_d.value * frac;
 		PF_CHECKIN_PARAM(in_data, &def);
 		AEFX_CLR_STRUCT(def);
-		PF_CHECKOUT_PARAM(in_data, paramID, time - floor * timeStep, timeStep, in_data->time_scale, &def);
+		PF_CHECKOUT_PARAM(in_data, mu::idToInd(paramID), time - floor * timeStep, timeStep, in_data->time_scale, &def);
 		float part2 = def.u.fs_d.value * (1 - frac);
 		PF_CHECKIN_PARAM(in_data, &def);
 		
@@ -156,11 +164,11 @@ double static interpParam_CPU(int paramID, PF_InData* in_data, float offset) {
 		float floor = std::floor(offset);
 		float frac = offset - floor;
 
-		PF_CHECKOUT_PARAM(in_data, paramID, time + (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
+		PF_CHECKOUT_PARAM(in_data, mu::idToInd(paramID), time + (floor + 1)*timeStep, timeStep, in_data->time_scale, &def);
 		float part1 = def.u.fs_d.value * frac;
 		PF_CHECKIN_PARAM(in_data, &def);
 		AEFX_CLR_STRUCT(def);
-		PF_CHECKOUT_PARAM(in_data, paramID, time + floor * timeStep, timeStep, in_data->time_scale, &def);
+		PF_CHECKOUT_PARAM(in_data, mu::idToInd(paramID), time + floor * timeStep, timeStep, in_data->time_scale, &def);
 		float part2 = def.u.fs_d.value * (1 - frac);
 		PF_CHECKIN_PARAM(in_data, &def);
 

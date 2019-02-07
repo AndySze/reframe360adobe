@@ -178,43 +178,56 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			int p_Width, int p_Height,
 			const float* r,
 			float* p_Fov, float* p_Tinyplanet, float* p_Rectilinear,
-			int samples, bool bilinear, bool is16bit, bool noLicense
+			int samples, bool bilinear, int multiCam, bool is16bit, bool noLicense
 			)
 		{
 			 const int x = blockIdx.x * blockDim.x + threadIdx.x;
    const int y = blockIdx.y * blockDim.y + threadIdx.y;
 
+   const int gridWidth = (int)ceilf(sqrtf(multiCam));
+   int cellWidth = p_Width / gridWidth;
+   int cellHeight = p_Height / gridWidth;
+
    if ((x < p_Width) && (y < p_Height))
    {
 		const int index = ((y * p_Width) + x) * 4;
 
+		int cellIndX = x / cellWidth;
+		int cellIndY = y / cellHeight;
+		int cam = cellIndY * gridWidth + cellIndX;
+		int inCellX = x % cellWidth;
+		int inCellY = y % cellHeight;
+
 		float4 accum_col = {0, 0, 0, 0};
 
 		for(int i=0; i<samples; i++){
-			float fov = p_Fov[i];
+			int camOffset = cam * samples;
+			int rotmatCamOffset = cam * samples * 9;
+			float fov = p_Fov[camOffset + i];
 
+		   float2 cell_uv = { (float)inCellX / cellWidth, (float)inCellY / cellHeight };
 		   float2 uv = { (float)x / p_Width, (float)y / p_Height };
-		   float aspect = (float)p_Width / (float)p_Height;
+		   float aspect = (float)cellWidth / (float)cellHeight;
 
 		   float3 dir = { 0, 0, 0 };
-		   dir.x = (uv.x - 0.5)*2.0;
-		   dir.y = (uv.y - 0.5)*2.0;
+		   dir.x = (cell_uv.x - 0.5)*2.0;
+		   dir.y = (cell_uv.y - 0.5)*2.0;
 		   dir.y /= aspect;
 		   dir.z = fov;
 
 		   float3 tinyplanet = tinyPlanetSph(dir);
 		   tinyplanet = normalize(tinyplanet);
 
-		   const float3 r012 = {r[i*9+0], r[i*9+1], r[i*9+2]};
-		   const float3 r345 = {r[i*9+3], r[i*9+4], r[i*9+5]};
-		   const float3 r678 = {r[i*9+6], r[i*9+7], r[i*9+8]};
+		   const float3 r012 = {r[rotmatCamOffset + i*9+0], r[rotmatCamOffset + i*9+1], r[rotmatCamOffset + i*9+2]};
+		   const float3 r345 = {r[rotmatCamOffset + i*9+3], r[rotmatCamOffset + i*9+4], r[rotmatCamOffset + i*9+5]};
+		   const float3 r678 = {r[rotmatCamOffset + i*9+6], r[rotmatCamOffset + i*9+7], r[rotmatCamOffset + i*9+8]};
 
 		   tinyplanet = matMul(r012, r345, r678, tinyplanet);
 		   float3 rectdir = matMul(r012, r345, r678, dir);
 
 		   rectdir = normalize(rectdir);
-		   dir = lerp(fisheyeDir(dir, r012, r345, r678), tinyplanet, p_Tinyplanet[i]);
-		   dir = lerp(dir, rectdir, p_Rectilinear[i]);
+		   dir = lerp(fisheyeDir(dir, r012, r345, r678), tinyplanet, p_Tinyplanet[camOffset + i]);
+		   dir = lerp(dir, rectdir, p_Rectilinear[camOffset + i]);
 
 		   float2 iuv = polarCoord(dir);
 		   iuv = repairUv(iuv);
@@ -285,6 +298,7 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			float* rectilinear,
 			int samples,
 			int bilinear,
+			int multiCam,
 			int is16bit,
 			int noLicense
 			)
@@ -292,7 +306,7 @@ __device__ float4 linInterpCol(float2 uv, const float* input, int width, int hei
 			dim3 blockDim (16, 16, 1);
 			dim3 gridDim ( (width + blockDim.x - 1)/ blockDim.x, (height + blockDim.y - 1) / blockDim.y, 1 );		
 
-			ReframeCUDA <<< gridDim, blockDim, 0 >>> ( (float const*) outBuf, (float*) destBuf, outPitch, destPitch, width, height, rotMat, fov, tinyplanet, rectilinear, samples, bilinear, is16bit, noLicense); 
+			ReframeCUDA <<< gridDim, blockDim, 0 >>> ( (float const*) outBuf, (float*) destBuf, outPitch, destPitch, width, height, rotMat, fov, tinyplanet, rectilinear, samples, bilinear, multiCam, is16bit, noLicense);
 
 			cudaDeviceSynchronize();
 		}

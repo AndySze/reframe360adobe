@@ -129,6 +129,7 @@ static PF_Err ParamsSetup(
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_TOPICX("Rendering Parameters", 0, MB_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[MB_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -145,6 +146,7 @@ static PF_Err ParamsSetup(
 		0,
 		MB_SAMPLES
 	);
+	KeyFrameManager::getInstance().idToIndex[MB_SAMPLES] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -161,15 +163,18 @@ static PF_Err ParamsSetup(
 		0,
 		MB_SHUTTER
 	);
+	KeyFrameManager::getInstance().idToIndex[MB_SHUTTER] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_END_TOPIC(MB_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[MB_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_TOPICX("Overall Camera Parameters", 0, MAIN_CAMERA_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_GRP_ID] = num_params;
 	num_params++;
 
 
@@ -187,6 +192,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_PITCH
 	);
+	KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_PITCH] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -203,6 +209,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_YAW
 	);
+	KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_YAW] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -219,6 +226,7 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_ROLL
 	);
+	KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_ROLL] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -235,14 +243,17 @@ static PF_Err ParamsSetup(
 		0,
 		MAIN_CAMERA_FOV
 	);
+	KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_FOV] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_END_TOPIC(MAIN_CAMERA_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_TOPICX("Camera Animation Parameters", 0, BLEND_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[BLEND_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -259,6 +270,7 @@ static PF_Err ParamsSetup(
 		PF_ParamFlag_SUPERVISE,
 		AUX_CAM_SEQUENCE
 	);
+	KeyFrameManager::getInstance().idToIndex[AUX_CAM_SEQUENCE] = num_params;
 	num_params++;
 
 
@@ -276,14 +288,17 @@ static PF_Err ParamsSetup(
 		0,
 		AUX_ACCELERATION
 	);
+	KeyFrameManager::getInstance().idToIndex[AUX_ACCELERATION] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_END_TOPIC(BLEND_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[BLEND_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_TOPICX("Camera Setup Parameters", 0, CAM_SELECTION_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[CAM_SELECTION_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -300,6 +315,7 @@ static PF_Err ParamsSetup(
 		PF_ParamFlag_SUPERVISE,
 		ACTIVE_AUX_CAMERA_SELECTOR
 	);
+	KeyFrameManager::getInstance().idToIndex[ACTIVE_AUX_CAMERA_SELECTOR] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -310,45 +326,82 @@ static PF_Err ParamsSetup(
 		0,
 		FORCE_AUX_DISPLAY
 	);
+	KeyFrameManager::getInstance().idToIndex[FORCE_AUX_DISPLAY] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_END_TOPIC(CAM_SELECTION_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[CAM_SELECTION_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_TOPICX("Editable Camera Parameters", 0, AUX_CAMERA_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_GRP_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_BUTTON("Copy Cam Parameters", "Copy", 0, PF_ParamFlag_SUPERVISE, AUX_CAMERA_COPY_BTN_ID);
+	KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_COPY_BTN_ID] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
 	PF_ADD_BUTTON("Paste Cam Parameters", "Paste", 0, PF_ParamFlag_SUPERVISE, AUX_CAMERA_PASTE_BTN_ID);
+	KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_PASTE_BTN_ID] = num_params;
 	num_params++;
 
-	num_params += addAuxParams(in_data, false, 0);
+	num_params = addAuxParams(in_data, false, 0, num_params);
 
 	AEFX_CLR_STRUCT(def);
 	PF_END_TOPIC(AUX_CAMERA_GRP_ID);
+	KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_GRP_ID] = num_params;
 	num_params++;
 
-
 	for (int i = 1; i <= CAMERA_MAX_VALUE; i++) {
-		num_params += addAuxParams(in_data, true, i);
+		num_params = addAuxParams(in_data, true, i, num_params);
 	}
     
     AEFX_CLR_STRUCT(def);
-    PF_ADD_BUTTON("Start Recording", "Start Rec.", 0, PF_ParamFlag_SUPERVISE, recordStartButtonParamID());
+    PF_ADD_BUTTON("Start Recording", "Start Rec.", 0, PF_ParamFlag_SUPERVISE, RECORD_START_PARAM_ID);
+	KeyFrameManager::getInstance().idToIndex[RECORD_START_PARAM_ID] = num_params;
     num_params++;
     
     AEFX_CLR_STRUCT(def);
-    PF_ADD_BUTTON("Stop Recording", "Stop Rec.", 0, PF_ParamFlag_SUPERVISE, recordStopButtonParamID());
+    PF_ADD_BUTTON("Stop Recording", "Stop Rec.", 0, PF_ParamFlag_SUPERVISE, RECORD_STOP_PARAM_ID);
+	KeyFrameManager::getInstance().idToIndex[RECORD_STOP_PARAM_ID] = num_params;
     num_params++;
+
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_CHECKBOXX(
+		"Show Multicam",
+		false,
+		0,
+		SHOW_MULTICAM_PARAM_ID
+	);
+	KeyFrameManager::getInstance().idToIndex[SHOW_MULTICAM_PARAM_ID] = num_params;
+	num_params++;
+
+	AEFX_CLR_STRUCT(def);
+	PF_ADD_FLOAT_SLIDERX(
+		"Multicam Grid Size",
+		1,
+		25,
+		1,
+		25,
+		4,
+		PF_Precision_INTEGER,
+		PF_ValueDisplayFlag_NONE,
+		PF_ParamFlag_SUPERVISE,
+		MULTICAM_GRIDSIZE_PRAM_ID
+	);
+	KeyFrameManager::getInstance().idToIndex[MULTICAM_GRIDSIZE_PRAM_ID] = num_params;
+	num_params++;
 
 	out_data->num_params = num_params;
 	return PF_Err_NONE;
+}
+
+static int idToInd(int id) {
+	return KeyFrameManager::getInstance().idToIndex[id];
 }
 
 /*
@@ -378,15 +431,15 @@ static PF_Err ParamChanged(
 
 	int selectedCam = getSelectedCamera(params);
 
-    int recordStartBtnId = recordStartButtonParamID();
-    int recordStopBtnId = recordStopButtonParamID();
+	int recordStartBtnId = RECORD_START_PARAM_ID;
+	int recordStopBtnId = RECORD_STOP_PARAM_ID;
 
 
 	if (param_extra->param_index == ACTIVE_AUX_CAMERA_SELECTOR) {
 
 		//CameraParams selectedParams = paramSet->auxCamParams[selectedCam-1];
 
-		params[AUX_CAMERA_PITCH]->u.fs_d.value = params[AUX_CAMERA_PITCH + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
+		params[AUX_CAMERA_PITCH]->u.fs_d.value = params[idToInd(auxParamId(AUX_CAMERA_PITCH, selectedCam))]->u.fs_d.value;
 		params[AUX_CAMERA_PITCH]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 
 		params[AUX_CAMERA_YAW]->u.fs_d.value = params[AUX_CAMERA_YAW + selectedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
@@ -440,7 +493,7 @@ static PF_Err ParamChanged(
 		params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value = params[AUX_CAMERA_RECTILINEAR + copiedCam * AUX_PARAM_NUM + 1]->u.fs_d.value;
 		params[AUX_CAMERA_RECTILINEAR]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
 	}
-    else if (param_extra->param_index == recordStartButtonParamID()) {
+    else if (param_extra->param_index == idToInd(RECORD_START_PARAM_ID)) {
         KeyFrameManager::getInstance().beginKeyNewRemoteRecording();
         try {
             std::string message = ReframeTCPServer::getInstance().startServer();
@@ -455,14 +508,14 @@ static PF_Err ParamChanged(
                                          "" // default text for input text box
                                          );
 
-			params[MAIN_CAMERA_YAW]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
-			params[MAIN_CAMERA_PITCH]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
-			params[MAIN_CAMERA_ROLL]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[idToInd(MAIN_CAMERA_YAW)]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[idToInd(MAIN_CAMERA_PITCH)]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
+			params[idToInd(MAIN_CAMERA_ROLL)]->uu.change_flags = PF_ChangeFlag_CHANGED_VALUE;
         } catch(std::exception& e) {
             std::cerr << e.what() << std::endl;
         }
     }
-    else if (param_extra->param_index == recordStopButtonParamID()) {
+    else if (param_extra->param_index == idToInd(RECORD_STOP_PARAM_ID)) {
         AEFX_SuiteScoper<AEGP_KeyframeSuite3> keyframeSuite(in_data, kAEGPKeyframeSuite, kAEGPKeyframeSuiteVersion3, out_data);
         
         ReframeTCPServer::getInstance().stopServer();
@@ -560,7 +613,7 @@ static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_Ou
 
 	PF_KeyIndex keyCount;
 
-	paramUtilsSuite->PF_GetKeyframeCount(effect_ref, AUX_CAM_SEQUENCE, &keyCount);
+	paramUtilsSuite->PF_GetKeyframeCount(effect_ref, idToInd(AUX_CAM_SEQUENCE), &keyCount);
 
 	KeyFrameManager::getInstance().beginKeyNewKeyframeData();
 
@@ -569,7 +622,7 @@ static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_Ou
 		A_u_long timeScale;
 		PF_ParamDef paramDef;
 
-		paramUtilsSuite->PF_CheckoutKeyframe(effect_ref, AUX_CAM_SEQUENCE, i, &keyTime, &timeScale, &paramDef);
+		paramUtilsSuite->PF_CheckoutKeyframe(effect_ref, idToInd(AUX_CAM_SEQUENCE), i, &keyTime, &timeScale, &paramDef);
 
 		float value = paramDef.u.fs_d.value;
 
@@ -619,25 +672,25 @@ void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamD
 		double main_roll = -interpParam_CPU(MAIN_CAMERA_ROLL, in_data, offset) / 180 * M_PI;
 		double main_fov_mult = interpParam_CPU(MAIN_CAMERA_FOV, in_data, offset);
 
-		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value) {
-			cam1 = (int)round(params[ACTIVE_AUX_CAMERA_SELECTOR]->u.fs_d.value);
+		if ((bool)params[idToInd(FORCE_AUX_DISPLAY)]->u.bd.value) {
+			cam1 = (int)round(params[idToInd(ACTIVE_AUX_CAMERA_SELECTOR)]->u.fs_d.value);
 		}
 
-		double cam1_pitch = -interpParam_CPU(auxParamId(AUX_CAMERA_PITCH, cam1), in_data, offset) / 180 * M_PI;
-		double cam1_yaw = -interpParam_CPU(auxParamId(AUX_CAMERA_YAW, cam1), in_data, offset) / 180 * M_PI;
-		double cam1_roll = -interpParam_CPU(auxParamId(AUX_CAMERA_ROLL, cam1), in_data, offset) / 180 * M_PI;
+		double cam1_pitch = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_PITCH, cam1)), in_data, offset) / 180 * M_PI;
+		double cam1_yaw = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_YAW, cam1)), in_data, offset) / 180 * M_PI;
+		double cam1_roll = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_ROLL, cam1)), in_data, offset) / 180 * M_PI;
 
-		double cam1_fov = interpParam_CPU(auxParamId(AUX_CAMERA_FOV, cam1), in_data, offset);
-		double cam1_tinyplanet = interpParam_CPU(auxParamId(AUX_CAMERA_TINYPLANET, cam1), in_data, offset);
-		double cam1_recti = interpParam_CPU(auxParamId(AUX_CAMERA_RECTILINEAR, cam1), in_data, offset);
+		double cam1_fov = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_FOV, cam1)), in_data, offset);
+		double cam1_tinyplanet = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, cam1)), in_data, offset);
+		double cam1_recti = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, cam1)), in_data, offset);
 
-		double cam2_pitch = -interpParam_CPU(auxParamId(AUX_CAMERA_PITCH, cam2), in_data, offset) / 180 * M_PI;
-		double cam2_yaw = -interpParam_CPU(auxParamId(AUX_CAMERA_YAW, cam2), in_data, offset) / 180 * M_PI;
-		double cam2_roll = -interpParam_CPU(auxParamId(AUX_CAMERA_ROLL, cam2), in_data, offset) / 180 * M_PI;
+		double cam2_pitch = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_PITCH, cam2)), in_data, offset) / 180 * M_PI;
+		double cam2_yaw = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_YAW, cam2)), in_data, offset) / 180 * M_PI;
+		double cam2_roll = -interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_ROLL, cam2)), in_data, offset) / 180 * M_PI;
 
-		double cam2_fov = interpParam_CPU(auxParamId(AUX_CAMERA_FOV, cam2), in_data, offset);
-		double cam2_tinyplanet = interpParam_CPU(auxParamId(AUX_CAMERA_TINYPLANET, cam2), in_data, offset);
-		double cam2_recti = interpParam_CPU(auxParamId(AUX_CAMERA_RECTILINEAR, cam2), in_data, offset);
+		double cam2_fov = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_FOV, cam2)), in_data, offset);
+		double cam2_tinyplanet = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, cam2)), in_data, offset);
+		double cam2_recti = interpParam_CPU(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, cam2)), in_data, offset);
 
 		double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
 
@@ -651,7 +704,7 @@ void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamD
 
 		double blend = getCameraBlend_CPU(in_data, camAlpha, offset);
 
-		if ((bool)params[FORCE_AUX_DISPLAY]->u.bd.value) {
+		if ((bool)params[idToInd(FORCE_AUX_DISPLAY)]->u.bd.value) {
 			blend = 0;
 		}
 
@@ -778,12 +831,12 @@ static PF_Err Render(
 	int width = output->width;
 	int height = output->height;
 
-	int samples = (int)round(params[MB_SAMPLES]->u.fs_d.value);
+	int samples = (int)round(params[idToInd(MB_SAMPLES)]->u.fs_d.value);
 	//samples = max(1, samples);
 
 	//TODO: TEMP!!!
 	int cam1, cam2;
-	float shutter = (int)round(params[MB_SHUTTER]->u.fs_d.value);
+	float shutter = (int)round(params[idToInd(MB_SHUTTER)]->u.fs_d.value);
 
 	float* fovs = (float*)malloc(sizeof(float)*samples);
 	float* tinyplanets = (float*)malloc(sizeof(float)*samples);
@@ -961,7 +1014,7 @@ static PF_Err PreRender(
 	for (int i = 1; i < TOTAL_PARAM_NUM; i++) {
 		params[i] = new PF_ParamDef;
 		AEFX_CLR_STRUCT(*params[i]);
-		PF_CHECKOUT_PARAM(in_data, i, in_data->current_time, in_data->time_step, in_data->time_scale, params[i]);
+		PF_CHECKOUT_PARAM(in_data, idToInd(i), in_data->current_time, in_data->time_step, in_data->time_scale, params[i]);
 	}
 
 	storeParamKeyframes(in_data, params, out_data);

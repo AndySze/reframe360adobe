@@ -20,7 +20,7 @@
 /*******************************************************************/
 #pragma once
 
-#define BETA_FAIL
+//#define BETA_FAIL
 #define BETA_FAIL_TIME 1546301340
 
 #ifndef SDK_CROSSDISSOLVE_H
@@ -89,7 +89,7 @@ enum
 
 enum
 {
-	MAIN_INPUT=0,
+	MAIN_INPUT = 0,
 
 	MB_GRP_ID,
 	MB_SAMPLES,
@@ -123,8 +123,14 @@ enum
 	AUX_CAMERA_TINYPLANET,
 	AUX_CAMERA_RECTILINEAR,
 	AUX_CAMERA_GRP_END_ID,
+
+	RECORD_START_PARAM_ID = 10000,
+	RECORD_STOP_PARAM_ID,
+	SHOW_MULTICAM_PARAM_ID,
+	MULTICAM_GRIDSIZE_PRAM_ID,
 	NUM_PARAMS
 };
+
 
 #define AUX_PARAM_NUM 6
 
@@ -132,7 +138,7 @@ enum
 **
 */
 #define	CAMERA_MIN_VALUE		1
-#define	CAMERA_MAX_VALUE		20
+#define	CAMERA_MAX_VALUE		25
 #define	CAMERA_MIN_SLIDER		1
 #define	CAMERA_MAX_SLIDER		10
 #define	CAMERA_DFLT				1

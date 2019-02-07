@@ -14,6 +14,8 @@
 #include "Reframe360.h"
 #include <math.h>
 #include "MathUtil.h"
+#include "KeyFrameManager.h"
+
 
 #pragma optimize( "", off )
 double static findNeighbourKeyframeTime_CPU_Premiere(int paramID, PF_InData* in_data, bool backwards) {
@@ -62,9 +64,9 @@ double static findNeighbourKeyframeTime_CPU_Premiere(int paramID, PF_InData* in_
 static CameraParams mainCameraParams(PF_ParamDef* params[]) {
 	CameraParams outParams;
 
-	outParams.pitch = params[MAIN_CAMERA_PITCH]->u.fs_d.value;
-	outParams.yaw = params[MAIN_CAMERA_YAW]->u.fs_d.value;
-	outParams.roll = params[MAIN_CAMERA_ROLL]->u.fs_d.value;
+	outParams.pitch = params[KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_PITCH]]->u.fs_d.value;
+	outParams.yaw = params[KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_YAW]]->u.fs_d.value;
+	outParams.roll = params[KeyFrameManager::getInstance().idToIndex[MAIN_CAMERA_ROLL]]->u.fs_d.value;
 
 	return outParams;
 }
@@ -72,21 +74,21 @@ static CameraParams mainCameraParams(PF_ParamDef* params[]) {
 static CameraParams activeAuxCameraParams(PF_ParamDef* params[]) {
 	CameraParams outParams;
 
-	int activeCam = (int)round(params[ACTIVE_AUX_CAMERA_SELECTOR]->u.fs_d.value);
+	int activeCam = (int)round(params[KeyFrameManager::getInstance().idToIndex[ACTIVE_AUX_CAMERA_SELECTOR]]->u.fs_d.value);
 
-	outParams.pitch = params[AUX_CAMERA_PITCH]->u.fs_d.value;
-	outParams.yaw = params[AUX_CAMERA_YAW]->u.fs_d.value;
-	outParams.roll = params[AUX_CAMERA_ROLL]->u.fs_d.value;
-	outParams.fov = params[AUX_CAMERA_FOV]->u.fs_d.value;
-	outParams.tinyplanet = params[AUX_CAMERA_TINYPLANET]->u.fs_d.value;
-	outParams.rectilinear = params[AUX_CAMERA_RECTILINEAR]->u.fs_d.value;
+	outParams.pitch = params[KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_PITCH]]->u.fs_d.value;
+	outParams.yaw = params[KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_YAW]]->u.fs_d.value;
+	outParams.roll = params[KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_ROLL]]->u.fs_d.value;
+	outParams.fov = params[KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_FOV]]->u.fs_d.value;
+	outParams.tinyplanet = params[KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_TINYPLANET]]->u.fs_d.value;
+	outParams.rectilinear = params[KeyFrameManager::getInstance().idToIndex[AUX_CAMERA_RECTILINEAR]]->u.fs_d.value;
 
 	return outParams;
 }
 
 
 static int getSelectedCamera(PF_ParamDef* params[]) {
-	int activeCam = (int)round(params[ACTIVE_AUX_CAMERA_SELECTOR]->u.fs_d.value);
+	int activeCam = (int)round(params[KeyFrameManager::getInstance().idToIndex[ACTIVE_AUX_CAMERA_SELECTOR]]->u.fs_d.value);
 	return activeCam;
 }
 
@@ -97,18 +99,9 @@ static int auxParamId(int baseId, int camId) {
 	return refID + camId * AUX_PARAM_NUM + diff + (camId < 1 ? 0 : 1);
 }
 
-static int recordStartButtonParamID(){
-    int maxAuxParamID = auxParamId(AUX_CAMERA_RECTILINEAR, 20);
-    return maxAuxParamID + 1;
-}
 
-static int recordStopButtonParamID(){
-    return recordStartButtonParamID() + 1;
-}
-
-static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
+static int addAuxParams(PF_InData* in_data, bool hidden, int camera, int num_params) {
 	PF_ParamDef	def;
-	int num_params = 0;
 
 	int refID = AUX_CAMERA_PITCH;
 
@@ -131,6 +124,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		PF_ParamFlag_SUPERVISE,
 		auxParamId(AUX_CAMERA_PITCH, camera)
 	);
+	KeyFrameManager::getInstance().idToIndex[auxParamId(AUX_CAMERA_PITCH, camera)] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -152,6 +146,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		PF_ParamFlag_SUPERVISE,
 		auxParamId(AUX_CAMERA_YAW, camera)
 	);
+	KeyFrameManager::getInstance().idToIndex[auxParamId(AUX_CAMERA_YAW, camera)] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -173,6 +168,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		PF_ParamFlag_SUPERVISE,
 		auxParamId(AUX_CAMERA_ROLL, camera)
 	);
+	KeyFrameManager::getInstance().idToIndex[auxParamId(AUX_CAMERA_ROLL, camera)] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -194,7 +190,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		PF_ParamFlag_SUPERVISE,
 		auxParamId(AUX_CAMERA_FOV, camera)
 	);
-
+	KeyFrameManager::getInstance().idToIndex[auxParamId(AUX_CAMERA_FOV, camera)] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -216,7 +212,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		PF_ParamFlag_SUPERVISE,
 		auxParamId(AUX_CAMERA_TINYPLANET, camera)
 	);
-
+	KeyFrameManager::getInstance().idToIndex[auxParamId(AUX_CAMERA_TINYPLANET, camera)] = num_params;
 	num_params++;
 
 	AEFX_CLR_STRUCT(def);
@@ -238,6 +234,7 @@ static int addAuxParams(PF_InData* in_data, bool hidden, int camera) {
 		PF_ParamFlag_SUPERVISE,
 		auxParamId(AUX_CAMERA_RECTILINEAR, camera)
 	);
+	KeyFrameManager::getInstance().idToIndex[auxParamId(AUX_CAMERA_RECTILINEAR, camera)] = num_params;
 	num_params++;
 
 	return num_params;

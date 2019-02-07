@@ -1,10 +1,54 @@
-﻿  TCPServer.cpp
-  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
-  - add -D_WIN32_WINNT=0x0501 to the compiler command line; or
-  - add _WIN32_WINNT=0x0501 to your project's Preprocessor Definitions.
-  Assuming _WIN32_WINNT=0x0501 (i.e. Windows XP target).
-c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\tcpserver.cpp(40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  Reframe360_GPU.cpp
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(106): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(135): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(136): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(145): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(145): warning C4244: 'argument': conversion from 'float' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(146): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(149): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(149): warning C4244: 'argument': conversion from 'float' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(150): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(159): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(159): warning C4244: 'argument': conversion from 'float' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(160): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(163): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(163): warning C4244: 'argument': conversion from 'float' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(164): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(173): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(183): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\mathutil.h(185): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(28): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(29): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(34): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(35): warning C4244: 'initializing': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(40): warning C4244: 'return': conversion from 'PrTime' to 'double', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(50): warning C4244: 'argument': conversion from 'PrTime' to 'A_long', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(51): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(58): warning C4244: 'return': conversion from 'PrTime' to 'double', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(65): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(66): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(67): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(77): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(78): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(79): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(80): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(81): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(82): warning C4244: '=': conversion from 'PF_FpLong' to 'float', possible loss of data
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\paramutil.h(205): warning C4305: '=': truncation from 'double' to 'PF_FpShort'
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\gumroadlicensehandler.h(8): warning C4005: 'LIC_PRIVATE_NUM': macro redefinition
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\licensing.h(6): note: see previous definition of 'LIC_PRIVATE_NUM'
+c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\gumroadlicensehandler.h(10): warning C4005: 'LIC_PRODUCT_ID': macro redefinition
+  c:\users\stefan\dev\premiere pro cc 12.0 win sdk\examples\projects\gpuvideofilter\reframe360\licensing.h(8): note: see previous definition of 'LIC_PRODUCT_ID'
 LINK : warning LNK4044: unrecognized option '/lboost_filesystem'; ignored
 LINK : warning LNK4044: unrecognized option '/lboost_system'; ignored
+LINK : warning LNK4044: unrecognized option '/lboost_filesystem'; ignored
+LINK : warning LNK4044: unrecognized option '/lboost_system'; ignored
+     Creating library x64\Debug\/Reframe360.lib and object x64\Debug\/Reframe360.exp
+aescriptsLicensing_MD_Debug_64.lib(aescriptsLicensing.obj) : warning LNK4099: PDB 'aescriptsLicensing.pdb' was not found with 'aescriptsLicensing_MD_Debug_64.lib(aescriptsLicensing.obj)' or at 'C:\Users\Stefan\Dev\Premiere Pro CC 12.0 Win SDK\Examples\Projects\GPUVideoFilter\Reframe360\Win\x64\Debug\aescriptsLicensing.pdb'; linking object as if no debug info
+aescriptsLicensing_MD_Debug_64.lib(Licensing_v2_for_SDK_plugins.obj) : warning LNK4099: PDB 'aescriptsLicensing.pdb' was not found with 'aescriptsLicensing_MD_Debug_64.lib(Licensing_v2_for_SDK_plugins.obj)' or at 'C:\Users\Stefan\Dev\Premiere Pro CC 12.0 Win SDK\Examples\Projects\GPUVideoFilter\Reframe360\Win\x64\Debug\aescriptsLicensing.pdb'; linking object as if no debug info
   Reframe360.vcxproj -> C:\Program Files\Adobe\Common\Plug-ins\7.0\MediaCore\Reframe360.aex
   Reframe360.vcxproj -> x64\Debug\Reframe360.pdb (Full PDB)

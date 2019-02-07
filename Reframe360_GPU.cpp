@@ -74,6 +74,7 @@ extern void Reframe_CUDA ( float const *outBuf, float *destBuf, unsigned int out
 	float* rectilinear,
 	int samples,
 	int bilinear,
+	int multiCam,
 	int is16bit,
 	int noLicense);
 #endif
@@ -175,6 +176,10 @@ public:
 			return suiteError_NoError;
 	}
 
+	int idToInd(int id) {
+		return KeyFrameManager::getInstance().idToIndex[id];
+	}
+
 
 	prSuiteError Render(
 		const PrGPUFilterRenderParams* inRenderParams,
@@ -206,9 +211,9 @@ public:
 		mPPixSuite->GetPixelFormat(properties, &pixelFormat);
 		int is16f = pixelFormat != PrPixelFormat_GPU_BGRA_4444_32f;
 
-		int camSequenceParam = AUX_CAM_SEQUENCE;
+		int camSequenceParam = idToInd(AUX_CAM_SEQUENCE);
 
-		int samples = (int)round(GetParam(MB_SAMPLES, inRenderParams->inClipTime).mFloat64);
+		int samples = (int)round(GetParam(idToInd(MB_SAMPLES), inRenderParams->inClipTime).mFloat64);
 		samples = glm::max(1, samples);
 
 		int cam1 = KeyFrameManager::getInstance().getPreviousCamera(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime);
@@ -216,94 +221,109 @@ public:
 
 		int cam2 = KeyFrameManager::getInstance().getNextCamera(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime);
 
-		float shutter = GetParam(MB_SHUTTER, inRenderParams->inClipTime).mFloat64;
+		float shutter = GetParam(idToInd(MB_SHUTTER), inRenderParams->inClipTime).mFloat64;
 
-		float* fovs = (float*)malloc(sizeof(float)*samples);
-		float* tinyplanets = (float*)malloc(sizeof(float)*samples);
-		float* rectilinears = (float*)malloc(sizeof(float)*samples);
-		float* rotmats = (float*)malloc(sizeof(float)*samples * 9);
+		int multiCamNum =(int) GetParam(idToInd(MULTICAM_GRIDSIZE_PRAM_ID), inRenderParams->inClipTime).mFloat64;
+		int showMulticam = GetParam(idToInd(SHOW_MULTICAM_PARAM_ID), inRenderParams->inClipTime).mInt64;
+		if (showMulticam != 1)
+			multiCamNum = 1;
+
+		int multiCamGridWidth = ceil(sqrt(multiCamNum));
+
+		float* fovs = (float*)malloc(sizeof(float)*samples*multiCamNum);
+		float* tinyplanets = (float*)malloc(sizeof(float)*samples*multiCamNum);
+		float* rectilinears = (float*)malloc(sizeof(float)*samples*multiCamNum);
+		float* rotmats = (float*)malloc(sizeof(float)*samples * 9 * multiCamNum);
 
 		bool isRecording = KeyFrameManager::getInstance().isRecording();
 #
-		for (int i = 0; i < samples; i++) {
-			float offset = 0;
-			if (samples > 1) {
-				offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
+		for (int cam = 1; cam <= multiCamNum; cam++) {
+			for (int i = 0; i < samples; i++) {
+				float offset = 0;
+				if (samples > 1) {
+					offset = fitRange((float)i*shutter, 0, samples - 1.0f, -1.0f, 1.0f);
+				}
+
+				// read the parameters
+				double main_pitch = -interpParam(MAIN_CAMERA_PITCH, inRenderParams, offset) / 180 * M_PI;
+				double main_yaw = -interpParam(MAIN_CAMERA_YAW, inRenderParams, offset) / 180 * M_PI;
+				double main_roll = -interpParam(MAIN_CAMERA_ROLL, inRenderParams, offset) / 180 * M_PI;
+				double main_fov_mult = interpParam(MAIN_CAMERA_FOV, inRenderParams, offset);
+
+				if (isRecording) {
+					PrTime ticksPerFrame = inRenderParams->inRenderTicksPerFrame;
+					PrTime currentTime = inRenderParams->inClipTime;
+					int frame = currentTime / ticksPerFrame;
+
+					double receivedYaw = ReframeTCPServer::getInstance().getYaw();
+					double receivedPitch = ReframeTCPServer::getInstance().getPitch();
+					double receivedRoll = ReframeTCPServer::getInstance().getRoll();
+
+					main_pitch = -receivedPitch;
+					main_yaw = -receivedYaw;
+					main_roll = -receivedRoll;
+
+					KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_PITCH, frame, receivedPitch * 180 / M_PI);
+					KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_YAW, frame, receivedYaw * 180 / M_PI);
+					KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_ROLL, frame, receivedRoll * 180 / M_PI);
+
+				}
+
+
+				if (GetParam(idToInd(FORCE_AUX_DISPLAY), inRenderParams->inClipTime).mBool) {
+					cam1 = (int)round(GetParam(idToInd(ACTIVE_AUX_CAMERA_SELECTOR), inRenderParams->inClipTime).mFloat64);
+					cam2 = cam1;
+				}
+				if (showMulticam) {
+					cam1 = cam;
+					cam2 = cam;
+				}
+
+				double cam1_pitch = -interpParam(auxParamId(AUX_CAMERA_PITCH, cam1), inRenderParams, offset) / 180 * M_PI;
+				double cam1_yaw = -interpParam(auxParamId(AUX_CAMERA_YAW, cam1), inRenderParams, offset) / 180 * M_PI;
+				double cam1_roll = -interpParam(auxParamId(AUX_CAMERA_ROLL, cam1), inRenderParams, offset) / 180 * M_PI;
+
+				double cam1_fov = interpParam(auxParamId(AUX_CAMERA_FOV, cam1), inRenderParams, offset);
+				double cam1_tinyplanet = interpParam(auxParamId(AUX_CAMERA_TINYPLANET, cam1), inRenderParams, offset);
+				double cam1_recti = interpParam(auxParamId(AUX_CAMERA_RECTILINEAR, cam1), inRenderParams, offset);
+
+				double cam2_pitch = -interpParam(auxParamId(AUX_CAMERA_PITCH, cam2), inRenderParams, offset) / 180 * M_PI;
+				double cam2_yaw = -interpParam(auxParamId(AUX_CAMERA_YAW, cam2), inRenderParams, offset) / 180 * M_PI;
+				double cam2_roll = -interpParam(auxParamId(AUX_CAMERA_ROLL, cam2), inRenderParams, offset) / 180 * M_PI;
+
+				double cam2_fov = interpParam(auxParamId(AUX_CAMERA_FOV, cam2), inRenderParams, offset);
+				double cam2_tinyplanet = interpParam(auxParamId(AUX_CAMERA_TINYPLANET, cam2), inRenderParams, offset);
+				double cam2_recti = interpParam(auxParamId(AUX_CAMERA_RECTILINEAR, cam2), inRenderParams, offset);
+
+				double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
+
+				float camAlpha = 0;
+				if (cam1 != cam2)
+					camAlpha = KeyFrameManager::getInstance().getRelativeKeyFrameAlpha(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime, inRenderParams->inRenderTicksPerFrame, offset);
+
+				double blend = getAcceleratedCameraBlend(inRenderParams, camAlpha, offset);
+
+				if (GetParam(idToInd(FORCE_AUX_DISPLAY), inRenderParams->inClipTime).mBool) {
+					blend = 0;
+				}
+
+				pitch = cam1_pitch * (1.0 - blend) + cam2_pitch * blend + main_pitch;
+				yaw = cam1_yaw * (1.0 - blend) + cam2_yaw * blend + main_yaw;
+				roll = cam1_roll * (1.0 - blend) + cam2_roll * blend + main_roll;
+				fov = (cam1_fov * (1.0 - blend) + cam2_fov * blend) * main_fov_mult;
+				tinyplanet = cam1_tinyplanet * (1.0 - blend) + cam2_tinyplanet * blend;
+				rectilinear = cam1_recti * (1.0 - blend) + cam2_recti * blend;
+
+				//mat3 main_rotMat = rotationMatrix(main_pitch, main_yaw, main_roll);
+				mat3 rotMat = rotationMatrix(pitch, yaw, roll);
+
+				int matCamStartIndex = (cam-1) * (samples * 9);
+				int camStartIndex = (cam-1) * samples;
+				memcpy(&(rotmats[matCamStartIndex + i * 9]), &rotMat[0], sizeof(float) * 9);
+				fovs[camStartIndex + i] = (float)fov;
+				tinyplanets[camStartIndex + i] = (float)tinyplanet;
+				rectilinears[camStartIndex + i] = (float)rectilinear;
 			}
-
-			// read the parameters
-			double main_pitch = -interpParam(MAIN_CAMERA_PITCH, inRenderParams, offset) / 180 * M_PI;
-			double main_yaw = -interpParam(MAIN_CAMERA_YAW, inRenderParams, offset) / 180 * M_PI;
-			double main_roll = -interpParam(MAIN_CAMERA_ROLL, inRenderParams, offset) / 180 * M_PI;
-			double main_fov_mult = interpParam(MAIN_CAMERA_FOV, inRenderParams, offset);
-            
-            if(isRecording){
-                PrTime ticksPerFrame = inRenderParams->inRenderTicksPerFrame;
-                PrTime currentTime = inRenderParams->inClipTime;
-                int frame = currentTime / ticksPerFrame;
-                
-                double receivedYaw = ReframeTCPServer::getInstance().getYaw();
-                double receivedPitch = ReframeTCPServer::getInstance().getPitch();
-                double receivedRoll = ReframeTCPServer::getInstance().getRoll();
-                
-                main_pitch = -receivedPitch;
-                main_yaw = -receivedYaw;
-                main_roll = -receivedRoll;
-                
-                KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_PITCH, frame, receivedPitch * 180 / M_PI);
-                KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_YAW, frame, receivedYaw * 180 / M_PI);
-                KeyFrameManager::getInstance().setRecordingKeyframe(MAIN_CAMERA_ROLL, frame, receivedRoll * 180 / M_PI);
-
-            }
-
-
-			if (GetParam(FORCE_AUX_DISPLAY, inRenderParams->inClipTime).mBool) {
-				cam1 = (int)round(GetParam(ACTIVE_AUX_CAMERA_SELECTOR, inRenderParams->inClipTime).mFloat64);
-				cam2 = cam1;
-			}
-
-			double cam1_pitch = -interpParam(auxParamId(AUX_CAMERA_PITCH, cam1), inRenderParams, offset) / 180 * M_PI;
-			double cam1_yaw = -interpParam(auxParamId(AUX_CAMERA_YAW, cam1), inRenderParams, offset) / 180 * M_PI;
-			double cam1_roll = -interpParam(auxParamId(AUX_CAMERA_ROLL, cam1), inRenderParams, offset) / 180 * M_PI;
-
-			double cam1_fov = interpParam(auxParamId(AUX_CAMERA_FOV, cam1), inRenderParams, offset);
-			double cam1_tinyplanet = interpParam(auxParamId(AUX_CAMERA_TINYPLANET, cam1), inRenderParams, offset);
-			double cam1_recti = interpParam(auxParamId(AUX_CAMERA_RECTILINEAR, cam1), inRenderParams, offset);
-
-			double cam2_pitch = -interpParam(auxParamId(AUX_CAMERA_PITCH, cam2), inRenderParams, offset) / 180 * M_PI;
-			double cam2_yaw = -interpParam(auxParamId(AUX_CAMERA_YAW, cam2), inRenderParams, offset) / 180 * M_PI;
-			double cam2_roll = -interpParam(auxParamId(AUX_CAMERA_ROLL, cam2), inRenderParams, offset) / 180 * M_PI;
-
-			double cam2_fov = interpParam(auxParamId(AUX_CAMERA_FOV, cam2), inRenderParams, offset);
-			double cam2_tinyplanet = interpParam(auxParamId(AUX_CAMERA_TINYPLANET, cam2), inRenderParams, offset);
-			double cam2_recti = interpParam(auxParamId(AUX_CAMERA_RECTILINEAR, cam2), inRenderParams, offset);
-
-			double pitch = 1.0, yaw = 1.0, roll = 1.0, fov = 1.0, tinyplanet = 1.0, rectilinear = 1.0;
-
-			float camAlpha = 0;
-			if(cam1 != cam2)
-				camAlpha = KeyFrameManager::getInstance().getRelativeKeyFrameAlpha(NULL, mNodeID, mVideoSegmentSuite, camSequenceParam, inRenderParams->inClipTime, inRenderParams->inRenderTicksPerFrame, offset);
-
-			double blend = getAcceleratedCameraBlend(inRenderParams, camAlpha, offset);
-
-			if (GetParam(FORCE_AUX_DISPLAY, inRenderParams->inClipTime).mBool) {
-				blend = 0;
-			}
-
-			pitch = cam1_pitch * (1.0 - blend) + cam2_pitch * blend + main_pitch;
-			yaw = cam1_yaw * (1.0 - blend) + cam2_yaw * blend + main_yaw;
-			roll = cam1_roll * (1.0 - blend) + cam2_roll * blend + main_roll;
-			fov = (cam1_fov * (1.0 - blend) + cam2_fov * blend) * main_fov_mult;
-			tinyplanet = cam1_tinyplanet * (1.0 - blend) + cam2_tinyplanet * blend;
-			rectilinear = cam1_recti * (1.0 - blend) + cam2_recti * blend;
-
-			//mat3 main_rotMat = rotationMatrix(main_pitch, main_yaw, main_roll);
-			mat3 rotMat = rotationMatrix(pitch, yaw, roll);
-
-			memcpy(&(rotmats[i * 9]), &rotMat[0], sizeof(float) * 9);
-			fovs[i] = (float)fov;
-			tinyplanets[i] = (float)tinyplanet;
-			rectilinears[i] = (float)rectilinear;
 		}
 
 		// Get width & height
@@ -363,20 +383,20 @@ public:
 		if (mDeviceInfo.outDeviceFramework == PrGPUDeviceFramework_CUDA) {
 #ifndef __APPLE__
             float* rotMatDeviceBuf;
-            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * 9 * samples, (void**)&rotMatDeviceBuf);
-            cudaMemcpy((void**)rotMatDeviceBuf, (void*)(&rotmats[0]), sizeof(float) * 9 * samples, cudaMemcpyHostToDevice);
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * 9 * samples * multiCamNum, (void**)&rotMatDeviceBuf);
+            cudaMemcpy((void**)rotMatDeviceBuf, (void*)(&rotmats[0]), sizeof(float) * 9 * samples * multiCamNum, cudaMemcpyHostToDevice);
             
             float* fovDeviceBuf;
-            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&fovDeviceBuf);
-            cudaMemcpy((void**)fovDeviceBuf, (void*)(fovs), sizeof(float) * samples, cudaMemcpyHostToDevice);
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples * multiCamNum, (void**)&fovDeviceBuf);
+            cudaMemcpy((void**)fovDeviceBuf, (void*)(fovs), sizeof(float) * samples * multiCamNum, cudaMemcpyHostToDevice);
             
             float* tinyplanetDeviceBuf;
-            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&tinyplanetDeviceBuf);
-            cudaMemcpy((void**)tinyplanetDeviceBuf, (void*)(tinyplanets), sizeof(float) * samples, cudaMemcpyHostToDevice);
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples * multiCamNum, (void**)&tinyplanetDeviceBuf);
+            cudaMemcpy((void**)tinyplanetDeviceBuf, (void*)(tinyplanets), sizeof(float) * samples * multiCamNum, cudaMemcpyHostToDevice);
             
             float* rectilinearDeviceBuf;
-            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples, (void**)&rectilinearDeviceBuf);
-            cudaMemcpy((void**)rectilinearDeviceBuf, (void*)(rectilinears), sizeof(float) * samples, cudaMemcpyHostToDevice);
+            mGPUDeviceSuite->AllocateDeviceMemory(index, sizeof(float) * samples * multiCamNum, (void**)&rectilinearDeviceBuf);
+            cudaMemcpy((void**)rectilinearDeviceBuf, (void*)(rectilinears), sizeof(float) * samples * multiCamNum, cudaMemcpyHostToDevice);
             
             free(rotmats);
             free(fovs);
@@ -396,7 +416,7 @@ public:
 								height,
 				rotMatDeviceBuf,
 				fovDeviceBuf, tinyplanetDeviceBuf, rectilinearDeviceBuf,
-				samples, true, is16f ? 1 : 0, !KeyFrameManager::getInstance().isRegistered
+				samples, true, multiCamNum, is16f ? 1 : 0, !KeyFrameManager::getInstance().isRegistered
 			);
 
 			mGPUDeviceSuite->FreeDeviceMemory(index, rotMatDeviceBuf);
@@ -478,14 +498,14 @@ public:
 	CameraParams activeAuxCameraParams(PrTime time) {
 		CameraParams outParams;
 
-		int activeCam = (int)round(GetParam(ACTIVE_AUX_CAMERA_SELECTOR, time).mFloat64);
+		int activeCam = (int)round(GetParam(idToInd(ACTIVE_AUX_CAMERA_SELECTOR), time).mFloat64);
 
-		outParams.pitch = GetParam(AUX_CAMERA_PITCH, time).mFloat64;
-		outParams.yaw = GetParam(AUX_CAMERA_YAW, time).mFloat64;
-		outParams.roll = GetParam(AUX_CAMERA_ROLL, time).mFloat64;
-		outParams.fov = GetParam(AUX_CAMERA_FOV, time).mFloat64;
-		outParams.tinyplanet = GetParam(AUX_CAMERA_TINYPLANET, time).mFloat64;
-		outParams.rectilinear = GetParam(AUX_CAMERA_RECTILINEAR, time).mFloat64;
+		outParams.pitch = GetParam(idToInd(AUX_CAMERA_PITCH), time).mFloat64;
+		outParams.yaw = GetParam(idToInd(AUX_CAMERA_YAW), time).mFloat64;
+		outParams.roll = GetParam(idToInd(AUX_CAMERA_ROLL), time).mFloat64;
+		outParams.fov = GetParam(idToInd(AUX_CAMERA_FOV), time).mFloat64;
+		outParams.tinyplanet = GetParam(idToInd(AUX_CAMERA_TINYPLANET), time).mFloat64;
+		outParams.rectilinear = GetParam(idToInd(AUX_CAMERA_RECTILINEAR), time).mFloat64;
 
 		return outParams;
 	}
@@ -493,12 +513,12 @@ public:
 	CameraParams auxCameraParamsForCamera(int camera, PrTime time) {
 		CameraParams outParams;
 
-		outParams.pitch = GetParam(auxParamId(AUX_CAMERA_PITCH, camera), time).mFloat64;
-		outParams.yaw = GetParam(auxParamId(AUX_CAMERA_YAW, camera), time).mFloat64;
-		outParams.roll = GetParam(auxParamId(AUX_CAMERA_ROLL, camera), time).mFloat64;
-		outParams.fov = GetParam(auxParamId(AUX_CAMERA_FOV, camera), time).mFloat64;
-		outParams.tinyplanet = GetParam(auxParamId(AUX_CAMERA_TINYPLANET, camera), time).mFloat64;
-		outParams.rectilinear = GetParam(auxParamId(AUX_CAMERA_RECTILINEAR, camera), time).mFloat64;
+		outParams.pitch = GetParam(idToInd(auxParamId(AUX_CAMERA_PITCH, camera)), time).mFloat64;
+		outParams.yaw = GetParam(idToInd(auxParamId(AUX_CAMERA_YAW, camera)), time).mFloat64;
+		outParams.roll = GetParam(idToInd(auxParamId(AUX_CAMERA_ROLL, camera)), time).mFloat64;
+		outParams.fov = GetParam(idToInd(auxParamId(AUX_CAMERA_FOV, camera)), time).mFloat64;
+		outParams.tinyplanet = GetParam(idToInd(auxParamId(AUX_CAMERA_TINYPLANET, camera)), time).mFloat64;
+		outParams.rectilinear = GetParam(idToInd(auxParamId(AUX_CAMERA_RECTILINEAR, camera)), time).mFloat64;
 
 		return outParams;
 	}
@@ -506,9 +526,9 @@ public:
 	CameraParams mainCameraParamsGPU(PrTime time) {
 		CameraParams outParams;
 
-		outParams.pitch = GetParam(MAIN_CAMERA_PITCH, time).mFloat64;
-		outParams.yaw = GetParam(MAIN_CAMERA_YAW, time).mFloat64;
-		outParams.roll = GetParam(MAIN_CAMERA_ROLL, time).mFloat64;
+		outParams.pitch = GetParam(idToInd(MAIN_CAMERA_PITCH), time).mFloat64;
+		outParams.yaw = GetParam(idToInd(MAIN_CAMERA_YAW), time).mFloat64;
+		outParams.roll = GetParam(idToInd(MAIN_CAMERA_ROLL), time).mFloat64;
 
 		return outParams;
 	}
@@ -518,20 +538,20 @@ public:
 		PrTime ticksPerFrame = inParams->inRenderTicksPerFrame;
 
 		if (offset == 0) {
-			return GetParam(paramID, time).mFloat64;
+			return GetParam(idToInd(paramID), time).mFloat64;
 		}
 		else if (offset < 0) {
 			offset = -offset;
 			float floor = std::floor(offset);
 			float frac = offset - floor;
 
-			return GetParam(paramID, time - (floor + 1)*ticksPerFrame).mFloat64 *frac + GetParam(paramID, time - floor * ticksPerFrame).mFloat64 *(1 - frac);
+			return GetParam(idToInd(paramID), time - (floor + 1)*ticksPerFrame).mFloat64 *frac + GetParam(idToInd(paramID), time - floor * ticksPerFrame).mFloat64 *(1 - frac);
 		}
 		else {
 			float floor = std::floor(offset);
 			float frac = offset - floor;
 
-			return GetParam(paramID, time + (floor + 1)*ticksPerFrame).mFloat64 *frac + GetParam(paramID, time + floor * ticksPerFrame).mFloat64 *(1 - frac);
+			return GetParam(idToInd(paramID), time + (floor + 1)*ticksPerFrame).mFloat64 *frac + GetParam(idToInd(paramID), time + floor * ticksPerFrame).mFloat64 *(1 - frac);
 		}
 	}
 
@@ -713,7 +733,7 @@ private:
 			if (needsInterPolation(paramIndex, time)) {
 				queryTime = getPreviousKeyFrameTime(paramIndex, time);
 			}
-			outValue = (int)round(GetParam(paramIndex, queryTime).mFloat64);
+			outValue = (int)round(GetParam(idToInd(paramIndex), queryTime).mFloat64);
 		}
 		else {
 			PrTime queryTime = KeyFrameManager::getInstance().getCurrentAETime();
@@ -726,7 +746,7 @@ private:
 		}
 
 		if (outValue == 0) {
-			outValue = (int)round(GetParam(paramIndex, time).mFloat64);
+			outValue = (int)round(GetParam(idToInd(paramIndex), time).mFloat64);
 		}
 
 		return  outValue;
@@ -744,7 +764,7 @@ private:
 			if (needsInterPolation(paramIndex, time)) {
 				queryTime = getNextKeyFrameTime(paramIndex, time);
 			}
-			outValue = (int)round(GetParam(paramIndex, queryTime).mFloat64);
+			outValue = (int)round(GetParam(idToInd(paramIndex), queryTime).mFloat64);
 		}
 		else {
 			PrTime queryTime = KeyFrameManager::getInstance().getCurrentAETime();
@@ -757,7 +777,7 @@ private:
 		}
 
 		if (outValue == 0) {
-			outValue = (int)round(GetParam(paramIndex, time).mFloat64);
+			outValue = (int)round(GetParam(idToInd(paramIndex), time).mFloat64);
 		}
 
 		return  outValue;

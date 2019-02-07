@@ -66,7 +66,7 @@ PrParam KeyFrameManager::GetParam(
 	inIndex -= 1; // GPU filters do not include the input frame
 
 	PrParam param = {};
-	videoSegmentSuite->GetParam(nodeID, inIndex, inTime, &param);
+	videoSegmentSuite->GetParam(nodeID, idToIndex[inIndex], inTime, &param);
 	return param;
 }
 
@@ -309,7 +309,7 @@ int KeyFrameManager::getNextCamera(PF_ParamDef* params[], csSDK_int32 nodeID, Pr
 		if (!KeyFrameManager::getInstance().isAE)
 			outValue = (int)round(GetParam(nodeID, videoSegmentSuite, paramIndex, time).mFloat64);
 		else if(params)
-			outValue = (int)round(params[paramIndex]->u.fs_d.value);
+			outValue = (int)round(params[idToIndex[paramIndex]]->u.fs_d.value);
 		//TEMP
 		if (outValue == 0)
 			outValue = 1;

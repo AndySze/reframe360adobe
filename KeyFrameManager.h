@@ -7,6 +7,7 @@
 #include "PrSDKMALErrors.h"
 #include "PrSDKVideoSegmentSuite.h"
 
+
 class KeyFrameManager
 {
 public:
@@ -57,6 +58,8 @@ public:
 	bool isAE = false;
 	bool isCpuProcessing = false;
 	bool isRegistered = false;
+
+	std::map<int, int> idToIndex;
 
 	PrParam GetParam(
 		csSDK_int32 nodeID,

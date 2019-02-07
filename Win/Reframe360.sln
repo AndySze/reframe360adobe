@@ -8,14 +8,18 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Reframe360Setup", "..\Refra
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_2019|x64 = Debug_2019|x64
 		Debug|x64 = Debug|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Debug_2019|x64.ActiveCfg = Debug_2019|x64
+		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Debug_2019|x64.Build.0 = Debug_2019|x64
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Debug|x64.ActiveCfg = Debug|x64
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Debug|x64.Build.0 = Debug|x64
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Release|x64.ActiveCfg = Release|x64
 		{35A2FA5C-49F2-4558-B100-16F7B858872E}.Release|x64.Build.0 = Release|x64
+		{3C189B34-9106-46D6-A212-5077C47338EF}.Debug_2019|x64.ActiveCfg = Debug_2019
 		{3C189B34-9106-46D6-A212-5077C47338EF}.Debug|x64.ActiveCfg = Debug
 		{3C189B34-9106-46D6-A212-5077C47338EF}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
