@@ -63,8 +63,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         BundleIdentifier = "com.adobe.PremierePro.CC12"
-         FilePath = "/Applications/Adobe Premiere Pro CC 2018/Adobe Premiere Pro CC 2018.app">
+         FilePath = "/Applications/Adobe After Effects CC 2018/Adobe After Effects CC 2018.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference

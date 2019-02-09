@@ -63,10 +63,8 @@ PrParam KeyFrameManager::GetParam(
 	csSDK_int32 inIndex,
 	PrTime inTime)
 {
-	inIndex -= 1; // GPU filters do not include the input frame
-
 	PrParam param = {};
-	videoSegmentSuite->GetParam(nodeID, idToIndex[inIndex], inTime, &param);
+	videoSegmentSuite->GetParam(nodeID, idToIndex[inIndex]-1, inTime, &param); // -1 bcs GPU filters do not include the input frame
 	return param;
 }
 
