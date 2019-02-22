@@ -57,7 +57,7 @@ public:
 
 	bool isAE = false;
 	bool isCpuProcessing = false;
-	bool isRegistered = false;
+	bool isRegistered = true;
 
 	std::map<int, int> idToIndex;
 

@@ -52,7 +52,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -63,8 +63,8 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         BundleIdentifier = "com.adobe.PremierePro.CC12"
-         FilePath = "/Applications/Adobe Premiere Pro CC 2018/Adobe Premiere Pro CC 2018.app">
+         BundleIdentifier = "com.adobe.PremierePro.CC13"
+         FilePath = "/Applications/Adobe Premiere Pro CC 2019/Adobe Premiere Pro CC 2019.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference

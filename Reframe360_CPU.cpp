@@ -34,6 +34,20 @@
 #include "GumroadLicenseHandler.h"
 #include "TCPServer.hpp"
 
+#include <boost/move/utility.hpp>
+#include <boost/log/sources/logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/sources/global_logger_storage.hpp>
+#include <boost/log/utility/setup/file.hpp>
+#include <boost/log/utility/setup/common_attributes.hpp>
+
+
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace keywords = boost::log::keywords;
+
+BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(my_logger, src::logger_mt)
+
 // ********************* aescripts licensing specific code start *********************
 
 // change the following settings for your own plugin!!!
@@ -56,6 +70,8 @@
 
 //#define GUMROAD
 
+#define NO_LIC_CHECK
+
 #ifdef GUMROAD
 #include "GumroadLicenseHandler.h"
 
@@ -75,6 +91,16 @@ static void storeParamKeyframes(PF_InData* in_data, PF_ParamDef* params[], PF_Ou
 
 static void fillParamStructs(int samples, float shutter, PF_InData * in_data, PF_ParamDef ** params, int &cam1, int &cam2, float * rotmats, float * fovs, float * tinyplanets, float * rectilinears);
 
+void initLogging()
+{
+    logging::add_file_log(
+                          keywords::file_name = "/Users/stefansietzen/Desktop/sample.log"
+                          );
+    
+    logging::add_common_attributes();
+    
+}
+
 /*
 **
 */
@@ -84,6 +110,11 @@ static PF_Err GlobalSetup(
 	PF_ParamDef* params[],
 	PF_LayerDef* output)
 {
+    initLogging();
+    
+    src::logger_mt& lg = my_logger::get();
+    BOOST_LOG(lg) << "Greetings from the global logger!";
+    
 	out_data->my_version = PF_VERSION(PLUGIN_MAJOR_VERSION, PLUGIN_MINOR_VERSION, PLUGIN_BUG_VERSION, PLUGIN_STAGE_VERSION, PLUGIN_BUILD_VERSION);
 
     if (in_data->appl_id == 'PrMr')
@@ -822,6 +853,7 @@ static PF_Err Render(
 	bool smartRender,
 	int mode)
 {
+
 	//TEMP
 	if (in_data->current_time == 0)
 		return PF_Err_NONE;
@@ -1203,17 +1235,21 @@ extern "C" DllExport PF_Err EffectMain(
 	AEGP_SuiteHandler suites(in_data->pica_basicP);
 
 	PF_Err err = PF_Err_NONE;
-	// ********************* aescripts licensing specific code start *********************
-	if (lic::checkLicenseAE(inCmd, in_data, out_data, lic::licenseData) != 0) return err;
-	// ********************* aescripts licensing specific code end *********************
-
-	if (lic::licenseData.registered) {
-		KeyFrameManager::getInstance().isRegistered = true;
-	}
-	else {
-		KeyFrameManager::getInstance().isRegistered = false;
-	}
-
+#ifndef NO_LIC_CHECK
+    // ********************* aescripts licensing specific code start *********************
+    if (lic::checkLicenseAE(inCmd, in_data, out_data, lic::licenseData) != 0) return err;
+    // ********************* aescripts licensing specific code end *********************
+    
+    if (lic::licenseData.registered) {
+        KeyFrameManager::getInstance().isRegistered = true;
+    }
+    else {
+        KeyFrameManager::getInstance().isRegistered = false;
+    }
+#else
+    KeyFrameManager::getInstance().isRegistered = true;
+#endif
+    
 	if (in_data->appl_id != 'PrMr') {
 		KeyFrameManager::getInstance().isAE = true;
 	}

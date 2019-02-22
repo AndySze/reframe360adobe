@@ -9,6 +9,21 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Reframe360 BK.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Reframe360 copy 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Reframe360 copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Reframe360.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +33,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>7E83C0F9170F4840008B8043</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC161DBE221717AA007DA2F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

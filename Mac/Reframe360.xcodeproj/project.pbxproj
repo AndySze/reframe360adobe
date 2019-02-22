@@ -7,29 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E83C0FD170F4840008B8043 /* Cocoa.framework */; };
-		7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9365DF172F7344006C8436 /* OpenCL.framework */; };
-		EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */; };
-		EC04FDE820F4FF4000A2301D /* Reframe360.r in Rez */ = {isa = PBXBuildFile; fileRef = EC04FDDD20F4FF3F00A2301D /* Reframe360.r */; };
-		EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */; };
-		EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE120F4FF4000A2301D /* Reframe360.cl */; };
-		EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC04FDF120F5008500A2301D /* InfoPlist.strings */; };
-		EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */ = {isa = PBXBuildFile; fileRef = EC61E82420F5119D0062CB00 /* CreateCString.py */; };
-		EC99A90E217B05FA00DA2AA1 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99A90D217B05FA00DA2AA1 /* libboost_thread-mt.dylib */; };
-		ECC92FF0215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */; };
-		ECC92FF5215BCB890054C2D7 /* KeyFrameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */; };
-		ECC92FF6215BCB890054C2D7 /* KeyFrameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF3215BCB890054C2D7 /* KeyFrameManager.cpp */; };
-		ECC92FFE215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF7215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp */; };
-		ECC92FFF215BCBA30054C2D7 /* HardwareUUIDHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */; };
-		ECC93006215DF3240054C2D7 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC93005215DF3240054C2D7 /* libboost_system.dylib */; };
-		ECC93008215DF9CC0054C2D7 /* MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */; };
-		ECE99A97217994460044FA75 /* GumroadLicenseHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE99A96217994460044FA75 /* GumroadLicenseHandler.cpp */; };
-		ECE99A9A2179CE670044FA75 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE99A982179CE670044FA75 /* TCPServer.cpp */; };
-		ECFF62C62182101200EAE509 /* aescriptsLicensing_libc++_Release_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECFF62C421820F9800EAE509 /* aescriptsLicensing_libc++_Release_64.a */; };
+		EC161DE022171864007DA2F7 /* AEGP_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF7215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp */; };
+		EC161DE122171864007DA2F7 /* Reframe360_GPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDDB20F4FF3F00A2301D /* Reframe360_GPU.cpp */; };
+		EC161DE222171864007DA2F7 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE99A982179CE670044FA75 /* TCPServer.cpp */; };
+		EC161DE322171864007DA2F7 /* GumroadLicenseHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE99A96217994460044FA75 /* GumroadLicenseHandler.cpp */; };
+		EC161DE422171864007DA2F7 /* Reframe360_CPU.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE020F4FF4000A2301D /* Reframe360_CPU.cpp */; };
+		EC161DE522171864007DA2F7 /* Reframe360.cl in Sources */ = {isa = PBXBuildFile; fileRef = EC04FDE120F4FF4000A2301D /* Reframe360.cl */; };
+		EC161DE622171864007DA2F7 /* MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC93007215DF9CC0054C2D7 /* MissingSuiteError.cpp */; };
+		EC161DE722171864007DA2F7 /* HardwareUUIDHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF8215BCBA30054C2D7 /* HardwareUUIDHandler.cpp */; };
+		EC161DE822171864007DA2F7 /* KeyFrameData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */; };
+		EC161DE922171864007DA2F7 /* KeyFrameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECC92FF3215BCB890054C2D7 /* KeyFrameManager.cpp */; };
+		EC161DEB22171864007DA2F7 /* aescriptsLicensing_libc++_Release_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECFF62C421820F9800EAE509 /* aescriptsLicensing_libc++_Release_64.a */; };
+		EC161DED22171864007DA2F7 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC93005215DF3240054C2D7 /* libboost_system.dylib */; };
+		EC161DEE22171864007DA2F7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */; };
+		EC161DEF22171864007DA2F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E83C0FD170F4840008B8043 /* Cocoa.framework */; };
+		EC161DF022171864007DA2F7 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9365DF172F7344006C8436 /* OpenCL.framework */; };
+		EC161DF222171864007DA2F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC04FDF120F5008500A2301D /* InfoPlist.strings */; };
+		EC161DF322171864007DA2F7 /* CreateCString.py in Resources */ = {isa = PBXBuildFile; fileRef = EC61E82420F5119D0062CB00 /* CreateCString.py */; };
+		EC161DF522171864007DA2F7 /* Reframe360.r in Rez */ = {isa = PBXBuildFile; fileRef = EC04FDDD20F4FF3F00A2301D /* Reframe360.r */; };
+		EC161E03221A694D007DA2F7 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC161E02221A694D007DA2F7 /* libboost_thread-mt.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-		18129D2E1EE5E99100A15AE5 /* PBXBuildRule */ = {
+		EC161DF722171864007DA2F7 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = sourcecode.opencl;
@@ -39,7 +39,7 @@
 			);
 			script = "mkdir -p ${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/\n\nchmod 777 ${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/\n\n\npython \"Supporting Files/Utils/CreateCString.py\" -i \"${INPUT_FILE_DIR}\"/Reframe360.cl -o ${DERIVED_FILE_DIR}/64/PreprocessedOpenCL/${INPUT_FILE_BASE}.cl.h --name k${INPUT_FILE_BASE}_OpenCLString\n\n";
 		};
-		7EC849641A6F377D00AE45FF /* PBXBuildRule */ = {
+		EC161DF822171864007DA2F7 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			filePatterns = "*.cu";
@@ -54,7 +54,6 @@
 
 /* Begin PBXFileReference section */
 		7E158D971A6F1D3E00BF99DB /* CUDA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CUDA.framework; path = ../../../../Library/Frameworks/CUDA.framework; sourceTree = DEVELOPER_DIR; };
-		7E83C0FA170F4840008B8043 /* Reframe360.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Reframe360.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E83C0FD170F4840008B8043 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7E83C100170F4840008B8043 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7E83C101170F4840008B8043 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -74,6 +73,14 @@
 		EC04FDEE20F5006800A2301D /* Reframe360-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Reframe360-Prefix.pch"; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Prefix.pch"; sourceTree = "<group>"; };
 		EC04FDEF20F5006800A2301D /* Reframe360-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Reframe360-Info.plist"; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist"; sourceTree = "<group>"; };
 		EC04FDF220F5008500A2301D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		EC161DDD221717AB007DA2F7 /* Reframe360 copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Reframe360 copy-Info.plist"; path = "/Users/stefansietzen/Dev/reframe360adobe/Mac/Reframe360 copy-Info.plist"; sourceTree = "<absolute>"; };
+		EC161DFC22171864007DA2F7 /* Reframe360 BK.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reframe360 BK.plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC161DFD22171864007DA2F7 /* Reframe360 copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Reframe360 copy2-Info.plist"; path = "/Users/stefansietzen/Dev/reframe360adobe/Mac/Reframe360 copy2-Info.plist"; sourceTree = "<absolute>"; };
+		EC161E0022171953007DA2F7 /* libboost_thread-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_thread-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_thread-mt.a"; sourceTree = "<group>"; };
+		EC161E02221A694D007DA2F7 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
+		EC42DE7B221FE014003DA3B1 /* libboost_log_setup.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_log_setup.a; path = ../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_log_setup.a; sourceTree = "<group>"; };
+		EC42DE7D221FE019003DA3B1 /* libboost_log-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_log-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_log-mt.a"; sourceTree = "<group>"; };
+		EC42DE7F221FE026003DA3B1 /* libboost_log.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_log.a; path = ../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_log.a; sourceTree = "<group>"; };
 		EC61E82320F5119D0062CB00 /* PrGPUFilterModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrGPUFilterModule.h; sourceTree = "<group>"; };
 		EC61E82420F5119D0062CB00 /* CreateCString.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = CreateCString.py; sourceTree = "<group>"; };
 		EC61E82720F5119D0062CB00 /* FloatingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingPoint.h; sourceTree = "<group>"; };
@@ -81,7 +88,7 @@
 		EC61E82920F5119D0062CB00 /* KernelHalf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelHalf.h; sourceTree = "<group>"; };
 		EC61E82A20F5119D0062CB00 /* KernelMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelMemory.h; sourceTree = "<group>"; };
 		EC61E82B20F5119D0062CB00 /* KernelWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KernelWrapper.h; sourceTree = "<group>"; };
-		EC99A90D217B05FA00DA2AA1 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
+		ECB5E57F221FE3D100EFD486 /* libboost_log_setup-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_log_setup-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.67.0_1/lib/libboost_log_setup-mt.a"; sourceTree = "<group>"; };
 		ECC92FEE215BC8DD0054C2D7 /* Licensing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Licensing.h; path = ../Licensing.h; sourceTree = "<group>"; };
 		ECC92FEF215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "aescriptsLicensing_libc++_Debug_64.a"; path = "../../aescripts-PLUGINS-licensing-framework-master/lib/MacOS/aescriptsLicensing_libc++_Debug_64.a"; sourceTree = "<group>"; };
 		ECC92FF1215BCB890054C2D7 /* KeyFrameData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeyFrameData.cpp; path = ../KeyFrameData.cpp; sourceTree = "<group>"; };
@@ -103,16 +110,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7E83C0F7170F4840008B8043 /* Frameworks */ = {
+		EC161DEA22171864007DA2F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECFF62C62182101200EAE509 /* aescriptsLicensing_libc++_Release_64.a in Frameworks */,
-				EC99A90E217B05FA00DA2AA1 /* libboost_thread-mt.dylib in Frameworks */,
-				ECC93006215DF3240054C2D7 /* libboost_system.dylib in Frameworks */,
-				ECC92FF0215BCB360054C2D7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */,
-				7E83C0FE170F4840008B8043 /* Cocoa.framework in Frameworks */,
-				7E9365E0172F7344006C8436 /* OpenCL.framework in Frameworks */,
+				EC161DEB22171864007DA2F7 /* aescriptsLicensing_libc++_Release_64.a in Frameworks */,
+				EC161DED22171864007DA2F7 /* libboost_system.dylib in Frameworks */,
+				EC161DEE22171864007DA2F7 /* aescriptsLicensing_libc++_Debug_64.a in Frameworks */,
+				EC161DEF22171864007DA2F7 /* Cocoa.framework in Frameworks */,
+				EC161DF022171864007DA2F7 /* OpenCL.framework in Frameworks */,
+				EC161E03221A694D007DA2F7 /* libboost_thread-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,13 +156,15 @@
 				EC04FDE520F4FF4000A2301D /* Reframe360.rcp */,
 				7E83C0FC170F4840008B8043 /* Frameworks */,
 				7E83C0FB170F4840008B8043 /* Products */,
+				EC161DDD221717AB007DA2F7 /* Reframe360 copy-Info.plist */,
+				EC161DFD22171864007DA2F7 /* Reframe360 copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		7E83C0FB170F4840008B8043 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7E83C0FA170F4840008B8043 /* Reframe360.plugin */,
+				EC161DFC22171864007DA2F7 /* Reframe360 BK.plugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,9 +172,14 @@
 		7E83C0FC170F4840008B8043 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ECB5E57F221FE3D100EFD486 /* libboost_log_setup-mt.a */,
+				EC42DE7F221FE026003DA3B1 /* libboost_log.a */,
+				EC42DE7D221FE019003DA3B1 /* libboost_log-mt.a */,
+				EC42DE7B221FE014003DA3B1 /* libboost_log_setup.a */,
+				EC161E0022171953007DA2F7 /* libboost_thread-mt.a */,
 				ECFF62C421820F9800EAE509 /* aescriptsLicensing_libc++_Release_64.a */,
 				ECFF62C221820F7E00EAE509 /* aescriptsLicensing_libstdc++_Release_64.a */,
-				EC99A90D217B05FA00DA2AA1 /* libboost_thread-mt.dylib */,
+				EC161E02221A694D007DA2F7 /* libboost_thread-mt.dylib */,
 				ECC93005215DF3240054C2D7 /* libboost_system.dylib */,
 				ECC93004215DF3030054C2D7 /* Caskroom */,
 				ECC93002215DF2BA0054C2D7 /* libboost_system.a */,
@@ -240,25 +254,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7E83C0F9170F4840008B8043 /* Reframe360 */ = {
+		EC161DDE22171864007DA2F7 /* Reframe360 BK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7E83C10C170F4840008B8043 /* Build configuration list for PBXNativeTarget "Reframe360" */;
+			buildConfigurationList = EC161DF922171864007DA2F7 /* Build configuration list for PBXNativeTarget "Reframe360 BK" */;
 			buildPhases = (
-				7E83C0F6170F4840008B8043 /* Sources */,
-				7E83C0F7170F4840008B8043 /* Frameworks */,
-				7E83C0F8170F4840008B8043 /* Resources */,
-				7EC22DD31FA7C88600D810DC /* Rez */,
-				EC80A3F720F53A8600FA0E61 /* Run Script */,
+				EC161DDF22171864007DA2F7 /* Sources */,
+				EC161DEA22171864007DA2F7 /* Frameworks */,
+				EC161DF122171864007DA2F7 /* Resources */,
+				EC161DF422171864007DA2F7 /* Rez */,
+				EC161DF622171864007DA2F7 /* Run Script */,
 			);
 			buildRules = (
-				18129D2E1EE5E99100A15AE5 /* PBXBuildRule */,
-				7EC849641A6F377D00AE45FF /* PBXBuildRule */,
+				EC161DF722171864007DA2F7 /* PBXBuildRule */,
+				EC161DF822171864007DA2F7 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
-			name = Reframe360;
+			name = "Reframe360 BK";
 			productName = SDK_CrossDissolve;
-			productReference = 7E83C0FA170F4840008B8043 /* Reframe360.plugin */;
+			productReference = EC161DFC22171864007DA2F7 /* Reframe360 BK.plugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -282,36 +296,36 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7E83C0F9170F4840008B8043 /* Reframe360 */,
+				EC161DDE22171864007DA2F7 /* Reframe360 BK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7E83C0F8170F4840008B8043 /* Resources */ = {
+		EC161DF122171864007DA2F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC04FDF320F5008500A2301D /* InfoPlist.strings in Resources */,
-				EC61E82C20F5119E0062CB00 /* CreateCString.py in Resources */,
+				EC161DF222171864007DA2F7 /* InfoPlist.strings in Resources */,
+				EC161DF322171864007DA2F7 /* CreateCString.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXRezBuildPhase section */
-		7EC22DD31FA7C88600D810DC /* Rez */ = {
+		EC161DF422171864007DA2F7 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC04FDE820F4FF4000A2301D /* Reframe360.r in Rez */,
+				EC161DF522171864007DA2F7 /* Reframe360.r in Rez */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		EC80A3F720F53A8600FA0E61 /* Run Script */ = {
+		EC161DF622171864007DA2F7 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -328,20 +342,20 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7E83C0F6170F4840008B8043 /* Sources */ = {
+		EC161DDF22171864007DA2F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECC92FFE215BCBA30054C2D7 /* AEGP_SuiteHandler.cpp in Sources */,
-				EC04FDE620F4FF4000A2301D /* Reframe360_GPU.cpp in Sources */,
-				ECE99A9A2179CE670044FA75 /* TCPServer.cpp in Sources */,
-				ECE99A97217994460044FA75 /* GumroadLicenseHandler.cpp in Sources */,
-				EC04FDE920F4FF4000A2301D /* Reframe360_CPU.cpp in Sources */,
-				EC04FDEA20F4FF4000A2301D /* Reframe360.cl in Sources */,
-				ECC93008215DF9CC0054C2D7 /* MissingSuiteError.cpp in Sources */,
-				ECC92FFF215BCBA30054C2D7 /* HardwareUUIDHandler.cpp in Sources */,
-				ECC92FF5215BCB890054C2D7 /* KeyFrameData.cpp in Sources */,
-				ECC92FF6215BCB890054C2D7 /* KeyFrameManager.cpp in Sources */,
+				EC161DE022171864007DA2F7 /* AEGP_SuiteHandler.cpp in Sources */,
+				EC161DE122171864007DA2F7 /* Reframe360_GPU.cpp in Sources */,
+				EC161DE222171864007DA2F7 /* TCPServer.cpp in Sources */,
+				EC161DE322171864007DA2F7 /* GumroadLicenseHandler.cpp in Sources */,
+				EC161DE422171864007DA2F7 /* Reframe360_CPU.cpp in Sources */,
+				EC161DE522171864007DA2F7 /* Reframe360.cl in Sources */,
+				EC161DE622171864007DA2F7 /* MissingSuiteError.cpp in Sources */,
+				EC161DE722171864007DA2F7 /* HardwareUUIDHandler.cpp in Sources */,
+				EC161DE822171864007DA2F7 /* KeyFrameData.cpp in Sources */,
+				EC161DE922171864007DA2F7 /* KeyFrameManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +403,7 @@
 					"\"${AE_SDK_BASE_PATH}/Examples/Util\"",
 					"\"${AE_SDK_BASE_PATH}/Examples/Resources\"",
 					"\"${CUDA_SDK_BASE_PATH}/\"",
+					/usr/local/Cellar/boost/1.67.0_1/include,
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -420,13 +435,14 @@
 					"\"${AE_SDK_BASE_PATH}/Examples/Util\"",
 					"\"${AE_SDK_BASE_PATH}/Examples/Resources\"",
 					"\"${CUDA_SDK_BASE_PATH}/\"",
+					/usr/local/Cellar/boost/1.67.0_1/include,
 				);
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
 		};
-		7E83C10D170F4840008B8043 /* Debug */ = {
+		EC161DFA22171864007DA2F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -440,17 +456,17 @@
 				GCC_PREFIX_HEADER = "Reframe360-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"/Users/stefansietzen/Dev/Premiere Pro CC 12.0 Mac SDK/Examples/Headers/\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Utils/\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Headers\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Util\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Resources\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Utils/\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Headers\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Util\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Resources\"",
 					/usr/local/cuda/include,
 					../../glm,
 					"\"../../aescripts-PLUGINS-licensing-framework-master/include/\"",
 					"\"/Users/stefansietzen/Dev/json/include\"",
 					/Users/stefansietzen/Dev/boost_1_67_0/,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
+				INFOPLIST_FILE = "Reframe360 copy2-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -458,13 +474,13 @@
 					/usr/local/Cellar/boost/1.67.0_1/lib,
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Reframe360;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		7E83C10E170F4840008B8043 /* Release */ = {
+		EC161DFB22171864007DA2F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
@@ -479,17 +495,17 @@
 				GCC_PREFIX_HEADER = "Reframe360-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"/Users/stefansietzen/Dev/Premiere Pro CC 12.0 Mac SDK/Examples/Headers/\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Utils/\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Headers\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Util\"",
-					"\"/Users/stefansietzen/Dev/After Effects SDK/Examples/Resources\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Utils/\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Headers\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Util\"",
+					"\"/Users/stefansietzen/Dev/AfterEffectsSDK_2019/Examples/Resources\"",
 					/usr/local/cuda/include,
 					../../glm,
 					"\"../../aescripts-PLUGINS-licensing-framework-master/include/\"",
 					"\"/Users/stefansietzen/Dev/json/include\"",
 					/Users/stefansietzen/Dev/boost_1_67_0/,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/../../Premiere Pro CC 12.0 Mac SDK/Examples/Projects/GPUVideoFilter/SDK_CrossDissolve/Mac/Reframe360-Info.plist";
+				INFOPLIST_FILE = "Reframe360 copy2-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/cuda/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -497,7 +513,7 @@
 					/usr/local/Cellar/boost/1.67.0_1/lib,
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Reframe360;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -515,11 +531,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7E83C10C170F4840008B8043 /* Build configuration list for PBXNativeTarget "Reframe360" */ = {
+		EC161DF922171864007DA2F7 /* Build configuration list for PBXNativeTarget "Reframe360 BK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7E83C10D170F4840008B8043 /* Debug */,
-				7E83C10E170F4840008B8043 /* Release */,
+				EC161DFA22171864007DA2F7 /* Debug */,
+				EC161DFB22171864007DA2F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
